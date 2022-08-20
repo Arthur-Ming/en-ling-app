@@ -1,0 +1,34 @@
+@import '/src/index.scss';
+
+.list {
+  display: flex;
+  column-gap: 40px;
+  padding: 5px 0px;
+}
+
+.link {
+  color: $text-secondary-dark;
+  display: flex;
+  column-gap: 10px;
+}
+
+.textbook,
+.games {
+  width: 30px;
+  height: 30px;
+}
+
+.statistics {
+  width: 28px;
+  height: 28px;
+}
+
+.active {
+  color: $active-link;
+}
+
+.text {
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+}
