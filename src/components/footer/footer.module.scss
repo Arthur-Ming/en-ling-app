@@ -1,0 +1,31 @@
+@import '/src/index.scss';
+.root {
+  position: absolute;
+  top: calc(100% - 32px);
+  width: 100%;
+  z-index: 60;
+}
+.box {
+  @extend .wrapper-box;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+.item {
+  font-size: 0.7rem;
+  color: $text-secondary-dark;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease 0s;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
