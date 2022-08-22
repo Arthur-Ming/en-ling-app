@@ -1,0 +1,13 @@
+@import '/src/index.scss';
+
+.root {
+  @extend .wrapper-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 60px 0px 40px;
+  h2 {
+    margin: 0;
+    flex: 1 0 auto;
+  }
+}

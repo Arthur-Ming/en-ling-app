@@ -1,0 +1,50 @@
+@import '/src/index.scss';
+
+.root {
+  display: flex;
+  column-gap: 20px;
+  background-color: $bg-primary-dark;
+  border-radius: 10px;
+  overflow: hidden;
+
+  h4,
+  h5 {
+    margin: 0;
+    font-weight: 400;
+    color: $font-color-dark;
+  }
+  h4 {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+  h5 {
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+  }
+}
+
+.text {
+}
+.header {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding: 10px 20px 15px 10px;
+}
+.body {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.icon {
+  width: 390px;
+  max-height: 100%;
+  object-fit: cover;
+}

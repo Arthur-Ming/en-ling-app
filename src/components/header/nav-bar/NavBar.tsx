@@ -8,28 +8,28 @@ import { ReactComponent as GamesIcon } from './games.svg';
 const links = [
   {
     link: 'textbook',
-    icon: <TextbookIcon />,
+    icon: TextbookIcon,
   },
   {
     link: 'games',
-    icon: <GamesIcon />,
+    icon: GamesIcon,
   },
   {
     link: 'statistics',
-    icon: <StatisticsIcon />,
+    icon: StatisticsIcon,
   },
 ];
 
 const NavBar = () => (
   <nav>
     <ul className={styles.list}>
-      {links.map(({ link, icon }) => (
+      {links.map(({ link, icon: Icon }) => (
         <li key={link}>
           <NavLink
             to={`/${link}`}
             className={({ isActive }) => classNames(styles.link, { [styles.active]: isActive })}
           >
-            <span className={styles[link]}>{icon}</span>
+            <Icon className={styles[link]} />
             <span className={styles.text}>{link}</span>
           </NavLink>
         </li>

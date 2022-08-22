@@ -1,0 +1,9 @@
+@import '/src/index.scss';
+
+.root {
+  @extend .wrapper-box;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}

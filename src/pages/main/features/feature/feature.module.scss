@@ -1,0 +1,23 @@
+@import '/src/index.scss';
+
+.root {
+  padding: 30px 30px;
+  display: flex;
+  flex: 1 1 40%;
+  column-gap: 20px;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+
+  background-color: $main-color;
+}
+
+.icon {
+  flex: 1 0 100px;
+  width: 100px;
+  height: 100px;
+}
+.text {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+}

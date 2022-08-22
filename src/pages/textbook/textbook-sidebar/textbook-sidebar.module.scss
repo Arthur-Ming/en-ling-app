@@ -1,0 +1,66 @@
+@import '/src/index.scss';
+
+.root {
+  margin-top: 20px;
+  position: sticky;
+  padding-top: 0px;
+  top: 40px;
+
+  flex: 1 0 120px;
+  max-width: 120px;
+  height: 100vh;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.button {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 3px;
+  padding: 0;
+  cursor: pointer;
+  border: 1px $bg-secondary-dark solid;
+  opacity: 0.6;
+  transition: opacity 0.3s ease 0s;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: $bg-primary-dark;
+}
+.text {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  color: $bg-primary-dark;
+}
+
+.level-1 {
+  background-color: #81c784;
+}
+.level-2 {
+  background-color: #fff176;
+}
+.level-3 {
+  background-color: rgb(233, 179, 80);
+}
+.level-4 {
+  background-color: pink;
+}
+.level-5 {
+  background-color: #2299eb;
+}
+.level-6 {
+  background-color: rgb(141, 87, 196);
+}
