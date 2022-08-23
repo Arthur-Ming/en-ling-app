@@ -25,6 +25,7 @@
 
 .active {
   color: $active-link;
+  pointer-events: none;
 }
 
 .text {

@@ -4,6 +4,7 @@ import Footer from '../components/footer';
 import Header from '../components/header';
 import Main from '../pages/main';
 import Textbook from '../pages/textbook';
+import TextbookCards from '../pages/textbook/textbook-cards';
 
 const App = () => {
   return (
@@ -12,7 +13,9 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/textbook" element={<Textbook />} />
+          <Route path="/textbook/*" element={<Textbook />}>
+            <Route path={`:page/:group`} element={<TextbookCards />} />
+          </Route>
         </Routes>
         <Footer />
       </div>

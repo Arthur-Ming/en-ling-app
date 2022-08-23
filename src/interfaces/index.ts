@@ -14,3 +14,22 @@ export interface ITextbookCard {
   textMeaningTranslate: string;
   wordTranslate: string;
 }
+
+export interface IAction {
+  type: string;
+}
+
+export interface IActionCallApi extends IAction {
+  CallAPI: string;
+}
+
+export interface ITextbookCardsAction extends IActionCallApi {
+  error: unknown | null;
+  data: ITextbookCard[] | null;
+  page: number;
+  group: number;
+}
+
+/* export interface ITextbookPageChangeAction extends IAction {
+  page: number;
+} */

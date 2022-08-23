@@ -1,0 +1,61 @@
+@import '/src/index.scss';
+.root {
+  background-color: $bg-secondary-dark;
+  opacity: 0.98;
+}
+
+.list {
+  display: flex;
+  column-gap: 5px;
+  margin: 0;
+}
+
+.item {
+  flex: 1 0 2.5rem;
+  width: 2.5rem;
+  background-color: $bg-primary-dark;
+  border-radius: 5px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease 0s;
+  &:hover {
+    opacity: 1;
+  }
+}
+.link {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+}
+
+.previous,
+.next {
+  width: 2.5rem;
+  height: 1.5;
+  border-radius: 5px;
+  opacity: 0.7;
+
+  transition: opacity 0.5s ease 0s;
+  &:hover {
+    opacity: 1;
+  }
+}
+.arrow {
+  width: 30px;
+  height: 30px;
+}
+
+.active {
+  outline: 2px $active-link solid;
+  opacity: 1;
+}
+
+.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+  &:hover {
+    opacity: 0.2;
+  }
+}

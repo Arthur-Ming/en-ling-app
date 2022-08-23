@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+import { useParams } from 'react-router';
 import { ITextbookCard } from '../../../interfaces';
 import styles from './textbook-card.module.scss';
 
@@ -8,6 +10,7 @@ interface IProps {
 const BASE = 'https://react-learnwords-example.herokuapp.com/';
 
 const TextbookCard = ({ card }: IProps) => {
+  const { group } = useParams();
   const {
     word,
     image,
@@ -21,7 +24,6 @@ const TextbookCard = ({ card }: IProps) => {
   return (
     <div className={styles.root}>
       <img className={styles.icon} src={`${BASE}${image}`} alt={word} />
-
       <div className={styles.content}>
         <div className={styles.header}>
           <h4>{word}</h4>
@@ -44,6 +46,17 @@ const TextbookCard = ({ card }: IProps) => {
           <button>button</button>
         </div>
       </div>
+      <svg
+        className={classNames(styles.label, styles[`level-${group}`])}
+        focusable="false"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          fill="currentColor"
+          d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
+        ></path>
+      </svg>
     </div>
   );
 };
