@@ -2,17 +2,23 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { pageChange } from '../../../redux/actions';
+import { textbookLoadingSelector } from '../../../redux/selectors';
+import { RootState } from '../../../redux/store';
 import styles from './textbook-groups-pagination.module.scss';
 
 const textbookSidebarItem = [1, 2, 3, 4, 5, 6];
+
+interface StateProps {
+  isWordsloading: boolean;
+}
 
 interface DispatchProps {
   onGroupChange: () => void;
 }
 
-type TProps = DispatchProps;
+type TProps = DispatchProps & StateProps;
 
-const TextbookGroupsPagination = ({ onGroupChange }: TProps) => {
+const TextbookGroupsPagination = ({ onGroupChange, isWordsloading }: TProps) => {
   const { page, group: currentGroup } = useParams();
   const navigate = useNavigate();
   const handleGroupClick = (item: number) => {
@@ -29,6 +35,7 @@ const TextbookGroupsPagination = ({ onGroupChange }: TProps) => {
           })}
           onClick={() => handleGroupClick(item)}
           key={item}
+          disabled={isWordsloading}
         >
           <svg
             className={classNames(styles.icon, styles[`level-${item}`])}
@@ -48,8 +55,12 @@ const TextbookGroupsPagination = ({ onGroupChange }: TProps) => {
   );
 };
 
+const mapStateToProps = (state: RootState) => ({
+  isWordsloading: textbookLoadingSelector(state),
+});
+
 const mapDispatchToProps = {
   onGroupChange: pageChange,
 };
 
-export default connect(null, mapDispatchToProps)(TextbookGroupsPagination);
+export default connect(mapStateToProps, mapDispatchToProps)(TextbookGroupsPagination);

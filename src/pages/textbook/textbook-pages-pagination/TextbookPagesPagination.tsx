@@ -6,14 +6,21 @@ import { connect } from 'react-redux';
 
 import { pageChange } from '../../../redux/actions';
 import { useNavigate, useParams } from 'react-router';
+import { textbookLoadingSelector } from '../../../redux/selectors';
+import { RootState } from '../../../redux/store';
+import classNames from 'classnames';
+
+interface StateProps {
+  isWordsloading: boolean;
+}
 
 interface DispatchProps {
   onPageChange: () => void;
 }
 
-type TProps = DispatchProps;
+type TProps = DispatchProps & StateProps;
 
-const TextbookPagesPagination = ({ onPageChange }: TProps) => {
+const TextbookPagesPagination = ({ onPageChange, isWordsloading }: TProps) => {
   const { page: currentPage, group } = useParams();
   const navigate = useNavigate();
   const handlePageClick = ({ selected }: { selected: number }) => {
@@ -22,7 +29,11 @@ const TextbookPagesPagination = ({ onPageChange }: TProps) => {
   };
 
   return (
-    <div className={styles.root}>
+    <div
+      className={classNames(styles.root, {
+        [styles.loading]: isWordsloading,
+      })}
+    >
       <ReactPaginate
         nextLabel={<ArrowNext className={styles.arrow} />}
         onPageChange={handlePageClick}
@@ -44,14 +55,17 @@ const TextbookPagesPagination = ({ onPageChange }: TProps) => {
         containerClassName={styles.list}
         activeClassName={styles.active}
         disabledClassName={styles.disabled}
-        /* renderOnZeroPageCount={null} */
       />
     </div>
   );
 };
 
+const mapStateToProps = (state: RootState) => ({
+  isWordsloading: textbookLoadingSelector(state),
+});
+
 const mapDispatchToProps = {
   onPageChange: pageChange,
 };
 
-export default connect(null, mapDispatchToProps)(TextbookPagesPagination);
+export default connect(mapStateToProps, mapDispatchToProps)(TextbookPagesPagination);

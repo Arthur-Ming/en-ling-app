@@ -3,7 +3,10 @@
   background-color: $bg-secondary-dark;
   opacity: 0.98;
 }
-
+.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .list {
   display: flex;
   column-gap: 5px;

@@ -14,8 +14,8 @@ import { useParams } from 'react-router';
 import Loader from '../../../components/Loader';
 
 interface StateProps {
-  isBoardsloading: boolean;
-  isBoardsloaded: boolean;
+  isWordsloading: boolean;
+  isWordsloaded: boolean;
   cards: ITextbookCard[];
 }
 
@@ -25,15 +25,15 @@ interface DispatchProps {
 
 type TProps = StateProps & DispatchProps;
 
-const TextbookCards = ({ cards, isBoardsloading, isBoardsloaded, getWords }: TProps) => {
+const TextbookCards = ({ cards, isWordsloading, isWordsloaded, getWords }: TProps) => {
   const { page, group } = useParams();
 
   useEffect(() => {
-    if (!isBoardsloading && !isBoardsloaded) getWords(Number(page) - 1, Number(group) - 1);
-  }, [isBoardsloading, isBoardsloaded, getWords, page, group]);
+    if (!isWordsloading && !isWordsloaded) getWords(Number(page) - 1, Number(group) - 1);
+  }, [isWordsloading, isWordsloaded, getWords, page, group]);
 
-  if (isBoardsloading) return <Loader />;
-  if (!isBoardsloaded) return <div>Not Fou</div>;
+  if (isWordsloading) return <Loader />;
+  if (!isWordsloaded) return <div>Not Fou</div>;
 
   return (
     <div className={styles.root}>
@@ -45,8 +45,8 @@ const TextbookCards = ({ cards, isBoardsloading, isBoardsloaded, getWords }: TPr
 };
 
 const mapStateToProps = (state: RootState) => ({
-  isBoardsloading: textbookLoadingSelector(state),
-  isBoardsloaded: textbookLoadedSelector(state),
+  isWordsloading: textbookLoadingSelector(state),
+  isWordsloaded: textbookLoadedSelector(state),
   cards: textbookListSelector(state),
 });
 

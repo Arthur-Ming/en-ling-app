@@ -25,6 +25,9 @@
   &:hover {
     opacity: 1;
   }
+  &:disabled {
+    opacity: 0.4;
+  }
 }
 
 .icon {
