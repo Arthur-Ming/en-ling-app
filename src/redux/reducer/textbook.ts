@@ -2,7 +2,7 @@
 import { LOAD_WORDS, TEXTBOOK_PAGE_CHANGE, SUCCESS, REQUEST } from '../constants';
 import arrToMap from '../../utils/arrToMap';
 import { createReducer } from '@reduxjs/toolkit';
-import { ITextbookCard, ITextbookCardsAction, IAction } from '../../interfaces';
+import { ITextbookWord, ITextbookCardsAction } from '../../interfaces';
 
 export interface ITextbookState {
   loading: boolean;
@@ -11,7 +11,7 @@ export interface ITextbookState {
   page: number;
   group: number;
   entities: {
-    [key: string]: ITextbookCard;
+    [key: string]: ITextbookWord;
   };
 }
 

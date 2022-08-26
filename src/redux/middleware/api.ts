@@ -8,7 +8,6 @@ const api: Middleware<Record<string, unknown>> = () => (next) => async (action) 
 
   switch (type) {
     case LOAD_WORDS: {
-      console.log(LOAD_WORDS);
       next({ ...rest, type: type + REQUEST });
       try {
         const res = await fetch(action.CallAPI);

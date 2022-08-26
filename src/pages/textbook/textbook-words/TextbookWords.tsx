@@ -1,12 +1,12 @@
-import { ITextbookCard } from '../../../interfaces';
-import TextbookCard from '../textbook-card';
-import styles from './textbook-cards.module.scss';
+import { ITextbookWord } from '../../../interfaces';
+import TextbookWord from '../textbook-word';
+import styles from './textbook-words.module.scss';
 import { connect } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import {
   textbookLoadingSelector,
   textbookLoadedSelector,
-  textbookListSelector,
+  textbookWordsSelector,
 } from '../../../redux/selectors';
 import { getWords } from '../../../redux/actions';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ import Loader from '../../../components/Loader';
 interface StateProps {
   isWordsloading: boolean;
   isWordsloaded: boolean;
-  cards: ITextbookCard[];
+  words: ITextbookWord[];
 }
 
 interface DispatchProps {
@@ -25,7 +25,7 @@ interface DispatchProps {
 
 type TProps = StateProps & DispatchProps;
 
-const TextbookCards = ({ cards, isWordsloading, isWordsloaded, getWords }: TProps) => {
+const TextbookWords = ({ words, isWordsloading, isWordsloaded, getWords }: TProps) => {
   const { page, group } = useParams();
 
   useEffect(() => {
@@ -37,8 +37,8 @@ const TextbookCards = ({ cards, isWordsloading, isWordsloaded, getWords }: TProp
 
   return (
     <div className={styles.root}>
-      {cards.map((card) => (
-        <TextbookCard key={card.id} card={card} />
+      {words.map((word) => (
+        <TextbookWord key={word.id} word={word} />
       ))}
     </div>
   );
@@ -47,11 +47,11 @@ const TextbookCards = ({ cards, isWordsloading, isWordsloaded, getWords }: TProp
 const mapStateToProps = (state: RootState) => ({
   isWordsloading: textbookLoadingSelector(state),
   isWordsloaded: textbookLoadedSelector(state),
-  cards: textbookListSelector(state),
+  words: textbookWordsSelector(state),
 });
 
 const mapDispatchToProps = {
   getWords,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextbookCards);
+export default connect(mapStateToProps, mapDispatchToProps)(TextbookWords);

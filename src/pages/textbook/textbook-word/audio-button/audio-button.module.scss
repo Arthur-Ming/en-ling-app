@@ -1,0 +1,15 @@
+.button {
+  position: absolute;
+  left: calc(100% - 70px);
+  top: calc(100% - 70px);
+  cursor: pointer;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+}
+
+.active {
+  color: red;
+}

@@ -1,4 +1,4 @@
-export interface ITextbookCard {
+export interface ITextbookWord {
   id: string;
   group: number;
   page: number;
@@ -25,7 +25,7 @@ export interface IActionCallApi extends IAction {
 
 export interface ITextbookCardsAction extends IActionCallApi {
   error: unknown | null;
-  data: ITextbookCard[] | null;
+  data: ITextbookWord[] | null;
   page: number;
   group: number;
 }

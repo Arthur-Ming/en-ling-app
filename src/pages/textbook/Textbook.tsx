@@ -1,4 +1,4 @@
-import TextbookCards from './textbook-cards';
+import TextbookWords from './textbook-words';
 import TextbookSidebar from './textbook-sidebar';
 import styles from './textbook.module.scss';
 import TextbookHeader from './textbook-header';
@@ -21,7 +21,7 @@ const Textbook = () => {
         <TextbookSidebar />
         <ArrowButton prev />
         <Routes>
-          <Route path={`:page/:group`} element={<TextbookCards />} />
+          <Route path={`:page/:group`} element={<TextbookWords />} />
         </Routes>
         <ArrowButton />
       </div>
