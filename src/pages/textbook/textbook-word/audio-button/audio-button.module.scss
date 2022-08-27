@@ -1,15 +1,17 @@
+@import '/src/index.scss';
 .button {
-  position: absolute;
-  left: calc(100% - 70px);
-  top: calc(100% - 70px);
   cursor: pointer;
+  background-color: inherit;
+  border: none;
 }
 
 .icon {
   width: 35px;
   height: 35px;
+  color: $font-color-dark;
 }
 
-.active {
-  color: red;
+.mute {
+  @extend .icon;
+  color: $text-secondary-dark;
 }

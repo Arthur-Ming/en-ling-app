@@ -29,7 +29,7 @@ type TProps = OwnProps & DispatchProps & StateProps;
 const AudioButton = ({ onAudioStart, onAudioStop, isCurrentAudio }: TProps) => {
   return isCurrentAudio ? (
     <button className={styles.button} onClick={onAudioStop}>
-      <MuteIcon className={styles.icon} />
+      <MuteIcon className={styles.mute} />
     </button>
   ) : (
     <button className={styles.button} onClick={onAudioStart}>
@@ -41,10 +41,6 @@ const AudioButton = ({ onAudioStart, onAudioStop, isCurrentAudio }: TProps) => {
 const mapStateToProps = (state: RootState, { id }: OwnProps) => ({
   isCurrentAudio: currentAudioWordIdSelector(state) === id,
 });
-
-/* const mapDispatchToProps = {
-  audioStart,
-}; */
 
 const mapDispatchToProps = (
   dispatch: Dispatch<AnyAction>,

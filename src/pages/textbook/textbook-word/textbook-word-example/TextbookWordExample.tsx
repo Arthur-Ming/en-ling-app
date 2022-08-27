@@ -3,8 +3,8 @@ import { audioConnector, IAudioConnector } from '../audioConnector';
 import styles from '../textbook-word.module.scss';
 
 interface OwnProps extends IAudioConnector {
-  textMeaning: string;
-  textMeaningTranslate: string;
+  textExample: string;
+  textExampleTranslate: string;
 }
 
 interface StateProps {
@@ -13,16 +13,16 @@ interface StateProps {
 
 type TProps = OwnProps & StateProps;
 
-const TextbookWordMeaning = ({ textMeaning, textMeaningTranslate, isCurrentAudioPath }: TProps) => (
+const TextbookWordExample = ({ textExample, textExampleTranslate, isCurrentAudioPath }: TProps) => (
   <div>
     <h4
       className={classNames(styles.text, {
         [styles.active]: isCurrentAudioPath,
       })}
-      dangerouslySetInnerHTML={{ __html: textMeaning }}
+      dangerouslySetInnerHTML={{ __html: textExample }}
     ></h4>
-    <h4 className={styles.text}>{textMeaningTranslate}</h4>
+    <h4 className={styles.text}>{textExampleTranslate}</h4>
   </div>
 );
 
-export default audioConnector(TextbookWordMeaning);
+export default audioConnector(TextbookWordExample);

@@ -1,13 +1,15 @@
-import classNames from 'classnames';
-
 import { useParams } from 'react-router';
 import { ITextbookWord } from '../../../interfaces';
-
 import AudioButton from './audio-button';
+import TextbookWordExample from './textbook-word-example';
 import TextbookWordHeader from './textbook-word-header';
 import TextbookWordMeaning from './textbook-word-meaning';
 
+import { ReactComponent as LabelIcon } from './label.svg';
+
 import styles from './textbook-word.module.scss';
+import classNames from 'classnames';
+import { apiRoutes } from '../../../utils/apiRoutes';
 
 interface OwnProps {
   word: ITextbookWord;
@@ -36,7 +38,7 @@ const TextbookWord = ({ word }: TProps) => {
 
   return (
     <div className={styles.root}>
-      <img className={styles.icon} src={`${BASE}${image}`} alt={wordText} />
+      <img className={styles.icon} src={apiRoutes.img.absolute(image)} alt={wordText} />
       <div className={styles.content}>
         <TextbookWordHeader
           wordText={wordText}
@@ -50,27 +52,26 @@ const TextbookWord = ({ word }: TProps) => {
             textMeaningTranslate={textMeaningTranslate}
             audio={audioMeaning}
           />
-          <div>
-            <h5 dangerouslySetInnerHTML={{ __html: textExample }}></h5>
-            <h5>{textExampleTranslate}</h5>
-          </div>
+          <TextbookWordExample
+            textExample={textExample}
+            textExampleTranslate={textExampleTranslate}
+            audio={audioExample}
+          />
         </div>
         <div className={styles.buttons}>
-          <button>button</button>
+          <div>
+            <button>button</button>
+            <button>button</button>
+          </div>
+          <AudioButton
+            audio={audio}
+            audioMeaning={audioMeaning}
+            audioExample={audioExample}
+            id={id}
+          />
         </div>
       </div>
-      <svg
-        className={classNames(styles.label, styles[`level-${group}`])}
-        focusable="false"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          fill="currentColor"
-          d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
-        ></path>
-      </svg>
-      <AudioButton audio={audio} audioMeaning={audioMeaning} audioExample={audioExample} id={id} />
+      <LabelIcon className={classNames(styles.label, styles[`level-${group}`])} />
     </div>
   );
 };
