@@ -4,7 +4,7 @@ import { ReactComponent as ArrowPrev } from './arrow-prev.svg';
 import { ReactComponent as ArrowNext } from './arrow-next.svg';
 import { connect } from 'react-redux';
 
-import { pageChange } from '../../../redux/actions';
+import { pageChange } from '../../../redux/actions/words';
 import { useNavigate, useParams } from 'react-router';
 import { textbookLoadingSelector } from '../../../redux/selectors';
 import { RootState } from '../../../redux/store';

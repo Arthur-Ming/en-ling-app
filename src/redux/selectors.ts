@@ -13,10 +13,21 @@ export const textbookLoadedSelector = (state: RootState) => (<ITextbookState>sta
 export const textbookPageSelector = (state: RootState) => (<ITextbookState>state.textbook).page;
 export const textbookGroupSelector = (state: RootState) => (<ITextbookState>state.textbook).group;
 
-export const currentAudioWordIdSelector = (state: RootState) => {
-  return (<IAudioState>state.audio).currentAudio?.wordId;
+export const wordAudioByIdSelector = (state: RootState, wordId: string) => {
+  return textbookSelector(state)[wordId]?.audio;
 };
 
+export const wordMeaningAudioByIdSelector = (state: RootState, wordId: string) => {
+  return textbookSelector(state)[wordId]?.audioMeaning;
+};
+
+export const wordExampleAudioByIdSelector = (state: RootState, wordId: string) => {
+  return textbookSelector(state)[wordId]?.audioExample;
+};
+
+export const currentAudioWordIdSelector = (state: RootState) => {
+  return (<IAudioState>state.audio)?.wordId;
+};
 export const currentAudioPathSelector = (state: RootState) => {
-  return (<IAudioState>state.audio).currentAudio?.path;
+  return (<IAudioState>state.audio)?.path;
 };

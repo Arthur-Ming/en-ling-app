@@ -1,10 +1,6 @@
-import { join } from 'path-browserify';
-
 export const apiRoutes = {
   root: 'https://react-learnwords-example.herokuapp.com',
 
-  img: {
-    relative: '',
-    absolute: (image: string) => `${apiRoutes.root}/${image}`,
-  },
+  files: (file: string) => `${apiRoutes.root}/${file}`,
+  words: (page: number, group: number) => `${apiRoutes.root}/words?page=${page}&group=${group}`,
 };

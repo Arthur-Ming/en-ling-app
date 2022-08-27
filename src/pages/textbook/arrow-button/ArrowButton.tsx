@@ -4,7 +4,7 @@ import styles from './arrow-button.module.scss';
 import classNames from 'classnames';
 import { useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
-import { pageChange } from '../../../redux/actions';
+import { pageChange } from '../../../redux/actions/words';
 import { RootState } from '../../../redux/store';
 import { textbookLoadingSelector } from '../../../redux/selectors';
 

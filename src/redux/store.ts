@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import api from './middleware/api';
-import audio from './middleware/audio';
 
 import reducer from './reducer';
 
 const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api, audio),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
 });
 
 export default store;

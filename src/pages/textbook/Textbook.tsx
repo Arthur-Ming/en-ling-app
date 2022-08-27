@@ -14,6 +14,7 @@ const Textbook = () => {
   if (!match) {
     return <Navigate to={`/textbook/${page + 1}/${group + 1}`} replace />;
   }
+
   return (
     <main className={styles.root}>
       <TextbookHeader />

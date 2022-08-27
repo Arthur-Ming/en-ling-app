@@ -2,16 +2,11 @@ import { ReactComponent as AudioIcon } from './audio.svg';
 import { ReactComponent as MuteIcon } from './mute.svg';
 import styles from './audio-button.module.scss';
 import { connect } from 'react-redux';
-import { audioStart, audioStop } from '../../../../redux/actions';
-import { AnyAction, Dispatch } from '@reduxjs/toolkit';
-import { RootState } from '../../../../redux/store';
+import { audioStart, audioStop } from '../../../../redux/actions/audio';
+import { AppDispatch, RootState } from '../../../../redux/store';
 import { currentAudioWordIdSelector } from '../../../../redux/selectors';
-import classNames from 'classnames';
 
 interface OwnProps {
-  audio: string;
-  audioMeaning: string;
-  audioExample: string;
   id: string;
 }
 
@@ -42,11 +37,8 @@ const mapStateToProps = (state: RootState, { id }: OwnProps) => ({
   isCurrentAudio: currentAudioWordIdSelector(state) === id,
 });
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<AnyAction>,
-  { audio, audioMeaning, audioExample, id }: OwnProps
-) => ({
-  onAudioStart: () => dispatch(audioStart(audio, audioMeaning, audioExample, id)),
+const mapDispatchToProps = (dispatch: AppDispatch, { id }: OwnProps) => ({
+  onAudioStart: () => dispatch(audioStart(id)),
   onAudioStop: () => dispatch(audioStop()),
 });
 

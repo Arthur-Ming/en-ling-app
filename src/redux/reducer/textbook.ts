@@ -1,5 +1,5 @@
 /* import { IBoard, IGetAllBoards, ICreatColumn, IDeleteColumn } from 'interfaces'; */
-import { LOAD_WORDS, TEXTBOOK_PAGE_CHANGE, SUCCESS, REQUEST } from '../constants';
+import { LOAD_WORDS, TEXTBOOK_PAGE_CHANGE, SUCCESS, REQUEST, FAILURE } from '../constants';
 import arrToMap from '../../utils/arrToMap';
 import { createReducer } from '@reduxjs/toolkit';
 import { ITextbookWord, ITextbookCardsAction } from '../../interfaces';
@@ -7,7 +7,7 @@ import { ITextbookWord, ITextbookCardsAction } from '../../interfaces';
 export interface ITextbookState {
   loading: boolean;
   loaded: boolean;
-  error: null;
+  error: null | unknown;
   page: number;
   group: number;
   entities: {
@@ -30,13 +30,19 @@ export default createReducer(initialState, (builder) => {
       state.loading = true;
     })
     .addCase(LOAD_WORDS + SUCCESS, (state, action) => {
-      const { data, page, group } = <ITextbookCardsAction>action;
+      const { data, page = 0, group = 0 } = <ITextbookCardsAction>action;
       state.loading = false;
       state.loaded = true;
       state.error = null;
       state.page = page;
       state.group = group;
       data && (state.entities = arrToMap(data));
+    })
+    .addCase(LOAD_WORDS + FAILURE, (state, action) => {
+      const { error = null } = <ITextbookCardsAction>action;
+      state.loading = false;
+      state.loaded = false;
+      state.error = error;
     })
     .addCase(TEXTBOOK_PAGE_CHANGE, (state) => {
       state.loading = false;

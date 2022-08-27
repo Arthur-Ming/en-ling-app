@@ -19,15 +19,17 @@ export interface IAction {
   type: string;
 }
 
-export interface IActionCallApi extends IAction {
-  CallAPI: string;
+export interface ITextbookCardsAction extends IAction {
+  error?: unknown | null;
+  data?: ITextbookWord[] | null;
+  page?: number;
+  group?: number;
 }
 
-export interface ITextbookCardsAction extends IActionCallApi {
-  error: unknown | null;
-  data: ITextbookWord[] | null;
-  page: number;
-  group: number;
+export interface IAudioAction extends IAction {
+  error?: null | unknown;
+  path?: string | null;
+  wordId?: string | null;
 }
 
 /* export interface ITextbookPageChangeAction extends IAction {

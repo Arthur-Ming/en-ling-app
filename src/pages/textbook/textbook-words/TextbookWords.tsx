@@ -8,14 +8,15 @@ import {
   textbookLoadedSelector,
   textbookWordsSelector,
 } from '../../../redux/selectors';
-import { getWords } from '../../../redux/actions';
+
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import Loader from '../../../components/Loader';
+import { getWords } from '../../../redux/actions/words';
 
 interface StateProps {
-  isWordsloading: boolean;
-  isWordsloaded: boolean;
+  loading: boolean;
+  loaded: boolean;
   words: ITextbookWord[];
 }
 
@@ -25,15 +26,14 @@ interface DispatchProps {
 
 type TProps = StateProps & DispatchProps;
 
-const TextbookWords = ({ words, isWordsloading, isWordsloaded, getWords }: TProps) => {
+const TextbookWords = ({ words, loading, getWords }: TProps) => {
   const { page, group } = useParams();
 
   useEffect(() => {
-    if (!isWordsloading && !isWordsloaded) getWords(Number(page) - 1, Number(group) - 1);
-  }, [isWordsloading, isWordsloaded, getWords, page, group]);
+    getWords(Number(page) - 1, Number(group) - 1);
+  }, [getWords, page, group]);
 
-  if (isWordsloading) return <Loader />;
-  if (!isWordsloaded) return <div>Not Fou</div>;
+  if (loading) return <Loader />;
 
   return (
     <div className={styles.root}>
@@ -45,8 +45,8 @@ const TextbookWords = ({ words, isWordsloading, isWordsloaded, getWords }: TProp
 };
 
 const mapStateToProps = (state: RootState) => ({
-  isWordsloading: textbookLoadingSelector(state),
-  isWordsloaded: textbookLoadedSelector(state),
+  loading: textbookLoadingSelector(state),
+  loaded: textbookLoadedSelector(state),
   words: textbookWordsSelector(state),
 });
 

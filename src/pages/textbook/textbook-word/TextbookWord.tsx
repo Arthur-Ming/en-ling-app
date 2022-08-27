@@ -38,7 +38,7 @@ const TextbookWord = ({ word }: TProps) => {
 
   return (
     <div className={styles.root}>
-      <img className={styles.icon} src={apiRoutes.img.absolute(image)} alt={wordText} />
+      <img className={styles.icon} src={apiRoutes.files(image)} alt={wordText} />
       <div className={styles.content}>
         <TextbookWordHeader
           wordText={wordText}
@@ -63,12 +63,7 @@ const TextbookWord = ({ word }: TProps) => {
             <button>button</button>
             <button>button</button>
           </div>
-          <AudioButton
-            audio={audio}
-            audioMeaning={audioMeaning}
-            audioExample={audioExample}
-            id={id}
-          />
+          <AudioButton id={id} />
         </div>
       </div>
       <LabelIcon className={classNames(styles.label, styles[`level-${group}`])} />
