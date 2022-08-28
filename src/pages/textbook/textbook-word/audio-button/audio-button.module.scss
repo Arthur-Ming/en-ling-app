@@ -9,9 +9,16 @@
   width: 35px;
   height: 35px;
   color: $font-color-dark;
+  transition: color 0.3s ease 0s;
+  &:hover {
+    color: $text-secondary-dark;
+  }
 }
 
 .mute {
   @extend .icon;
   color: $text-secondary-dark;
+  &:hover {
+    color: $font-color-dark;
+  }
 }

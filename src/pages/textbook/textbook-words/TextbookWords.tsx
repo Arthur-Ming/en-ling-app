@@ -30,7 +30,7 @@ const TextbookWords = ({ words, loading, getWords }: TProps) => {
   const { page, group } = useParams();
 
   useEffect(() => {
-    getWords(Number(page) - 1, Number(group) - 1);
+    getWords(Number(page), Number(group));
   }, [getWords, page, group]);
 
   if (loading) return <Loader />;

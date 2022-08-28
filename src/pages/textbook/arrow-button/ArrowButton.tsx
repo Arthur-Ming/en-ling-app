@@ -4,39 +4,35 @@ import styles from './arrow-button.module.scss';
 import classNames from 'classnames';
 import { useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
-import { pageChange } from '../../../redux/actions/words';
+
 import { RootState } from '../../../redux/store';
 import { textbookLoadingSelector } from '../../../redux/selectors';
+import { DEFAULT_PAGE, PAGE_COUNT, PAGE_SHIFT } from '../../../redux/constants';
+import clientRoutes from '../../../utils/clientRoutes';
 
 interface StateProps {
   isWordsloading: boolean;
-}
-
-interface DispatchProps {
-  onPageChange: () => void;
 }
 
 interface OwnProps {
   prev?: boolean;
 }
 
-type TProps = OwnProps & DispatchProps & StateProps;
+type TProps = OwnProps & StateProps;
 
-const ArrowButton = ({ prev, onPageChange, isWordsloading }: TProps) => {
+const ArrowButton = ({ prev, isWordsloading }: TProps) => {
   const { page = null, group = null } = useParams();
   const navigate = useNavigate();
 
   const onNextClick = () => {
     if (page !== null && group !== null) {
-      navigate(`${Number(page) + 1}/${Number(group)}`);
-      onPageChange();
+      navigate(clientRoutes.textbookWords.relative(Number(page) + PAGE_SHIFT, group));
     }
   };
 
   const onPrevClick = () => {
     if (page !== null && group !== null) {
-      navigate(`${Number(page) - 1}/${Number(group)}`);
-      onPageChange();
+      navigate(clientRoutes.textbookWords.relative(Number(page) - PAGE_SHIFT, group));
     }
   };
   return (
@@ -45,7 +41,7 @@ const ArrowButton = ({ prev, onPageChange, isWordsloading }: TProps) => {
         <button
           className={styles.wrap}
           onClick={onPrevClick}
-          disabled={Number(page) === 1 || isWordsloading}
+          disabled={Number(page) === DEFAULT_PAGE || isWordsloading}
         >
           <ArrowPrevIcon className={classNames(styles.arrow, styles.prev)} />
         </button>
@@ -53,7 +49,7 @@ const ArrowButton = ({ prev, onPageChange, isWordsloading }: TProps) => {
         <button
           className={styles.wrap}
           onClick={onNextClick}
-          disabled={Number(page) === 20 || isWordsloading}
+          disabled={Number(page) === PAGE_COUNT || isWordsloading}
         >
           <ArrowNextIcon className={classNames(styles.arrow, styles.next)} />
         </button>
@@ -66,8 +62,4 @@ const mapStateToProps = (state: RootState) => ({
   isWordsloading: textbookLoadingSelector(state),
 });
 
-const mapDispatchToProps = {
-  onPageChange: pageChange,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ArrowButton);
+export default connect(mapStateToProps)(ArrowButton);

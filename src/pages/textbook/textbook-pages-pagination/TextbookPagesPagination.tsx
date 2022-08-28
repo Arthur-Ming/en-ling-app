@@ -4,28 +4,24 @@ import { ReactComponent as ArrowPrev } from './arrow-prev.svg';
 import { ReactComponent as ArrowNext } from './arrow-next.svg';
 import { connect } from 'react-redux';
 
-import { pageChange } from '../../../redux/actions/words';
 import { useNavigate, useParams } from 'react-router';
 import { textbookLoadingSelector } from '../../../redux/selectors';
 import { RootState } from '../../../redux/store';
 import classNames from 'classnames';
+import { PAGE_COUNT, PAGE_SHIFT } from '../../../redux/constants';
+import clientRoutes from '../../../utils/clientRoutes';
 
 interface StateProps {
   isWordsloading: boolean;
 }
 
-interface DispatchProps {
-  onPageChange: () => void;
-}
+type TProps = StateProps;
 
-type TProps = DispatchProps & StateProps;
-
-const TextbookPagesPagination = ({ onPageChange, isWordsloading }: TProps) => {
+const TextbookPagesPagination = ({ isWordsloading }: TProps) => {
   const { page: currentPage, group } = useParams();
   const navigate = useNavigate();
   const handlePageClick = ({ selected }: { selected: number }) => {
-    navigate(`${selected + 1}/${Number(group)}`);
-    onPageChange();
+    navigate(clientRoutes.textbookWords.relative(selected + PAGE_SHIFT, group));
   };
 
   return (
@@ -39,8 +35,8 @@ const TextbookPagesPagination = ({ onPageChange, isWordsloading }: TProps) => {
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         marginPagesDisplayed={2}
-        forcePage={Number(currentPage) - 1}
-        pageCount={20}
+        forcePage={Number(currentPage) - PAGE_SHIFT}
+        pageCount={PAGE_COUNT}
         previousLabel={<ArrowPrev className={styles.arrow} />}
         disableInitialCallback={true}
         pageClassName={styles.item}
@@ -64,8 +60,4 @@ const mapStateToProps = (state: RootState) => ({
   isWordsloading: textbookLoadingSelector(state),
 });
 
-const mapDispatchToProps = {
-  onPageChange: pageChange,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TextbookPagesPagination);
+export default connect(mapStateToProps)(TextbookPagesPagination);

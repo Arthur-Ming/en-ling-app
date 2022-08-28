@@ -17,10 +17,9 @@ interface OwnProps {
 
 type TProps = OwnProps;
 
-const BASE = 'https://react-learnwords-example.herokuapp.com/';
-
 const TextbookWord = ({ word }: TProps) => {
   const { group } = useParams();
+
   const {
     id,
     word: wordText,

@@ -6,13 +6,29 @@ import TextbookFooter from './textbook-footer';
 import { Navigate, Route, Routes, useMatch } from 'react-router';
 import ArrowButton from './arrow-button';
 import useTextbookPageParams from '../../hooks/useTextbookPageParams';
+import { useEffect } from 'react';
+import clientRoutes from '../../utils/clientRoutes';
 
 const Textbook = () => {
   const { page, group } = useTextbookPageParams();
-  const match = useMatch('/textbook/:page/:group');
+
+  useEffect(() => {
+    const syncTextbookParamsToStorage = () => {
+      localStorage.setItem('page', String(page));
+      localStorage.setItem('group', String(group));
+    };
+    syncTextbookParamsToStorage();
+    window.addEventListener('beforeunload', syncTextbookParamsToStorage);
+
+    return () => {
+      window.removeEventListener('beforeunload', syncTextbookParamsToStorage);
+    };
+  }, [page, group]);
+
+  const match = useMatch(clientRoutes.textbookWords.absolute());
 
   if (!match) {
-    return <Navigate to={`/textbook/${page + 1}/${group + 1}`} replace />;
+    return <Navigate to={clientRoutes.textbookWords.absolute(page, group)} replace />;
   }
 
   return (
@@ -22,7 +38,7 @@ const Textbook = () => {
         <TextbookSidebar />
         <ArrowButton prev />
         <Routes>
-          <Route path={`:page/:group`} element={<TextbookWords />} />
+          <Route path={clientRoutes.textbookWords.relative()} element={<TextbookWords />} />
         </Routes>
         <ArrowButton />
       </div>

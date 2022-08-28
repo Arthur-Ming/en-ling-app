@@ -1,31 +1,21 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  textbookGroupSelector,
-  textbookLoadedSelector,
-  textbookPageSelector,
-} from '../redux/selectors';
+import { useParams } from 'react-router';
+import { textbookGroupSelector, textbookPageSelector } from '../redux/selectors';
 
 const useTextbookPageParams = () => {
   const defaultPage = useSelector(textbookPageSelector);
   const defaultGroup = useSelector(textbookGroupSelector);
-  const loaded = useSelector(textbookLoadedSelector);
+
+  const { page = null, group = null } = useParams();
+
+  if (page && group) return { page: Number(page), group: Number(group) };
 
   const savedPage = localStorage.getItem('page');
   const savedGroup = localStorage.getItem('group');
 
-  useEffect(() => {
-    const syncTextbookParamsToStorage = () => {
-      localStorage.setItem('page', String(defaultPage));
-      localStorage.setItem('group', String(defaultGroup));
-    };
-
-    syncTextbookParamsToStorage();
-  }, [defaultGroup, defaultPage]);
-
-  if (loaded) return { page: defaultPage, group: defaultGroup };
-
-  if (savedPage && savedGroup) return { page: Number(savedPage), group: Number(savedGroup) };
+  if (savedPage && savedGroup) {
+    return { page: Number(savedPage), group: Number(savedGroup) };
+  }
 
   return { page: defaultPage, group: defaultGroup };
 };
