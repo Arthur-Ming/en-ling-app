@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dadccaf2.css",
+    "main.js": "/static/js/main.6a716cb4.js",
+    "static/media/mission.svg": "/static/media/mission.cc3f7d8da8baf36c43184478e4b1ce5d.svg",
+    "static/media/textbook.svg": "/static/media/textbook.86a2b688cf10ab4327c602f6d36f34db.svg",
+    "static/media/github.svg": "/static/media/github.1e13bf38a61323f3404ab5bd43ffcfeb.svg",
+    "static/media/games.svg": "/static/media/games.2a8bce9a8181ddd4749f8b4da2afbd5a.svg",
+    "static/media/mute.svg": "/static/media/mute.1825442e6886ffec70f7140131ec4b66.svg",
+    "static/media/audio.svg": "/static/media/audio.b2e37b35c502edf9570667e412d01318.svg",
+    "index.html": "/index.html",
+    "static/media/statistics.svg": "/static/media/statistics.4de341b4465f1377157d28fc4f33b380.svg",
+    "static/media/arrow-next.svg": "/static/media/arrow-next.1d8c6863bfdf3fd47b45efe4709782db.svg",
+    "static/media/arrow-prev.svg": "/static/media/arrow-prev.616cf9a990caaf0c0437295d879a145f.svg",
+    "static/media/label.svg": "/static/media/label.6056204c3791fbda8dfa37ebdff64396.svg",
+    "main.dadccaf2.css.map": "/static/css/main.dadccaf2.css.map",
+    "main.6a716cb4.js.map": "/static/js/main.6a716cb4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dadccaf2.css",
+    "static/js/main.6a716cb4.js"
+  ]
+}
