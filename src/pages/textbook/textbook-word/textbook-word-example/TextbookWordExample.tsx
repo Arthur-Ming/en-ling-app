@@ -11,9 +11,9 @@ interface StateProps {
   isCurrentAudioPath: boolean;
 }
 
-type TProps = OwnProps & StateProps;
+type Props = OwnProps & StateProps;
 
-const TextbookWordExample = ({ textExample, textExampleTranslate, isCurrentAudioPath }: TProps) => (
+const TextbookWordExample = ({ textExample, textExampleTranslate, isCurrentAudioPath }: Props) => (
   <div>
     <h4
       className={classNames(styles.text, {

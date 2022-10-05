@@ -1,6 +1,6 @@
 import { AUDIO, START, STOP, FAILURE } from '../constants';
 
-import { AnyAction, createReducer } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { IAudioAction } from '../../interfaces';
 
 export interface IAudioState {

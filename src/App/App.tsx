@@ -6,6 +6,14 @@ import Main from '../pages/main';
 import Textbook from '../pages/textbook';
 import TextbookWords from '../pages/textbook/textbook-words';
 import clientRoutes from '../utils/clientRoutes';
+import Games from '../pages/games';
+import Sprint from '../pages/sprint';
+import AudioCall from '../pages/audio-call';
+import SprintGame from '../pages/sprint/sprint-game';
+import AudioCallGame from '../pages/audio-call/audio-call-game';
+
+console.log(`${clientRoutes.textbook.absolute()}/*`);
+console.log(clientRoutes.textbookWords.relative());
 
 const App = () => (
   <Router>
@@ -15,6 +23,14 @@ const App = () => (
         <Route path={clientRoutes.main()} element={<Main />} />
         <Route path={`${clientRoutes.textbook.absolute()}/*`} element={<Textbook />}>
           <Route path={clientRoutes.textbookWords.relative()} element={<TextbookWords />} />
+        </Route>
+        <Route path={`/${clientRoutes.games.absolute()}/*`} element={<Games />}>
+          <Route path="sprint/*" element={<Sprint />}>
+            <Route path=":group" element={<SprintGame />} />
+          </Route>
+          <Route path="audio-call/*" element={<AudioCall />}>
+            <Route path=":group" element={<AudioCallGame />} />
+          </Route>
         </Route>
       </Routes>
       <Footer />

@@ -4,7 +4,7 @@ import styles from './audio-button.module.scss';
 import { connect } from 'react-redux';
 import { audioStart, audioStop } from '../../../../redux/actions/audio';
 import { AppDispatch, RootState } from '../../../../redux/store';
-import { currentAudioWordIdSelector } from '../../../../redux/selectors';
+import { currentAudioWordIdSelector } from '../../../../redux/selectors/audio';
 
 interface OwnProps {
   id: string;
@@ -19,9 +19,9 @@ interface DispatchProps {
   onAudioStop: () => void;
 }
 
-type TProps = OwnProps & DispatchProps & StateProps;
+type Props = OwnProps & DispatchProps & StateProps;
 
-const AudioButton = ({ onAudioStart, onAudioStop, isCurrentAudio }: TProps) => {
+const AudioButton = ({ onAudioStart, onAudioStop, isCurrentAudio }: Props) => {
   return isCurrentAudio ? (
     <button className={styles.button} onClick={onAudioStop}>
       <MuteIcon className={styles.mute} />

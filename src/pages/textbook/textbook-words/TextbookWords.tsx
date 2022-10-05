@@ -7,12 +7,12 @@ import {
   textbookLoadingSelector,
   textbookLoadedSelector,
   textbookWordsSelector,
-} from '../../../redux/selectors';
+} from '../../../redux/selectors/textbook';
 
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
-import Loader from '../../../components/Loader';
-import { getWords } from '../../../redux/actions/words';
+import Loader from '../../../components/loader';
+import { getWords } from '../../../redux/actions/textbook';
 
 interface StateProps {
   loading: boolean;
@@ -24,9 +24,9 @@ interface DispatchProps {
   getWords: (page: number, group: number) => void;
 }
 
-type TProps = StateProps & DispatchProps;
+type Props = StateProps & DispatchProps;
 
-const TextbookWords = ({ words, loading, getWords }: TProps) => {
+const TextbookWords = ({ words, loading, getWords }: Props) => {
   const { page, group } = useParams();
 
   useEffect(() => {

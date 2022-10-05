@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
 
 import { RootState } from '../../../redux/store';
-import { textbookLoadingSelector } from '../../../redux/selectors';
+import { textbookLoadingSelector } from '../../../redux/selectors/textbook';
 import { DEFAULT_PAGE, PAGE_COUNT, PAGE_SHIFT } from '../../../redux/constants';
 import clientRoutes from '../../../utils/clientRoutes';
 
@@ -18,9 +18,9 @@ interface OwnProps {
   prev?: boolean;
 }
 
-type TProps = OwnProps & StateProps;
+type Props = OwnProps & StateProps;
 
-const ArrowButton = ({ prev, isWordsloading }: TProps) => {
+const ArrowButton = ({ prev, isWordsloading }: Props) => {
   const { page = null, group = null } = useParams();
   const navigate = useNavigate();
 

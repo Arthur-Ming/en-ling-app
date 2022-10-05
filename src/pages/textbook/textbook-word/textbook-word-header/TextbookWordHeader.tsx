@@ -12,14 +12,14 @@ interface OwnProps extends IAudioConnector {
   wordTranslate: string;
 }
 
-type TProps = OwnProps & StateProps;
+type Props = OwnProps & StateProps;
 
 const TextbookWordHeader = ({
   wordText,
   transcription,
   wordTranslate,
   isCurrentAudioPath,
-}: TProps) => (
+}: Props) => (
   <div>
     <h3
       className={classNames(styles.title, {

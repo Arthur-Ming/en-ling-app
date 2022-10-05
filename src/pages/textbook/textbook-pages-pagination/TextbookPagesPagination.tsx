@@ -5,7 +5,7 @@ import { ReactComponent as ArrowNext } from './arrow-next.svg';
 import { connect } from 'react-redux';
 
 import { useNavigate, useParams } from 'react-router';
-import { textbookLoadingSelector } from '../../../redux/selectors';
+import { textbookLoadingSelector } from '../../../redux/selectors/textbook';
 import { RootState } from '../../../redux/store';
 import classNames from 'classnames';
 import { PAGE_COUNT, PAGE_SHIFT } from '../../../redux/constants';
@@ -15,9 +15,9 @@ interface StateProps {
   isWordsloading: boolean;
 }
 
-type TProps = StateProps;
+type Props = StateProps;
 
-const TextbookPagesPagination = ({ isWordsloading }: TProps) => {
+const TextbookPagesPagination = ({ isWordsloading }: Props) => {
   const { page: currentPage, group } = useParams();
   const navigate = useNavigate();
   const handlePageClick = ({ selected }: { selected: number }) => {

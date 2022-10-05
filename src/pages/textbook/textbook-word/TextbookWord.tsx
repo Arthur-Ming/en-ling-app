@@ -15,9 +15,9 @@ interface OwnProps {
   word: ITextbookWord;
 }
 
-type TProps = OwnProps;
+type Props = OwnProps;
 
-const TextbookWord = ({ word }: TProps) => {
+const TextbookWord = ({ word }: Props) => {
   const { group } = useParams();
 
   const {

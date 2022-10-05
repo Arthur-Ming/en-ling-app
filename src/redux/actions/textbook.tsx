@@ -3,8 +3,13 @@ import { ITextbookCardsAction } from '../../interfaces';
 import { apiRoutes } from '../../utils/apiRoutes';
 import { Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { textbookGroupSelector, textbookLoadedSelector, textbookPageSelector } from '../selectors';
+
 import api from '../../utils/api';
+import {
+  textbookLoadedSelector,
+  textbookGroupSelector,
+  textbookPageSelector,
+} from '../selectors/textbook';
 
 export const getWords =
   (page: number, group: number) =>

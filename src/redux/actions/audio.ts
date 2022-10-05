@@ -2,12 +2,12 @@ import { AUDIO, FAILURE, START, STOP } from '../constants';
 import { apiRoutes } from '../../utils/apiRoutes';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { IAudioAction } from '../../interfaces';
 import {
   wordAudioByIdSelector,
   wordExampleAudioByIdSelector,
   wordMeaningAudioByIdSelector,
-} from '../selectors';
-import { IAudioAction } from '../../interfaces';
+} from '../selectors/textbook';
 
 let player: HTMLAudioElement | null = null;
 

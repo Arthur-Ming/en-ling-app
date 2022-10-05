@@ -1,9 +1,8 @@
-import TextbookWords from './textbook-words';
 import TextbookSidebar from './textbook-sidebar';
 import styles from './textbook.module.scss';
 import TextbookHeader from './textbook-header';
 import TextbookFooter from './textbook-footer';
-import { Navigate, Route, Routes, useMatch } from 'react-router';
+import { Navigate, Outlet, useMatch } from 'react-router';
 import ArrowButton from './arrow-button';
 import useTextbookPageParams from '../../hooks/useTextbookPageParams';
 import { useEffect } from 'react';
@@ -18,11 +17,11 @@ const Textbook = () => {
       localStorage.setItem('group', String(group));
     };
     syncTextbookParamsToStorage();
-    window.addEventListener('beforeunload', syncTextbookParamsToStorage);
+    /*   window.addEventListener('beforeunload', syncTextbookParamsToStorage);
 
     return () => {
       window.removeEventListener('beforeunload', syncTextbookParamsToStorage);
-    };
+    }; */
   }, [page, group]);
 
   const match = useMatch(clientRoutes.textbookWords.absolute());
@@ -37,9 +36,7 @@ const Textbook = () => {
       <div className={styles.body}>
         <TextbookSidebar />
         <ArrowButton prev />
-        <Routes>
-          <Route path={clientRoutes.textbookWords.relative()} element={<TextbookWords />} />
-        </Routes>
+        <Outlet />
         <ArrowButton />
       </div>
       <TextbookFooter />

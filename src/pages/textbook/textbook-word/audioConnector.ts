@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { currentAudioPathSelector } from '../../../redux/selectors';
+import { currentAudioPathSelector } from '../../../redux/selectors/audio';
 import { RootState } from '../../../redux/store';
 
 export interface IAudioConnector {

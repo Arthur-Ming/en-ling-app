@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { GROUP_COUNT } from '../../../redux/constants';
 
-import { textbookLoadingSelector } from '../../../redux/selectors';
+import { textbookLoadingSelector } from '../../../redux/selectors/textbook';
 import { RootState } from '../../../redux/store';
 import clientRoutes from '../../../utils/clientRoutes';
 import styles from './textbook-groups-pagination.module.scss';
@@ -14,9 +14,9 @@ interface StateProps {
   isWordsloading: boolean;
 }
 
-type TProps = StateProps;
+type Props = StateProps;
 
-const TextbookGroupsPagination = ({ isWordsloading }: TProps) => {
+const TextbookGroupsPagination = ({ isWordsloading }: Props) => {
   const { page, group: currentGroup } = useParams();
   const navigate = useNavigate();
   const handleGroupClick = (group: number) => {

@@ -11,9 +11,9 @@ interface StateProps {
   isCurrentAudioPath: boolean;
 }
 
-type TProps = OwnProps & StateProps;
+type Props = OwnProps & StateProps;
 
-const TextbookWordMeaning = ({ textMeaning, textMeaningTranslate, isCurrentAudioPath }: TProps) => (
+const TextbookWordMeaning = ({ textMeaning, textMeaningTranslate, isCurrentAudioPath }: Props) => (
   <div>
     <h4
       className={classNames(styles.text, {
