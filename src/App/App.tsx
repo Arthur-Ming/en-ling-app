@@ -12,9 +12,6 @@ import AudioCall from '../pages/audio-call';
 import SprintGame from '../pages/sprint/sprint-game';
 import AudioCallGame from '../pages/audio-call/audio-call-game';
 
-console.log(`${clientRoutes.textbook.absolute()}/*`);
-console.log(clientRoutes.textbookWords.relative());
-
 const App = () => (
   <Router>
     <div className="wrapper">

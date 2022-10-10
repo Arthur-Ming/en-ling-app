@@ -9,7 +9,7 @@ export const FAILURE = '_FAILURE';
 export const START = '_START';
 export const STOP = '_STOP';
 
-export const RANGE_PAGE: readonly number[] = [1, 20];
+export const RANGE_PAGE: readonly number[] = [1, 30];
 export const RANGE_GROUP: readonly number[] = [1, 6];
 
 export const DEFAULT_PAGE = RANGE_PAGE[0];
