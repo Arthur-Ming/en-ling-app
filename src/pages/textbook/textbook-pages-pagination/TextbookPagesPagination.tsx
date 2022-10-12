@@ -3,17 +3,16 @@ import styles from './textbook-pagination.module.scss';
 import { ReactComponent as ArrowPrev } from './arrow-prev.svg';
 import { ReactComponent as ArrowNext } from './arrow-next.svg';
 import { connect } from 'react-redux';
-
 import { useNavigate, useParams } from 'react-router';
 import { textbookLoadingSelector } from '../../../redux/selectors/textbook';
 import { RootState } from '../../../redux/store';
 import classNames from 'classnames';
-import { PAGE_COUNT, PAGE_SHIFT } from '../../../redux/constants';
+import { PAGE_COUNT, PAGE_SHIFT } from '../../../constants';
 import clientRoutes from '../../../utils/clientRoutes';
 
-interface StateProps {
+type StateProps = {
   isWordsloading: boolean;
-}
+};
 
 type Props = StateProps;
 

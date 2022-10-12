@@ -1,34 +1,21 @@
-import { Navigate, Outlet, Route, Routes, useMatch } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import AudioCall from '../audio-call';
 import AudioCallGame from '../audio-call/audio-call-game';
 import Sprint from '../sprint';
 import SprintGame from '../sprint/sprint-game';
-import styles from './games.module.scss';
-import SprintEntry from './sprint-entry';
+import GamesEntry from './games-entry';
 
-const HG = () => (
-  <main className={styles.box}>
-    <SprintEntry />
-  </main>
+const Games = () => (
+  <Routes>
+    <Route path="/" element={<GamesEntry />} />
+    <Route path="sprint/*" element={<Sprint />}>
+      <Route path=":group" element={<SprintGame />} />
+    </Route>
+    <Route path="audio-call/*" element={<AudioCall />}>
+      <Route path=":group" element={<AudioCallGame />} />
+    </Route>
+    <Route path="/*" element={<Navigate to="/games" replace={true} />} />
+  </Routes>
 );
 
-const Games = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<HG />} />
-      <Route path="sprint/*" element={<Sprint />}>
-        <Route path=":group" element={<SprintGame />} />
-      </Route>
-      <Route path="audio-call/*" element={<AudioCall />}>
-        <Route path=":group" element={<AudioCallGame />} />
-      </Route>
-      <Route path="/*" element={<Navigate to="/games" replace={true} />} />
-    </Routes>
-  );
-  /*  return (
-    <main className={styles.box}>
-      <SprintEntry />
-    </main>
-  ); */
-};
 export default Games;

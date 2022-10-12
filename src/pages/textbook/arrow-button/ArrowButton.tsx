@@ -4,19 +4,18 @@ import styles from './arrow-button.module.scss';
 import classNames from 'classnames';
 import { useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
-
 import { RootState } from '../../../redux/store';
 import { textbookLoadingSelector } from '../../../redux/selectors/textbook';
-import { DEFAULT_PAGE, PAGE_COUNT, PAGE_SHIFT } from '../../../redux/constants';
+import { DEFAULT_PAGE, PAGE_COUNT, PAGE_SHIFT } from '../../../constants';
 import clientRoutes from '../../../utils/clientRoutes';
 
-interface StateProps {
+type StateProps = {
   isWordsloading: boolean;
-}
+};
 
-interface OwnProps {
+type OwnProps = {
   prev?: boolean;
-}
+};
 
 type Props = OwnProps & StateProps;
 

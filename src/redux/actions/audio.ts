@@ -1,4 +1,4 @@
-import { AUDIO, FAILURE, START, STOP } from '../constants';
+import { AUDIO, FAILURE, START, STOP } from '../action-types';
 import { apiRoutes } from '../../utils/apiRoutes';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../store';

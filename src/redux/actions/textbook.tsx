@@ -1,15 +1,15 @@
-import { FAILURE, GROUP_SHIFT, LOAD_WORDS, PAGE_SHIFT, REQUEST, SUCCESS } from '../constants';
 import { ITextbookCardsAction } from '../../interfaces';
 import { apiRoutes } from '../../utils/apiRoutes';
 import { Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-
 import api from '../../utils/api';
 import {
   textbookLoadedSelector,
   textbookGroupSelector,
   textbookPageSelector,
 } from '../selectors/textbook';
+import { FAILURE, LOAD_WORDS, REQUEST, SUCCESS } from '../action-types';
+import { GROUP_SHIFT, PAGE_SHIFT } from '../../constants';
 
 export const getWords =
   (page: number, group: number) =>

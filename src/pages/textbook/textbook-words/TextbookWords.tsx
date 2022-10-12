@@ -8,21 +8,20 @@ import {
   textbookLoadedSelector,
   textbookWordsSelector,
 } from '../../../redux/selectors/textbook';
-
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import Loader from '../../../components/loader';
 import { getWords } from '../../../redux/actions/textbook';
 
-interface StateProps {
+type StateProps = {
   loading: boolean;
   loaded: boolean;
   words: ITextbookWord[];
-}
+};
 
-interface DispatchProps {
+type DispatchProps = {
   getWords: (page: number, group: number) => void;
-}
+};
 
 type Props = StateProps & DispatchProps;
 

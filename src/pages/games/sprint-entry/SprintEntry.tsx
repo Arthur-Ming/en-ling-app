@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import useTextbookPageParams from '../../../hooks/useTextbookPageParams';
-import { GROUP_COUNT } from '../../../redux/constants';
+import { GROUP_COUNT } from '../../../constants';
 import styles from '../games.module.scss';
 
 const groups = Array.from(Array(GROUP_COUNT), (_, index) => index + 1);
@@ -13,7 +13,6 @@ const SprintEntry = () => {
   const navigate = useNavigate();
 
   const onButtonClick = () => navigate(`sprint/${currentGroup}`);
-  const onButtonClick2 = () => navigate(`audio-call/${currentGroup}`);
 
   return (
     <div className={styles.item}>
@@ -33,9 +32,6 @@ const SprintEntry = () => {
         ))}
       </div>
       <button className={styles.button} onClick={onButtonClick}>
-        <span>Начать</span>
-      </button>
-      <button className={styles.button} onClick={onButtonClick2}>
         <span>Начать</span>
       </button>
     </div>

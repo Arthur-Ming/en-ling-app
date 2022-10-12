@@ -1,4 +1,4 @@
-import { DEFAULT_GROUP } from '../../../redux/constants';
+import { DEFAULT_GROUP } from '../../../constants';
 
 interface OwnProps {
   level?: number;

@@ -1,7 +1,8 @@
-import { LOAD_WORDS, SUCCESS, REQUEST, FAILURE, DEFAULT_PAGE, DEFAULT_GROUP } from '../constants';
 import arrToMap from '../../utils/arrToMap';
 import { createReducer } from '@reduxjs/toolkit';
 import { ITextbookWord, ITextbookCardsAction } from '../../interfaces';
+import { DEFAULT_GROUP, DEFAULT_PAGE } from '../../constants';
+import { FAILURE, LOAD_WORDS, REQUEST, SUCCESS } from '../action-types';
 
 export interface ITextbookState {
   loading: boolean;

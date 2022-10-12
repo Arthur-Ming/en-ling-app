@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
 import Loader from '../../../components/loader';
 import useSprintGame from '../../../hooks/useSprintGame';
-import { ITextbookWord } from '../../../interfaces';
-import { DEFAULT_GROUP, GROUP_SHIFT, PAGE_SHIFT } from '../../../redux/constants';
-import api from '../../../utils/api';
-import { apiRoutes } from '../../../utils/apiRoutes';
+import { DEFAULT_GROUP } from '../../../constants';
 import CircleTimer from '../circle-timer';
 import SprintGameBody from './sprint-game-body';
 import SprintGameFooter from './sprint-game-footer';
@@ -18,10 +14,10 @@ interface OwnProps {
 type Props = OwnProps;
 
 const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
-  const { wordsLoading, sprintStep, onFalseClick, onTrueClick } = useSprintGame(level);
+  const { wordsLoading, sprintStep, onFalseClick, onTrueClick, gamePoints } = useSprintGame(level);
 
   return (
-    <main>
+    <main className={styles.main}>
       <div className={styles.box}>
         <CircleTimer
           start={false}
@@ -33,7 +29,7 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
           {wordsLoading && <Loader />}
           {!wordsLoading && sprintStep && (
             <>
-              <SprintGameHeader score={20} audio={''} />
+              <SprintGameHeader score={gamePoints.total} audio={''} />
               <SprintGameBody word={sprintStep.word} wordTranslate={sprintStep.translate} />
               <SprintGameFooter onFalseClick={onFalseClick} onTrueClick={onTrueClick} />
             </>

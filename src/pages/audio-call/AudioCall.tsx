@@ -1,5 +1,5 @@
 import { Navigate, useParams } from 'react-router';
-import { RANGE_GROUP } from '../../redux/constants';
+import { RANGE_GROUP } from '../../constants';
 import AudioCallGame from './audio-call-game';
 
 const AudioCall = () => {
