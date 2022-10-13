@@ -6,6 +6,7 @@ import SprintGameBody from './sprint-game-body';
 import SprintGameFooter from './sprint-game-footer';
 import SprintGameHeader from './sprint-game-header';
 import styles from './sprint-game.module.scss';
+import SprintGamePoints from './sprint-game-points';
 
 interface OwnProps {
   level?: number;
@@ -29,12 +30,13 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
           {wordsLoading && <Loader />}
           {!wordsLoading && sprintStep && (
             <>
-              <SprintGameHeader score={gamePoints.total} audio={''} />
+              <SprintGameHeader totalGamePoints={gamePoints.total} audio={''} />
               <SprintGameBody word={sprintStep.word} wordTranslate={sprintStep.translate} />
               <SprintGameFooter onFalseClick={onFalseClick} onTrueClick={onTrueClick} />
             </>
           )}
         </div>
+        <SprintGamePoints gamePoints={gamePoints.current} total={gamePoints.total} />
       </div>
     </main>
   );

@@ -77,3 +77,26 @@
     background: $text-secondary-dark;
   }
 }
+
+.points {
+  position: absolute;
+  font-size: 54px;
+  line-height: 60px;
+
+  left: calc(100% - 200px);
+  top: 100px;
+  display: flex;
+  column-gap: 5px;
+  opacity: 1;
+  transition: opacity 0.5s ease 0s;
+}
+
+.points_hide {
+  opacity: 0;
+}
+.points_true {
+  color: green;
+}
+.points_false {
+  color: red;
+}

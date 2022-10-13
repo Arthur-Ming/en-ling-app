@@ -1,15 +1,15 @@
 import styles from '../sprint-game.module.scss';
 
-interface Props {
-  score: number;
+type Props = {
+  totalGamePoints: number;
   audio: string;
-}
+};
 
-const SprintGameHeader = ({ score, audio }: Props) => {
+const SprintGameHeader = ({ totalGamePoints, audio }: Props) => {
   return (
     <div className={styles.header}>
       <p className={styles.result_text}>Ваш результат:</p>
-      <p className={styles.result_score}>{score}</p>
+      <p className={styles.result_score}>{totalGamePoints}</p>
     </div>
   );
 };
