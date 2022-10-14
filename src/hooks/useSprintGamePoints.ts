@@ -11,7 +11,7 @@ const useSprintGamePoints = () => {
     total: 0,
   });
   //use sprint game points
-  // const [numberOfContinuousTrueAnswers, setNumberOfContinuousTrueAnswers] = useState(0);
+  //const [numberOfContinuousTrueAnswers, setNumberOfContinuousTrueAnswers] = useState(0);
 
   const setGamePointsByAnswer = useMemo(
     () => (isAnswerTrue: boolean) => {

@@ -33,16 +33,13 @@ function getRandomIntWithoutCurrent(current: number, min = 0, max = 30): number 
 
 const useSprintGameRandom = () => {
   const [shuffledPagesArr, setShuffledPagesArr] = useState<null | number[]>(null);
-  const [shuffledWordsArr, setShuffledWordsArr] = useState<null | number[]>(null);
 
   useEffect(() => {
     setShuffledPagesArr(createShuffledArr(30));
-    setShuffledWordsArr(createShuffledArr(20));
   }, []);
 
   return {
     shuffledPagesArr,
-    shuffledWordsArr,
   };
 };
 

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ITextbookWord } from '../interfaces';
 
 function getRandomInt(min = 0, max = 30): number {
@@ -17,30 +17,80 @@ function getRandomIntWithoutCurrent(current: number, min = 0, max = 30): number 
   return randomInt;
 }
 
+function shuffle<T>(array: T[]): void {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+const createSprintStepsByWords = (words: ITextbookWord[]) =>
+  words.map(({ id, word, wordTranslate, audio }, index) => {
+    const isTrue = Boolean(getRandomInt(0, 2));
+    let translate = wordTranslate;
+    if (!isTrue) {
+      const randomIndex = getRandomIntWithoutCurrent(index, 0, 20);
+      const { wordTranslate: fakeWordTranslate } = words[randomIndex];
+      translate = fakeWordTranslate;
+    }
+    return {
+      id,
+      word,
+      mockWordTranslate: translate,
+      wordTranslate,
+      audio,
+      isTrue,
+    };
+  });
+
+const createShuffledSprintStepsByWords = (words: ITextbookWord[]) => {
+  const steps = createSprintStepsByWords(words);
+  shuffle(steps);
+  return steps;
+};
+
 interface IStep {
+  id: string;
   word: string;
-  translate: string;
+  mockWordTranslate: string;
+  wordTranslate: string;
+  audio: string;
   isTrue: boolean;
 }
 
-const useSprintGameStep = () => {
+const useSprintGameStep = (words: ITextbookWord[] | null) => {
+  const [sprintSteps, setSprintSteps] = useState<null | IStep[]>(null);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [sprintStep, setSprintStep] = useState<null | IStep>(null);
+  const [stepsOver, setStepsOver] = useState<boolean>(false);
 
-  const setStepOfSprintGameByWords = useMemo(
-    () => (wordIndex: number, words: ITextbookWord[]) => {
-      const { word, wordTranslate } = words[wordIndex];
-      let translate = wordTranslate;
-      const isTrue = Boolean(getRandomInt(0, 2));
-      if (!isTrue) {
-        const randomIndex = getRandomIntWithoutCurrent(wordIndex, 0, 20);
-        const { wordTranslate: fakeWordTranslate } = words[randomIndex];
-        translate = fakeWordTranslate;
-      }
+  useEffect(() => {
+    if (words) {
+      setSprintSteps(createShuffledSprintStepsByWords(words));
+      setStepsOver(false);
+    }
+  }, [words]);
 
-      setSprintStep({
-        word,
-        translate,
-        isTrue,
+  useEffect(() => {
+    if (sprintSteps !== null && !stepsOver) {
+      setSprintStep(sprintSteps[currentStepIndex]);
+    }
+  }, [currentStepIndex, sprintSteps, stepsOver]);
+
+  useEffect(() => {
+    if (stepsOver) {
+      setSprintSteps(null);
+      setSprintStep(null);
+    }
+  }, [stepsOver]);
+
+  const getNextStep = useMemo(
+    () => () => {
+      setCurrentStepIndex((prevStepIndex) => {
+        if (prevStepIndex === 5) {
+          setStepsOver(true);
+          return 0;
+        }
+        return prevStepIndex + 1;
       });
     },
     []
@@ -48,7 +98,8 @@ const useSprintGameStep = () => {
 
   return {
     sprintStep,
-    setStepOfSprintGameByWords,
+    getNextStep,
+    stepsOver,
   };
 };
 

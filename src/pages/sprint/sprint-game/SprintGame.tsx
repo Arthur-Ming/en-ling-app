@@ -15,8 +15,11 @@ interface OwnProps {
 type Props = OwnProps;
 
 const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
-  const { wordsLoading, sprintStep, onFalseClick, onTrueClick, gamePoints } = useSprintGame(level);
+  /* const { wordsLoading, sprintStep, onFalseClick, onTrueClick, gamePoints } = useSprintGame(level); */
+  const { sprintStep, wordsLoading, onTrueClick, onFalseClick, pagesOver, gamePoints } =
+    useSprintGame(level);
 
+  if (pagesOver) return <div style={{ marginTop: '100px' }}>Игра окончена</div>;
   return (
     <main className={styles.main}>
       <div className={styles.box}>
@@ -31,7 +34,7 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
           {!wordsLoading && sprintStep && (
             <>
               <SprintGameHeader totalGamePoints={gamePoints.total} audio={''} />
-              <SprintGameBody word={sprintStep.word} wordTranslate={sprintStep.translate} />
+              <SprintGameBody word={sprintStep.word} wordTranslate={sprintStep.mockWordTranslate} />
               <SprintGameFooter onFalseClick={onFalseClick} onTrueClick={onTrueClick} />
             </>
           )}

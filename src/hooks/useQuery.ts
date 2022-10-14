@@ -21,6 +21,7 @@ const useQuery = () => {
     if (loaded) return;
     const fn = async () => {
       setLoading(true);
+      setData(null);
       const data = await api.get(path);
       setData(data);
       setLoading(false);
