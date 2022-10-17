@@ -40,3 +40,8 @@ export type SprintGameStep = Pick<SprintGameAnswer, 'id' | 'word' | 'wordTransla
   mockWordTranslate: string;
   isTrue: boolean;
 };
+
+type DefaultPoints = 0;
+type PointsForCorrectAnswer = 10 | 20;
+type PointsForWrongAnswer = -10 | -20;
+export type SprintGamePoints = DefaultPoints | PointsForCorrectAnswer | PointsForWrongAnswer;

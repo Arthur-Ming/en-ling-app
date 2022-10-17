@@ -16,7 +16,7 @@ type Props = OwnProps;
 
 const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
   /* const { wordsLoading, sprintStep, onFalseClick, onTrueClick, gamePoints } = useSprintGame(level); */
-  const { sprintStep, wordsLoading, onTrueClick, onFalseClick, pagesOver, gamePoints } =
+  const { sprintStep, requestState, handlers, pagesOver, gamePoints, answers } =
     useSprintGame(level);
 
   if (pagesOver) return <div style={{ marginTop: '100px' }}>Игра окончена</div>;
@@ -30,16 +30,19 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
           }}
         />
         <div className={styles.content}>
-          {wordsLoading && <Loader />}
-          {!wordsLoading && sprintStep && (
+          {requestState.loading && <Loader />}
+          {!requestState.loading && sprintStep && (
             <>
-              <SprintGameHeader totalGamePoints={gamePoints.total} audio={''} />
+              {/*  <SprintGameHeader totalGamePoints={gamePoints.total} audio={''} /> */}
               <SprintGameBody word={sprintStep.word} wordTranslate={sprintStep.mockWordTranslate} />
-              <SprintGameFooter onFalseClick={onFalseClick} onTrueClick={onTrueClick} />
+              <SprintGameFooter
+                onFalseClick={handlers.onFalseClick}
+                onTrueClick={handlers.onTrueClick}
+              />
             </>
           )}
         </div>
-        <SprintGamePoints gamePoints={gamePoints.current} total={gamePoints.total} />
+        {/*    <SprintGamePoints gamePoints={gamePoints.current} total={gamePoints.total} /> */}
       </div>
     </main>
   );

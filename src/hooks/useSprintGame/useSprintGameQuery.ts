@@ -4,7 +4,7 @@ import { apiRoutes } from '../../utils/apiRoutes';
 import useQuery from '../useQuery';
 
 const useSprintGameQuery = (page: null | number, level: number) => {
-  const { loading: wordsLoading, loaded: wordsLoaded, queryFn, data: words } = useQuery();
+  const { loading, loaded, error, queryFn, data: words } = useQuery();
 
   useEffect(() => {
     if (page !== null) {
@@ -13,8 +13,9 @@ const useSprintGameQuery = (page: null | number, level: number) => {
   }, [page, level, queryFn]);
 
   return {
-    wordsLoading,
-    wordsLoaded,
+    loading,
+    loaded,
+    error,
     words,
   };
 };

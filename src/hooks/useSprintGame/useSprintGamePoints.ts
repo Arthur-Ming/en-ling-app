@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react';
-
-type DefaultPoints = 0;
-type PointsForCorrectAnswer = 10 | 20;
-type PointsForWrongAnswer = -10 | -20;
-type AllPoints = DefaultPoints | PointsForCorrectAnswer | PointsForWrongAnswer;
+import { SprintGamePoints } from '../../interfaces';
 
 const useSprintGamePoints = (isCorrectAnswer: null | boolean) => {
-  const [allPoints, setAllPoints] = useState<AllPoints[]>([]);
-  const [currentPoints, setCurrentPoints] = useState<AllPoints | null>(null);
-  const [totalPoints, setTotalPoints] = useState<number>(0);
+  const [points, setPoints] = useState<SprintGamePoints[]>([]);
+  const [currentPoints, setCurrentPoints] = useState<SprintGamePoints | null>(null);
   const [numberOfContinuousCorrectAnswers, setNumberOfContinuousCorrectAnswers] = useState(0);
   const [numberOfContinuousWrongAnswers, setNumberOfContinuousWrongAnswers] = useState(0);
 
@@ -36,16 +31,10 @@ const useSprintGamePoints = (isCorrectAnswer: null | boolean) => {
 
   useEffect(() => {
     if (currentPoints !== null) {
-      setAllPoints((prevPoints) => [...prevPoints, currentPoints]);
+      setPoints((prevPoints) => [...prevPoints, currentPoints]);
       setCurrentPoints(null);
     }
   }, [currentPoints]);
-
-  useEffect(() => {
-    if (allPoints.length) {
-      setTotalPoints((prevPoints) => prevPoints + allPoints[allPoints.length - 1]);
-    }
-  }, [allPoints]);
 
   useEffect(() => {
     if (numberOfContinuousCorrectAnswers === 2) {
@@ -60,10 +49,7 @@ const useSprintGamePoints = (isCorrectAnswer: null | boolean) => {
   }, [numberOfContinuousWrongAnswers]);
 
   return {
-    gamePoints: {
-      current: allPoints.length && allPoints[allPoints.length - 1],
-      total: totalPoints,
-    },
+    gamePoints: points,
   };
 };
 

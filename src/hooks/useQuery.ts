@@ -1,34 +1,32 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import api from '../utils/api';
 
 const useQuery = () => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | unknown>(null);
   const [data, setData] = useState(null);
-  const [path, setPath] = useState<null | string>(null);
 
   const queryFn = useMemo(
-    () => (path: string) => {
+    () => async (path: string) => {
       setLoaded(false);
-      setPath(path);
+      setLoading(true);
+      setData(null);
+      setError(null);
+      try {
+        const data = await api.get(path);
+        setData(data);
+        setLoading(false);
+        setLoaded(true);
+      } catch (err: unknown) {
+        setData(null);
+        setLoading(false);
+        setLoaded(false);
+        setError(err);
+      }
     },
     []
   );
-
-  useEffect(() => {
-    if (!path) return;
-    if (loaded) return;
-    const fn = async () => {
-      setLoading(true);
-      setData(null);
-      const data = await api.get(path);
-      setData(data);
-      setLoading(false);
-      setLoaded(true);
-    };
-    fn();
-  }, [loaded, path]);
 
   return {
     loading,

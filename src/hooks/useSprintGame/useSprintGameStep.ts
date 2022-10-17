@@ -63,27 +63,27 @@ const useSprintGameStep = (words: ITextbookWord[] | null) => {
 
   useEffect(() => {
     if (sprintSteps !== null && !stepsOver) {
-      setSprintStep(sprintSteps[currentStepIndex]);
+      const step = sprintSteps[currentStepIndex];
+      step !== undefined && setSprintStep(step);
     }
   }, [currentStepIndex, sprintSteps, stepsOver]);
+
+  useEffect(() => {
+    if (words && currentStepIndex === words.length) {
+      setStepsOver(true);
+    }
+  }, [currentStepIndex, words]);
 
   useEffect(() => {
     if (stepsOver) {
       setSprintSteps(null);
       setSprintStep(null);
+      setCurrentStepIndex(0);
     }
   }, [stepsOver]);
 
   const getNextStep = useMemo(
-    () => () => {
-      setCurrentStepIndex((prevStepIndex) => {
-        if (prevStepIndex === 5) {
-          setStepsOver(true);
-          return 0;
-        }
-        return prevStepIndex + 1;
-      });
-    },
+    () => () => setCurrentStepIndex((prevStepIndex) => prevStepIndex + 1),
     []
   );
 
