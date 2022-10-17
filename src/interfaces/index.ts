@@ -32,6 +32,11 @@ export interface IAudioAction extends IAction {
   wordId?: string | null;
 }
 
-/* export interface ITextbookPageChangeAction extends IAction {
-  page: number;
-} */
+export type SprintGameAnswer = Pick<ITextbookWord, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
+  isCorrectAnswer: boolean;
+};
+
+export type SprintGameStep = Pick<SprintGameAnswer, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
+  mockWordTranslate: string;
+  isTrue: boolean;
+};

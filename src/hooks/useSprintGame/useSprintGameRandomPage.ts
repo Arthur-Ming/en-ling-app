@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import useSprintGameRandom from './useSprintGameRandom';
 
 function shuffle<T>(array: T[]): void {
   for (let i = array.length - 1; i > 0; i--) {
@@ -39,7 +38,7 @@ const useSprintGameRandomPage = () => {
     }
   }, [pagesOver]);
 
-  const getNextRandomPage = useMemo(
+  const setNextRandomPage = useMemo(
     () => () => {
       setCurrentPageIndex((prevPageIndex) => {
         if (prevPageIndex === 1) {
@@ -54,7 +53,7 @@ const useSprintGameRandomPage = () => {
 
   return {
     randomPage,
-    getNextRandomPage,
+    setNextRandomPage,
     pagesOver,
   };
 };

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ITextbookWord } from '../interfaces';
+import { SprintGameStep, ITextbookWord } from '../../interfaces';
 
 function getRandomInt(min = 0, max = 30): number {
   min = Math.ceil(min);
@@ -48,19 +48,10 @@ const createShuffledSprintStepsByWords = (words: ITextbookWord[]) => {
   return steps;
 };
 
-interface IStep {
-  id: string;
-  word: string;
-  mockWordTranslate: string;
-  wordTranslate: string;
-  audio: string;
-  isTrue: boolean;
-}
-
 const useSprintGameStep = (words: ITextbookWord[] | null) => {
-  const [sprintSteps, setSprintSteps] = useState<null | IStep[]>(null);
+  const [sprintSteps, setSprintSteps] = useState<null | SprintGameStep[]>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [sprintStep, setSprintStep] = useState<null | IStep>(null);
+  const [sprintStep, setSprintStep] = useState<null | SprintGameStep>(null);
   const [stepsOver, setStepsOver] = useState<boolean>(false);
 
   useEffect(() => {
