@@ -3,6 +3,7 @@ import { SprintGameStep } from '../../interfaces';
 
 const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
   const [isTrueClick, setIsTrueClick] = useState<null | boolean>(null);
+  const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const [isCorrectAnswerSelected, setIsCorrectAnswerSelected] = useState<null | boolean>(null);
 
   useEffect(() => {
@@ -10,23 +11,28 @@ const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
       isTrueClick
         ? setIsCorrectAnswerSelected(sprintStep.isTrue)
         : setIsCorrectAnswerSelected(!sprintStep.isTrue);
+      setIsAnswered(true);
       setIsTrueClick(null);
     }
   }, [isTrueClick, sprintStep]);
 
   useEffect(() => {
-    if (sprintStep !== null && isCorrectAnswerSelected !== null) {
+    if (sprintStep !== null) {
       setIsCorrectAnswerSelected(null);
+      setIsAnswered(false);
     }
-  }, [sprintStep, isCorrectAnswerSelected]);
+  }, [sprintStep]);
 
   const onTrueClick = useMemo(() => () => setIsTrueClick(true), []);
   const onFalseClick = useMemo(() => () => setIsTrueClick(false), []);
 
   return {
     isCorrectAnswerSelected,
-    onTrueClick,
-    onFalseClick,
+    isAnswered,
+    handlers: {
+      onTrueClick,
+      onFalseClick,
+    },
   };
 };
 

@@ -13,9 +13,11 @@ const useSprintGameQuery = (page: null | number, level: number) => {
   }, [page, level, queryFn]);
 
   return {
-    loading,
-    loaded,
-    error,
+    requestState: {
+      loading,
+      loaded,
+      error,
+    },
     words,
   };
 };

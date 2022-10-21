@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PAGE_COUNT } from '../../constants';
 
 function shuffle<T>(array: T[]): void {
@@ -16,7 +16,7 @@ function createShuffledArr(num: number): number[] {
   return arr;
 }
 
-const useSprintGameRandomPage = () => {
+const useSprintGameRandomPage = (shouldGetNextRandomPage: boolean) => {
   const [shuffledPagesArr, setShuffledPagesArr] = useState<null | number[]>(null);
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const [randomPage, setRandomPage] = useState<null | number>(null);
@@ -25,6 +25,12 @@ const useSprintGameRandomPage = () => {
   useEffect(() => {
     setShuffledPagesArr(createShuffledArr(PAGE_COUNT));
   }, []);
+
+  useEffect(() => {
+    if (shouldGetNextRandomPage) {
+      setCurrentPageIndex((prevPageIndex) => prevPageIndex + 1);
+    }
+  }, [shouldGetNextRandomPage]);
 
   useEffect(() => {
     if (shuffledPagesArr && !pagesOver) {
@@ -47,14 +53,8 @@ const useSprintGameRandomPage = () => {
     }
   }, [pagesOver]);
 
-  const setNextRandomPage = useMemo(
-    () => () => setCurrentPageIndex((prevPageIndex) => prevPageIndex + 1),
-    []
-  );
-
   return {
     randomPage,
-    setNextRandomPage,
     pagesOver,
   };
 };

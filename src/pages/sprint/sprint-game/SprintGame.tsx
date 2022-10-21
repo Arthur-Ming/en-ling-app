@@ -2,11 +2,12 @@ import Loader from '../../../components/loader';
 import useSprintGame from '../../../hooks/useSprintGame';
 import { DEFAULT_GROUP } from '../../../constants';
 import CircleTimer from '../circle-timer';
-import SprintGameBody from './sprint-game-body';
-import SprintGameFooter from './sprint-game-footer';
+import SprintGameWords from './sprint-game-words';
+import SprintGameButtons from './sprint-game-footer';
 import SprintGameHeader from './sprint-game-header';
 import styles from './sprint-game.module.scss';
 import SprintGamePoints from './sprint-game-points';
+import SprintGameInd from './sprint-game-ind';
 
 interface OwnProps {
   level?: number;
@@ -15,11 +16,18 @@ interface OwnProps {
 type Props = OwnProps;
 
 const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
-  /* const { wordsLoading, sprintStep, onFalseClick, onTrueClick, gamePoints } = useSprintGame(level); */
-  const { sprintStep, requestState, handlers, pagesOver, gamePoints, answers } =
-    useSprintGame(level);
+  const {
+    sprintStep,
+    requestState,
+    handlers,
+    pagesOver,
+    gamePoints,
+    numberOfContinuousAnswers,
+    answers,
+  } = useSprintGame(level);
 
   if (pagesOver) return <div style={{ marginTop: '100px' }}>Игра окончена</div>;
+
   return (
     <main className={styles.main}>
       <div className={styles.box}>
@@ -30,19 +38,24 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
           }}
         />
         <div className={styles.content}>
-          {requestState.loading && <Loader />}
-          {!requestState.loading && sprintStep && (
-            <>
-              {/*  <SprintGameHeader totalGamePoints={gamePoints.total} audio={''} /> */}
-              <SprintGameBody word={sprintStep.word} wordTranslate={sprintStep.mockWordTranslate} />
-              <SprintGameFooter
-                onFalseClick={handlers.onFalseClick}
-                onTrueClick={handlers.onTrueClick}
+          <SprintGameHeader gamePoints={gamePoints} audio={''} />
+          <SprintGameInd numberOfContinuousAnswers={numberOfContinuousAnswers} />
+          <div className={styles.words}>
+            {!sprintStep && <div>Loading...</div>}
+            {sprintStep && (
+              <SprintGameWords
+                word={sprintStep.word}
+                mockWordTranslate={sprintStep.mockWordTranslate}
               />
-            </>
-          )}
+            )}
+          </div>
+          <SprintGameButtons
+            onFalseClick={handlers.onFalseClick}
+            onTrueClick={handlers.onTrueClick}
+            disabled={!Boolean(sprintStep)}
+          />
         </div>
-        {/*    <SprintGamePoints gamePoints={gamePoints.current} total={gamePoints.total} /> */}
+        <SprintGamePoints gamePoints={gamePoints} />
       </div>
     </main>
   );

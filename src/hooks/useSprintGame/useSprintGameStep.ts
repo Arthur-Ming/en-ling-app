@@ -48,7 +48,7 @@ const createShuffledSprintStepsByWords = (words: ITextbookWord[]) => {
   return steps;
 };
 
-const useSprintGameStep = (words: ITextbookWord[] | null) => {
+const useSprintGameStep = (words: ITextbookWord[] | null, shouldGetNextStep: null | boolean) => {
   const [sprintSteps, setSprintSteps] = useState<null | SprintGameStep[]>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [sprintStep, setSprintStep] = useState<null | SprintGameStep>(null);
@@ -82,14 +82,14 @@ const useSprintGameStep = (words: ITextbookWord[] | null) => {
     }
   }, [stepsOver]);
 
-  const getNextStep = useMemo(
-    () => () => setCurrentStepIndex((prevStepIndex) => prevStepIndex + 1),
-    []
-  );
+  useEffect(() => {
+    if (shouldGetNextStep) {
+      setCurrentStepIndex((prevStepIndex) => prevStepIndex + 1);
+    }
+  }, [shouldGetNextStep]);
 
   return {
     sprintStep,
-    getNextStep,
     stepsOver,
   };
 };
