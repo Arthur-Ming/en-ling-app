@@ -12,10 +12,7 @@ type Props = {
   };
 };
 
-console.log(dotsArr);
-
-const SprintGameInd = ({ numberOfContinuousAnswers }: Props) => {
-  console.log(numberOfContinuousAnswers);
+const SprintGameDotsOfAnswers = ({ numberOfContinuousAnswers }: Props) => {
   return (
     <div className={styles.dots}>
       {dotsArr.map(({ dotId }) => (
@@ -31,4 +28,4 @@ const SprintGameInd = ({ numberOfContinuousAnswers }: Props) => {
   );
 };
 
-export default SprintGameInd;
+export default SprintGameDotsOfAnswers;

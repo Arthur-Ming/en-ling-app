@@ -17,6 +17,7 @@ const useSprintGameAnswers = (isCorrectAnswer: null | boolean, step: null | Spri
 
   useEffect(() => {
     if (isCorrectAnswer !== null && step !== null) {
+      console.log(step);
       setAnswers((prevAnswers) => [
         ...prevAnswers,
         getSprintGameAnswerFromStep(step, isCorrectAnswer),

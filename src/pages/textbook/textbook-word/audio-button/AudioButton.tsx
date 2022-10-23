@@ -1,5 +1,5 @@
-import { ReactComponent as AudioIcon } from './audio.svg';
-import { ReactComponent as MuteIcon } from './mute.svg';
+import { ReactComponent as AudioIcon } from '../../../../svg/audio.svg';
+import { ReactComponent as MuteIcon } from '../../../../svg/mute.svg';
 import styles from './audio-button.module.scss';
 import { connect } from 'react-redux';
 import { audioStart, audioStop } from '../../../../redux/actions/audio';

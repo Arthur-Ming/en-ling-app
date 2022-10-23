@@ -1,19 +1,17 @@
 @import '/src/index.scss';
 
 .main {
-  background-color: $bg-primary-dark;
 }
 
 .box {
   @extend .wrapper-box;
   display: flex;
   justify-content: center;
-  max-width: 1400px;
+  max-width: 1280px;
   position: relative;
 }
 .content {
   margin-top: 100px;
-  background-color: $bg-primary-dark;
   width: 600px;
   height: 340px;
   border-radius: 10px;
@@ -27,18 +25,21 @@
 }
 
 .result {
-  font-size: 28px;
-  line-height: 32px;
-  color: $font-color-dark;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 15px;
+  min-width: 260px;
 }
 .result_text {
-  @extend .result;
+  font-size: 28px;
+  line-height: 32px;
+  color: $text-secondary-dark;
   margin: 0px;
 }
 
-.result_score {
+.result_points {
   @extend .result_text;
-  color: $font-color-dark;
+  color: $text-secondary-dark;
 }
 
 .words {
@@ -51,7 +52,7 @@
 }
 
 .word {
-  color: $text-secondary-dark;
+  color: $text-primary-light;
   margin: 0px;
   font-size: 42px;
   line-height: 48px;
@@ -74,14 +75,22 @@
   height: 44px;
   border: none;
   cursor: pointer;
-  background: $text-secondary-dark;
-  opacity: 0.8;
-  transition: opacity 0.3s ease 0s;
+  background: #21262d;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  opacity: 1;
+  transition: all 0.3s ease 0s;
+  color: #c9d1d9;
   &:hover {
-    opacity: 1;
+    border: 1px solid #8b949e;
+    background: hsla(212, 12%, 18%, 1);
   }
   &:disabled {
-    opacity: 0.8;
+    opacity: 0.3;
+    cursor: default;
+    &:hover {
+      background: #21262d;
+      border: 1px solid rgba(240, 246, 252, 0.1);
+    }
   }
 }
 .points_list {
@@ -99,8 +108,8 @@
   justify-content: flex-end;
   column-gap: 5px;
   opacity: 0.3;
-  transition: opacity 0.5s ease 0s;
-  .points_l {
+
+  .points_sign {
     display: flex;
     justify-content: center;
     width: 20px;
@@ -111,13 +120,13 @@
   opacity: 0;
 }
 .points_true {
-  color: green;
+  color: $success;
 }
 .points_false {
-  color: red;
+  color: $fail;
 }
 
-.points_f {
+.points_active {
   font-size: 72px;
   line-height: 84px;
   opacity: 1;
@@ -137,12 +146,12 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: $bg-secondary-dark;
+  background: $text-secondary-dark;
 }
 .dot_true {
-  background: green;
+  background: $success;
 }
 
 .dot_false {
-  background: red;
+  background: $fail;
 }

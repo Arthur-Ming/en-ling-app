@@ -11,8 +11,12 @@ const SprintGameHeader = ({ gamePoints, audio }: Props) => {
   const gamePointsSum = useSprintGamePointsSum(gamePoints);
   return (
     <div className={styles.header}>
-      <p className={styles.result_text}>Ваш результат:</p>
-      <p className={styles.result_score}>{gamePointsSum}</p>
+      <div className={styles.result}>
+        <p className={styles.result_text}>Ваш результат:</p>
+        <p className={styles.result_points}>
+          <span>{gamePointsSum}</span>
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,29 @@
+@import '/src/index.scss';
+.box {
+  @extend .wrapper-box;
+  max-width: 800px;
+  background-color: $bg-primary-dark;
+  padding: 40px 40px;
+}
+.answers {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+.answer {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 10px;
+}

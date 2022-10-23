@@ -1,20 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PAGE_COUNT } from '../../constants';
-
-function shuffle<T>(array: T[]): void {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-const createArr = (num: number): number[] => Array.from(Array(num), (_, index) => index);
-
-function createShuffledArr(num: number): number[] {
-  const arr = createArr(num);
-  shuffle<number>(arr);
-  return arr;
-}
+import { createShuffledArr } from '../../utils/arrayHelpers';
 
 const useSprintGameRandomPage = (shouldGetNextRandomPage: boolean) => {
   const [shuffledPagesArr, setShuffledPagesArr] = useState<null | number[]>(null);
