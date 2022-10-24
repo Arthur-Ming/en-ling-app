@@ -8,75 +8,44 @@ import {
   wordExampleAudioByIdSelector,
   wordMeaningAudioByIdSelector,
 } from '../selectors/textbook';
+import audioPlayer from '../../utils/audioPlayer';
 
-let player: HTMLAudioElement | null = null;
-
-export const audioStart =
-  (wordId: string) => (dispatch: Dispatch<IAudioAction>, getState: () => RootState) => {
-    if (player) {
+export const wordAudioStart =
+  (wordId: string, audio: string) => async (dispatch: Dispatch<IAudioAction>) => {
+    try {
+      dispatch({ path: audio, wordId, type: AUDIO + START });
+      await audioPlayer.play(apiRoutes.files(audio));
+    } catch (error) {
+      dispatch({ error: String(error), type: AUDIO + FAILURE });
+    } finally {
       dispatch({ type: AUDIO + STOP });
-      player.pause();
     }
+  };
+
+export const textbookWordFullAudioStart =
+  (wordId: string) => async (dispatch: Dispatch<IAudioAction>, getState: () => RootState) => {
     const state = getState();
     const audio = wordAudioByIdSelector(state, wordId);
     const audioMeaning = wordMeaningAudioByIdSelector(state, wordId);
     const audioExample = wordExampleAudioByIdSelector(state, wordId);
 
-    player = new Audio(apiRoutes.files(audio));
-
-    player.addEventListener('error', (error) => {
-      player = null;
-      dispatch({ error: error.type, type: AUDIO + FAILURE });
-    });
-
-    player.addEventListener('canplay', () => {
-      player && player.play();
-    });
-
-    player.addEventListener('play', () => {
+    try {
       dispatch({ path: audio, wordId, type: AUDIO + START });
-    });
+      await audioPlayer.play(apiRoutes.files(audio));
 
-    player.addEventListener('ended', () => {
-      player = new Audio(apiRoutes.files(audioMeaning));
+      dispatch({ path: audioMeaning, wordId, type: AUDIO + START });
+      await audioPlayer.play(apiRoutes.files(audioMeaning));
 
-      player.addEventListener('error', (error) => {
-        player = null;
-        dispatch({ error, type: AUDIO + FAILURE });
-      });
-
-      player.addEventListener('canplay', () => {
-        player && player.play();
-      });
-      player.addEventListener('play', () => {
-        dispatch({ path: audioMeaning, wordId, type: AUDIO + START });
-      });
-
-      player.addEventListener('ended', () => {
-        player = new Audio(apiRoutes.files(audioExample));
-
-        player.addEventListener('error', (error) => {
-          player = null;
-          dispatch({ error, type: AUDIO + FAILURE });
-        });
-
-        player.addEventListener('canplay', () => {
-          player && player.play();
-        });
-        player.addEventListener('play', () => {
-          dispatch({ path: audioExample, wordId, type: AUDIO + START });
-        });
-
-        player.addEventListener('ended', () => {
-          player = null;
-          dispatch({ type: AUDIO + STOP });
-        });
-      });
-    });
+      dispatch({ path: audioExample, wordId, type: AUDIO + START });
+      await audioPlayer.play(apiRoutes.files(audioExample));
+    } catch (error) {
+      dispatch({ error: String(error), type: AUDIO + FAILURE });
+    } finally {
+      dispatch({ type: AUDIO + STOP });
+    }
   };
 
 export const audioStop = () => (dispatch: Dispatch<AnyAction>) => {
-  player && player.pause();
-  player = null;
+  audioPlayer.stop();
   dispatch({ type: AUDIO + STOP });
 };

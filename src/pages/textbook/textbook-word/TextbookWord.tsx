@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import { ITextbookWord } from '../../../interfaces';
-import AudioButton from './audio-button';
+import AudioButton from './textbook-word-audio-button';
 import TextbookWordExample from './textbook-word-example';
 import TextbookWordHeader from './textbook-word-header';
 import TextbookWordMeaning from './textbook-word-meaning';
