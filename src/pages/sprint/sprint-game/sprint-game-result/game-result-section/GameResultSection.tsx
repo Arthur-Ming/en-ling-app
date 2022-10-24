@@ -11,13 +11,14 @@ const GameResultSection = ({ filtredAnswers, isTrueAnswers }: Props) => {
   return (
     <section>
       {isTrueAnswers && (
-        <h5>
-          Правильные ответы<span>{filtredAnswers.length}</span>
+        <h5 className={styles.subtitle}>
+          Правильные ответы
+          <span className={styles.points_true}>{filtredAnswers.length}</span>
         </h5>
       )}
       {!isTrueAnswers && (
-        <h5>
-          Не правильные ответы<span>{filtredAnswers.length}</span>
+        <h5 className={styles.subtitle}>
+          Не правильные ответы<span className={styles.points_false}>{filtredAnswers.length}</span>
         </h5>
       )}
       <div className={styles.answers}>

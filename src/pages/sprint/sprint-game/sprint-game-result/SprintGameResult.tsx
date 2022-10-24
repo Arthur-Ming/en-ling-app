@@ -24,8 +24,10 @@ const SprintGameResult = ({ answers }: Props) => {
     <main>
       <div className={styles.box}>
         <h4 className={styles.title}>Результаты</h4>
-        <GameResultSection filtredAnswers={trueAnswers} isTrueAnswers={true} />
-        <GameResultSection filtredAnswers={falseAnswers} isTrueAnswers={false} />
+        <div className={styles.sections}>
+          <GameResultSection filtredAnswers={falseAnswers} isTrueAnswers={false} />
+          <GameResultSection filtredAnswers={trueAnswers} isTrueAnswers={true} />
+        </div>
       </div>
     </main>
   );
