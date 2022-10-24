@@ -1,0 +1,29 @@
+@import '/src/index.scss';
+.button {
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    .icon {
+      color: wheat;
+    }
+  }
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  color: $text-secondary-dark;
+  transition: color 0.3s ease 0s;
+}
+
+.mute {
+  @extend .icon;
+  color: $text-secondary-dark;
+  &:hover {
+    color: $text-secondary-dark;
+  }
+}
