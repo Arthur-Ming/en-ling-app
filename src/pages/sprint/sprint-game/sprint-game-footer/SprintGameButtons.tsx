@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styles from '../sprint-game.module.scss';
 
 interface Props {
@@ -17,4 +18,4 @@ const SprintGameButtons = ({ onTrueClick, onFalseClick, disabled }: Props) => (
   </div>
 );
 
-export default SprintGameButtons;
+export default memo(SprintGameButtons);

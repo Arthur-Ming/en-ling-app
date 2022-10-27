@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import useSprintGameAnswers from './useSprintGameAnswers';
 import useSprintGameRandomPage from './useSprintGameRandomPage';
 import useSprintGamePoints from './useSprintGamePoints';
 import useSprintGameQuery from './useSprintGameQuery';

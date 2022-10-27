@@ -1,9 +1,10 @@
 @import '/src/index.scss';
 .box {
   @extend .wrapper-box;
-  max-width: 800px;
-  height: 100%;
+  max-width: 900px;
+  min-height: 100vh;
   background-color: $bg-primary-dark;
+  box-sizing: border-box;
   padding: 40px 60px 60px;
 }
 .sections {
@@ -13,10 +14,22 @@
   column-gap: 20px;
 }
 .title {
-  text-align: center;
   font-size: 24px;
   line-height: 28px;
   font-weight: 500;
+  display: flex;
+  column-gap: 15px;
+  justify-content: center;
+}
+.points_sum {
+  font-size: 28px;
+  line-height: 32px;
+}
+.points_sum_p {
+  color: $success;
+}
+.points_sum_n {
+  color: $fail;
 }
 .subtitle {
   font-size: 22px;

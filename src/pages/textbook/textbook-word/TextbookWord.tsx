@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import { ITextbookWord } from '../../../interfaces';
-import AudioButton from './textbook-word-audio-button';
+import TextbookWordAudioButton from './textbook-word-audio-button';
 import TextbookWordExample from './textbook-word-example';
 import TextbookWordHeader from './textbook-word-header';
 import TextbookWordMeaning from './textbook-word-meaning';
@@ -62,7 +62,7 @@ const TextbookWord = ({ word }: Props) => {
             <button>button</button>
             <button>button</button>
           </div>
-          <AudioButton id={id} />
+          <TextbookWordAudioButton id={id} />
         </div>
       </div>
       <LabelIcon className={classNames(styles.label, styles[`level-${group}`])} />

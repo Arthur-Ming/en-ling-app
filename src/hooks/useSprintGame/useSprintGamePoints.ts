@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { SprintGamePoints } from '../../interfaces';
 
+const EXTRA_POINTS_NUMBER = 3;
+
 const useSprintGamePoints = (isCorrectAnswer: null | boolean) => {
   const [points, setPoints] = useState<SprintGamePoints[]>([]);
   const [currentPoints, setCurrentPoints] = useState<SprintGamePoints | null>(null);
@@ -17,15 +19,16 @@ const useSprintGamePoints = (isCorrectAnswer: null | boolean) => {
 
   useEffect(() => {
     if (numberOfContinuousCorrectAnswers !== 0) {
-      setCurrentPoints(numberOfContinuousCorrectAnswers === 3 ? 20 : 10);
-      numberOfContinuousCorrectAnswers === 4 && setNumberOfContinuousCorrectAnswers(1);
+      setCurrentPoints(numberOfContinuousCorrectAnswers === EXTRA_POINTS_NUMBER ? 20 : 10);
+      numberOfContinuousCorrectAnswers > EXTRA_POINTS_NUMBER &&
+        setNumberOfContinuousCorrectAnswers(1);
       setNumberOfContinuousWrongAnswers(0);
     }
   }, [numberOfContinuousCorrectAnswers]);
 
   useEffect(() => {
     if (numberOfContinuousWrongAnswers !== 0) {
-      setCurrentPoints(numberOfContinuousWrongAnswers === 3 ? -20 : -10);
+      setCurrentPoints(numberOfContinuousWrongAnswers === EXTRA_POINTS_NUMBER ? -20 : -10);
       numberOfContinuousWrongAnswers === 4 && setNumberOfContinuousWrongAnswers(1);
       setNumberOfContinuousCorrectAnswers(0);
     }
@@ -38,18 +41,6 @@ const useSprintGamePoints = (isCorrectAnswer: null | boolean) => {
     }
   }, [currentPoints]);
 
-  /*  useEffect(() => {
-    if (numberOfContinuousCorrectAnswers > 3) {
-      setNumberOfContinuousCorrectAnswers(0);
-    }
-  }, [numberOfContinuousCorrectAnswers]); */
-
-  /*  useEffect(() => {
-    if (numberOfContinuousWrongAnswers > 3) {
-      setNumberOfContinuousWrongAnswers(0);
-    }
-  }, [numberOfContinuousWrongAnswers]);
- */
   return {
     gamePoints: points,
     numberOfContinuousAnswers: {

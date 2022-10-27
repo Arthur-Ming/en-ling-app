@@ -52,34 +52,46 @@ function getRemainingPathColor(timeLeft: number, duration: number) {
 }
 
 interface Props {
-  start: boolean;
+  pause: boolean;
   onTimeOver: () => void;
   duration?: number;
 }
 
-const CircleTimer = ({ start, onTimeOver, duration = 60 }: Props) => {
+const CircleTimer = ({ pause, onTimeOver, duration = 30 }: Props) => {
   const [timePassed, setTimePassed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [time, setTime] = useState(formatTime(timeLeft));
   const [strokeDasharray, setStrokeDasharray] = useState(FULL_DASH_ARRAY.toString());
   const [circleColor, setCircleColor] = useState(COLOR_CODES.info.color);
-  const [isSetTimeout, setIsSetTimeout] = useState(false);
+  const [isTimeOver, setTimeOver] = useState(false);
+  const [intervalId, setIntervalId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!pause) {
+      setIntervalId(
+        window.setInterval(() => {
+          setTimePassed((s) => s + 1);
+        }, 1000)
+      );
+    }
+  }, [pause]);
+
+  useEffect(() => {
+    if (pause && intervalId !== null) {
+      window.clearInterval(intervalId);
+    }
+  }, [intervalId, pause]);
 
   useEffect(() => {
     if (timePassed >= duration) {
-      onTimeOver();
-      return;
+      setTimeOver(true);
     }
-    if (start && !isSetTimeout) {
-      setIsSetTimeout(true);
-      setTimeout(() => {
-        setTimePassed((s) => s + 1);
-        setIsSetTimeout(false);
-      }, 1000);
-    }
-  }, [duration, isSetTimeout, onTimeOver, start, timePassed]);
+  }, [duration, timePassed]);
 
-  useEffect(() => setTimeLeft(duration - timePassed), [duration, timePassed]);
+  useEffect(() => {
+    const left = duration - timePassed;
+    if (left >= 0) setTimeLeft(left);
+  }, [duration, timePassed]);
 
   useEffect(() => {
     setStrokeDasharray(getCircleDasharray(duration, timeLeft));
@@ -87,8 +99,19 @@ const CircleTimer = ({ start, onTimeOver, duration = 60 }: Props) => {
     setTime(formatTime(timeLeft));
   }, [duration, timeLeft]);
 
+  useEffect(() => {
+    if (isTimeOver) {
+      onTimeOver();
+      intervalId !== null && window.clearInterval(intervalId);
+    }
+  }, [isTimeOver, onTimeOver, intervalId]);
+
   return (
-    <div className={styles.timer}>
+    <div
+      className={classNames(styles.timer, {
+        [styles.timer_pause]: pause,
+      })}
+    >
       <svg className={styles.timer_svg} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <g className={styles.timer_circle}>
           <circle className={styles.timer_path_elapsed} cx="50" cy="50" r={CIRCLE_RADIUS}></circle>
