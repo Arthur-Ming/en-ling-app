@@ -19,7 +19,7 @@ const TextbookGroupsPagination = ({ isWordsloading }: Props) => {
   const { page, group: currentGroup } = useParams();
   const navigate = useNavigate();
   const handleGroupClick = (group: number) => {
-    navigate(clientRoutes.textbookWords.relative(page, group));
+    navigate(clientRoutes.textbook.words.relative(page, group));
   };
 
   return (

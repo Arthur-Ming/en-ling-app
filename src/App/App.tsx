@@ -11,6 +11,9 @@ import Sprint from '../pages/sprint';
 import AudioCall from '../pages/audio-call';
 import SprintGame from '../pages/sprint/sprint-game';
 import AudioCallGame from '../pages/audio-call/audio-call-game';
+import SignIn from '../pages/auth/sign-in';
+import SignUp from '../pages/auth/sign-up';
+import Auth from '../pages/auth';
 
 const App = () => (
   <Router>
@@ -18,12 +21,16 @@ const App = () => (
       <Header />
       <Routes>
         <Route path={clientRoutes.main()} element={<Main />} />
-        <Route path={`${clientRoutes.textbook.absolute()}/*`} element={<Textbook />}>
-          <Route path={clientRoutes.textbookWords.relative()} element={<TextbookWords />} />
+        <Route path="/auth/*" element={<Auth />}>
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
         </Route>
-        <Route path={`/${clientRoutes.games.absolute()}/*`} element={<Games />}>
-          <Route path="sprint/*" element={<Sprint />}>
-            <Route path=":group" element={<SprintGame />} />
+        <Route path={`${clientRoutes.textbook.absolute()}/*`} element={<Textbook />}>
+          <Route path={clientRoutes.textbook.words.relative()} element={<TextbookWords />} />
+        </Route>
+        <Route path={`${clientRoutes.games.absolute()}/*`} element={<Games />}>
+          <Route path={`${clientRoutes.sprint.relative()}/*`} element={<Sprint />}>
+            <Route path={clientRoutes.sprint.round.relative()} element={<SprintGame />} />
           </Route>
           <Route path="audio-call/*" element={<AudioCall />}>
             <Route path=":group" element={<AudioCallGame />} />

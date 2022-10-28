@@ -1,0 +1,21 @@
+@import '/src/index.scss';
+
+.box {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+  cursor: pointer;
+  color: $text-primary-light;
+  &:hover {
+    color: $active-link;
+  }
+}
+.text {
+  margin: 0;
+  font-size: 18px;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}

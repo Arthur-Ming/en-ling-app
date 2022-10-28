@@ -16,14 +16,13 @@ const useQuery = () => {
       try {
         const data = await api.get(path);
         setData(data);
-        setLoading(false);
         setLoaded(true);
       } catch (err: unknown) {
         setData(null);
-        setLoading(false);
         setLoaded(false);
         setError(err);
       }
+      setLoading(false);
     },
     []
   );

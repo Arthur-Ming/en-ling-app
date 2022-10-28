@@ -25,13 +25,13 @@ const ArrowButton = ({ prev, isWordsloading }: Props) => {
 
   const onNextClick = () => {
     if (page !== null && group !== null) {
-      navigate(clientRoutes.textbookWords.relative(Number(page) + PAGE_SHIFT, group));
+      navigate(clientRoutes.textbook.words.relative(Number(page) + PAGE_SHIFT, group));
     }
   };
 
   const onPrevClick = () => {
     if (page !== null && group !== null) {
-      navigate(clientRoutes.textbookWords.relative(Number(page) - PAGE_SHIFT, group));
+      navigate(clientRoutes.textbook.words.relative(Number(page) - PAGE_SHIFT, group));
     }
   };
   return (

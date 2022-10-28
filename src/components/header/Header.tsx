@@ -1,4 +1,4 @@
-import Auth from './auth';
+import AuthLink from './auth-link';
 import Logo from './logo';
 import NavBar from './nav-bar';
 import styles from './header.module.scss';
@@ -9,7 +9,7 @@ const Header = () => {
       <div className={styles.box}>
         <Logo />
         <NavBar />
-        <Auth />
+        <AuthLink />
       </div>
     </header>
   );

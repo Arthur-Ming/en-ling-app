@@ -7,9 +7,12 @@
 }
 
 .link {
-  color: $text-primary-light;
+  color: $text-secondary-dark;
   display: flex;
   column-gap: 10px;
+  &:hover {
+    color: $text-primary-light;
+  }
 }
 
 .textbook,
@@ -24,8 +27,19 @@
 }
 
 .active {
-  color: $active-link;
-  /* pointer-events: none; */
+  color: $text-primary-light;
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: $active-link;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% + 3px);
+    transition: all 0.2s ease 0s;
+  }
 }
 
 .text {

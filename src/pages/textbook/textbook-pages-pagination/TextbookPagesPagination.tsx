@@ -20,7 +20,7 @@ const TextbookPagesPagination = ({ isWordsloading }: Props) => {
   const { page: currentPage, group } = useParams();
   const navigate = useNavigate();
   const handlePageClick = ({ selected }: { selected: number }) => {
-    navigate(clientRoutes.textbookWords.relative(selected + PAGE_SHIFT, group));
+    navigate(clientRoutes.textbook.words.relative(selected + PAGE_SHIFT, group));
   };
 
   return (

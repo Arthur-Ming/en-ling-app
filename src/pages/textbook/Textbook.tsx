@@ -24,10 +24,10 @@ const Textbook = () => {
     }; */
   }, [page, group]);
 
-  const match = useMatch(clientRoutes.textbookWords.absolute());
+  const match = useMatch(clientRoutes.textbook.words.absolute());
 
   if (!match) {
-    return <Navigate to={clientRoutes.textbookWords.absolute(page, group)} replace />;
+    return <Navigate to={clientRoutes.textbook.words.absolute(page, group)} replace />;
   }
 
   return (
