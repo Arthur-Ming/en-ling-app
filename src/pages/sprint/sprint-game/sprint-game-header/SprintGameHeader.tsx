@@ -1,6 +1,7 @@
-import styles from '../sprint-game.module.scss';
+import styles from '../../sprint.module.scss';
 import { SprintGamePoints as SprintGamePointsType } from '../../../../interfaces';
-import useSprintGamePointsSum from '../../../../hooks/useSprintGame/useSprintGamePointsSum';
+import useSprintGamePointsSum from '../../../../hooks/SprintGame/useSprintGamePointsSum';
+import React from 'react';
 
 type Props = {
   gamePoints: SprintGamePointsType[];
@@ -20,4 +21,4 @@ const SprintGameHeader = ({ gamePoints, audio }: Props) => {
     </div>
   );
 };
-export default SprintGameHeader;
+export default React.memo(SprintGameHeader);

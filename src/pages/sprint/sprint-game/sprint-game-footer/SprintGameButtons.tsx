@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from '../sprint-game.module.scss';
+import styles from '../../sprint.module.scss';
 
 interface Props {
   onTrueClick: () => void;

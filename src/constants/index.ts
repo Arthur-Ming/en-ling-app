@@ -9,3 +9,6 @@ export const GROUP_SHIFT = 1;
 
 export const PAGE_COUNT = RANGE_PAGE[1];
 export const GROUP_COUNT = RANGE_GROUP[1];
+
+export const TOKEN = 'token';
+export const USER_ID = 'userId';

@@ -9,19 +9,20 @@ const useSprintGame = (level: number) => {
   const [shouldGetNextStep, setShouldGetNextStep] = useState<boolean>(false);
   const [shouldGetNextRandomPage, setShouldGetNextRandomPage] = useState<boolean>(false);
   const { randomPage, pagesOver } = useSprintGameRandomPage(shouldGetNextRandomPage);
-  const { requestState, words } = useSprintGameQuery(randomPage, level);
+  const { wordsLoading, wordsLoaded, error, words } = useSprintGameQuery(randomPage, level);
   const { sprintStep, stepsOver } = useSprintGameStep(words, shouldGetNextStep);
-  const { isCorrectAnswerSelected, isAnswered, handlers, answers } =
+  const { isCorrectAnswerSelected, didAnswer, handlers, answers } =
     useSprintGameAnswerHandler(sprintStep);
   const { gamePoints, numberOfContinuousAnswers } = useSprintGamePoints(isCorrectAnswerSelected);
 
-  useEffect(() => setShouldGetNextStep(isAnswered), [isAnswered]);
+  useEffect(() => setShouldGetNextStep(didAnswer), [didAnswer]);
   useEffect(() => setShouldGetNextRandomPage(stepsOver), [stepsOver]);
-  useEffect(() => console.log(answers), [answers]);
 
   return {
     sprintStep,
-    requestState,
+    wordsLoading,
+    wordsLoaded,
+    error,
     handlers,
     pagesOver,
     gamePoints,

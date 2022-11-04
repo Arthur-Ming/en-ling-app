@@ -1,15 +1,18 @@
-import styles from '../sprint-game.module.scss';
+import React from 'react';
+import styles from '../../sprint.module.scss';
 
 interface Props {
   word: string;
   mockWordTranslate: string;
 }
 
-const SprintGameWords = ({ word, mockWordTranslate }: Props) => (
-  <>
-    <p className={styles.word}>{word}</p>
-    <p className={styles.translate}>{mockWordTranslate}</p>
-  </>
-);
+const SprintGameWords = ({ word, mockWordTranslate }: Props) => {
+  return (
+    <>
+      <p className={styles.word}>{word}</p>
+      <p className={styles.translate}>{mockWordTranslate}</p>
+    </>
+  );
+};
 
-export default SprintGameWords;
+export default React.memo(SprintGameWords);

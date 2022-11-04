@@ -14,6 +14,8 @@ import AudioCallGame from '../pages/audio-call/audio-call-game';
 import SignIn from '../pages/auth/sign-in';
 import SignUp from '../pages/auth/sign-up';
 import Auth from '../pages/auth';
+import ProtectedRoute from './ProtectedRoute';
+import Statistics from '../pages/statistics';
 
 const App = () => (
   <Router>
@@ -36,6 +38,19 @@ const App = () => (
             <Route path=":group" element={<AudioCallGame />} />
           </Route>
         </Route>
+        <Route
+          path="/statistics"
+          element={
+            <ProtectedRoute>
+              <Statistics />
+            </ProtectedRoute>
+          }
+        />
+
+        {/*   <ProtectedRoute>
+          <Route path="/statistics" element={<Statistics />} />
+        </ProtectedRoute> */}
+        {/*   <Route path="/statistics" element={<Statistics />} /> */}
       </Routes>
       <Footer />
     </div>

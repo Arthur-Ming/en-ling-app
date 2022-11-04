@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { SprintGameAnswer, SprintGameStep } from '../../interfaces';
 
 const getSprintGameAnswerFromStep = (
@@ -14,7 +14,7 @@ const getSprintGameAnswerFromStep = (
 
 const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
   const [isTrueClick, setIsTrueClick] = useState<null | boolean>(null);
-  const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  const [didAnswer, setDidAnswer] = useState<boolean>(false);
   const [isCorrectAnswerSelected, setIsCorrectAnswerSelected] = useState<null | boolean>(null);
   const [answers, setAnswers] = useState<SprintGameAnswer[]>([]);
 
@@ -29,21 +29,21 @@ const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
 
   useEffect(() => {
     if (sprintStep !== null) {
-      setIsAnswered(false);
+      setDidAnswer(false);
     }
   }, [sprintStep]);
 
   useEffect(() => {
     if (isCorrectAnswerSelected !== null) {
-      setIsAnswered(true);
+      setDidAnswer(true);
     }
   }, [isCorrectAnswerSelected]);
 
   useEffect(() => {
-    if (isAnswered) {
+    if (didAnswer) {
       setIsCorrectAnswerSelected(null);
     }
-  }, [isAnswered]);
+  }, [didAnswer]);
 
   useEffect(() => {
     if (isCorrectAnswerSelected !== null && sprintStep !== null) {
@@ -54,16 +54,18 @@ const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
     }
   }, [isCorrectAnswerSelected, sprintStep]);
 
-  const onTrueClick = useMemo(() => () => setIsTrueClick(true), []);
-  const onFalseClick = useMemo(() => () => setIsTrueClick(false), []);
+  const handlers = useMemo(
+    () => ({
+      onTrueClick: () => setIsTrueClick(true),
+      onFalseClick: () => setIsTrueClick(false),
+    }),
+    []
+  );
 
   return {
     isCorrectAnswerSelected,
-    isAnswered,
-    handlers: {
-      onTrueClick,
-      onFalseClick,
-    },
+    didAnswer,
+    handlers,
     answers,
   };
 };

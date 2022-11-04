@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styles from './circle-timer.module.scss';
+import Timer from './Timer';
 
 const CIRCLE_RADIUS = 45;
 const FULL_DASH_ARRAY = CIRCLE_RADIUS * 2 * Math.PI;
@@ -82,6 +83,15 @@ const CircleTimer = ({ pause, onTimeOver, duration = 30 }: Props) => {
     }
   }, [intervalId, pause]);
 
+  useEffect(
+    () => () => {
+      if (intervalId !== null) {
+        window.clearInterval(intervalId);
+      }
+    },
+    [intervalId]
+  );
+
   useEffect(() => {
     if (timePassed >= duration) {
       setTimeOver(true);
@@ -107,24 +117,8 @@ const CircleTimer = ({ pause, onTimeOver, duration = 30 }: Props) => {
   }, [isTimeOver, onTimeOver, intervalId]);
 
   return (
-    <div
-      className={classNames(styles.timer, {
-        [styles.timer_pause]: pause,
-      })}
-    >
-      <svg className={styles.timer_svg} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g className={styles.timer_circle}>
-          <circle className={styles.timer_path_elapsed} cx="50" cy="50" r={CIRCLE_RADIUS}></circle>
-          <path
-            strokeDasharray={strokeDasharray}
-            className={classNames(styles.timer_path_remaining, styles[circleColor])}
-            d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"
-          ></path>
-        </g>
-      </svg>
-      <span className={styles.timer_label}>{time}</span>
-    </div>
+    <Timer pause={pause} strokeDasharray={strokeDasharray} circleColor={circleColor} time={time} />
   );
 };
 
-export default CircleTimer;
+export default memo(CircleTimer);

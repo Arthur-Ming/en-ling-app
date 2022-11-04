@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const useSprintGameTimer = (loaded: boolean) => {
   const [isPause, setIsPause] = useState(true);
@@ -7,7 +7,7 @@ const useSprintGameTimer = (loaded: boolean) => {
     loaded ? setIsPause(false) : setIsPause(true);
   }, [loaded]);
 
-  const onTimeOver = useMemo(() => () => setIsTimeOver(true), []);
+  const onTimeOver = useCallback(() => setIsTimeOver(true), []);
 
   return {
     isPause,

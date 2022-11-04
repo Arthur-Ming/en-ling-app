@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import useTextbookPageParams from '../../../hooks/useTextbookPageParams';
 import { GROUP_COUNT } from '../../../constants';
 import styles from '../games.module.scss';
+import { useSearchParams } from 'react-router-dom';
 
 const groups = Array.from(Array(GROUP_COUNT), (_, index) => index + 1);
 

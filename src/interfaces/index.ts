@@ -32,6 +32,11 @@ export interface IAudioAction extends IAction {
   wordId?: string | null;
 }
 
+export interface ISignInAction extends IAction {
+  userName?: string;
+  error?: null | unknown;
+}
+
 export type SprintGameAnswer = Pick<ITextbookWord, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
   isCorrectAnswer: boolean;
 };
@@ -45,3 +50,22 @@ type DefaultPoints = 0;
 type PointsForCorrectAnswer = 10 | 20;
 type PointsForWrongAnswer = -10 | -20;
 export type SprintGamePoints = DefaultPoints | PointsForCorrectAnswer | PointsForWrongAnswer;
+
+export type SignInType = {
+  email: string;
+  password: string;
+};
+
+export interface ISuccessfulLogin {
+  message: string;
+  token: string;
+  refreshToken: string;
+  userId: string;
+  name: string;
+}
+
+export interface ISuccessfulUserById {
+  name: string;
+  email: string;
+  password: string;
+}

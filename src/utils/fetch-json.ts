@@ -2,12 +2,16 @@
 // status >= 400 is an error
 // network error / json error are errors
 
-export default async function (url: string, params?: RequestInit | undefined) {
+export default async function (url: string, params?: RequestInit) {
   let response;
 
   try {
     response = await fetch(url, params);
   } catch (err) {
+    console.log((err as Error).name);
+    if ((err as { name: string }).name == 'AbortError') {
+      console.log((err as { name: string }).name);
+    }
     throw new FetchError(response, 'Network error has occurred.');
   }
 
@@ -34,9 +38,8 @@ export default async function (url: string, params?: RequestInit | undefined) {
 
   try {
     return await response.json();
-  } catch (e: unknown) {
-    const error = e as Error;
-    throw new FetchError(response, null, error.message);
+  } catch (error: unknown) {
+    throw new FetchError(response, null, (error as Error).message);
   }
 }
 

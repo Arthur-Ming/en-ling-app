@@ -1,25 +1,33 @@
 import classNames from 'classnames';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { SignInType } from '../../../interfaces';
+import { signIn } from '../../../redux/actions/user';
+import { userIsAuthSelector, userLoadingSelector } from '../../../redux/selectors/user';
+import { RootState } from '../../../redux/store';
 import styles from '../auth.module.scss';
 
-type Inputs = {
-  email: string;
-  password: string;
+type StateProps = {
+  loading: boolean;
+  isAuth: boolean;
 };
 
-const SignIn = () => {
+type DispatchProps = {
+  signIn: (requestBody: SignInType) => void;
+};
+
+type Props = StateProps & DispatchProps;
+
+type Inputs = SignInType;
+
+const SignIn = ({ loading, signIn }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({
-    mode: 'onBlur',
-  });
+  } = useForm<Inputs>({ mode: 'onBlur' });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-  };
   return (
     <>
       <form className={styles.form}>
@@ -61,9 +69,10 @@ const SignIn = () => {
         </label>
         <input
           className={styles.button}
-          onClick={handleSubmit(onSubmit)}
+          onClick={handleSubmit(signIn)}
           type="submit"
           value="Войти"
+          disabled={loading}
         />
       </form>
       <div className={styles.text}>
@@ -76,4 +85,13 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const mapStateToProps = (state: RootState) => ({
+  loading: userLoadingSelector(state),
+  isAuth: userIsAuthSelector(state),
+});
+
+const mapDispatchToProps = {
+  signIn,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

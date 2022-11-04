@@ -1,6 +1,7 @@
 import { Navigate, useParams } from 'react-router';
 import { RANGE_GROUP } from '../../constants';
 import SprintGame from './sprint-game';
+import styles from './sprint.module.scss';
 
 const Sprint = () => {
   const { group = null } = useParams();
@@ -13,7 +14,13 @@ const Sprint = () => {
 
   if (isNaN(level) || level > max || level < min) return <Navigate to="/games" />;
 
-  return <SprintGame level={level} />;
+  return (
+    <main className={styles.main}>
+      <div className={styles.box}>
+        <SprintGame level={level} />
+      </div>
+    </main>
+  );
 };
 
 export default Sprint;

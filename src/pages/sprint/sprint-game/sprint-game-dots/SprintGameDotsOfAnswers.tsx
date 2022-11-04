@@ -1,26 +1,28 @@
 import classNames from 'classnames';
-import styles from '../sprint-game.module.scss';
+import React, { memo } from 'react';
+import styles from '../../sprint.module.scss';
 
 const dotsArr = Array.from(Array(3), (_, index) => ({
   dotId: index + 1,
 }));
 
 type Props = {
-  numberOfContinuousAnswers: {
-    correct: number;
-    wrong: number;
-  };
+  numberOfContinuousCorrectAnswers: number;
+  numberOfContinuousWrongAnswers: number;
 };
 
-const SprintGameDotsOfAnswers = ({ numberOfContinuousAnswers }: Props) => {
+const SprintGameDotsOfAnswers = ({
+  numberOfContinuousCorrectAnswers,
+  numberOfContinuousWrongAnswers,
+}: Props) => {
   return (
     <div className={styles.dots}>
       {dotsArr.map(({ dotId }) => (
         <div
           key={dotId}
           className={classNames([styles.dot], {
-            [styles.dot_true]: dotId <= numberOfContinuousAnswers.correct,
-            [styles.dot_false]: dotId <= numberOfContinuousAnswers.wrong,
+            [styles.dot_true]: dotId <= numberOfContinuousCorrectAnswers,
+            [styles.dot_false]: dotId <= numberOfContinuousWrongAnswers,
           })}
         ></div>
       ))}
@@ -28,4 +30,4 @@ const SprintGameDotsOfAnswers = ({ numberOfContinuousAnswers }: Props) => {
   );
 };
 
-export default SprintGameDotsOfAnswers;
+export default memo(SprintGameDotsOfAnswers);
