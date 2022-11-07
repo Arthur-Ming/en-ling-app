@@ -1,5 +1,5 @@
 import { ISignInAction, ISuccessfulLogin, ISuccessfulUserById, SignInType } from '../../interfaces';
-import { FAILURE, REQUEST, SIGN_IN, SUCCESS } from '../action-types';
+import { FAILURE, REQUEST, SIGN_IN, SIGN_OUT, SUCCESS } from '../action-types';
 import { Dispatch } from '@reduxjs/toolkit';
 import fetchJson from '../../utils/fetch-json';
 import { apiRoutes } from '../../utils/apiRoutes';
@@ -60,4 +60,11 @@ export const getUserById = () => async (dispatch: Dispatch<ISignInAction>) => {
       }
     }
   }
+};
+
+export const signOut = () => (dispatch: Dispatch<ISignInAction>) => {
+  Cookies.remove(TOKEN);
+  Cookies.remove(USER_ID);
+
+  dispatch({ type: SIGN_OUT });
 };

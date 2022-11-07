@@ -13,11 +13,12 @@ import { apiRoutes } from '../../../utils/apiRoutes';
 
 interface OwnProps {
   word: ITextbookWord;
+  children?: JSX.Element;
 }
 
 type Props = OwnProps;
 
-const TextbookWord = ({ word }: Props) => {
+const TextbookWord = ({ word, children }: Props) => {
   const { group } = useParams();
 
   const {
@@ -58,10 +59,7 @@ const TextbookWord = ({ word }: Props) => {
           />
         </div>
         <div className={styles.buttons}>
-          <div>
-            <button>button</button>
-            <button>button</button>
-          </div>
+          {children}
           <TextbookWordAudioButton id={id} />
         </div>
       </div>

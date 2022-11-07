@@ -8,12 +8,8 @@ export const createShuffledArr = (num: number): number[] => {
   return arr;
 };
 
-interface P {
-  id: string;
-}
+type ArrToMapType = <T extends object>(arr: T[], key: keyof T) => { [key: string]: T };
 
-type ArrToMapType = <T extends P>(arr: T[]) => { [id: string]: T };
-
-export const arrToMap: ArrToMapType = (arr) => {
-  return arr.reduce((acc, item) => ({ ...acc, [item.id]: item }), {});
+export const arrToMap: ArrToMapType = (arr, key) => {
+  return arr.reduce((acc, item) => ({ ...acc, [String(item[key])]: item }), {});
 };

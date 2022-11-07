@@ -15,6 +15,31 @@ export interface ITextbookWord {
   wordTranslate: string;
 }
 
+export type DifficultyUserWord = 'easy' | 'hard' | null;
+
+export interface ITextbookUserWord {
+  difficulty: DifficultyUserWord;
+  optional?: unknown;
+  wordId: string;
+  id: string;
+}
+
+export interface IPaginatedResult extends Omit<ITextbookWord, 'id'> {
+  _id: string;
+  userWord?: {
+    difficulty: DifficultyUserWord;
+  };
+}
+
+interface ITotalCount {
+  count: number;
+}
+
+export interface IAggregatedWord {
+  paginatedResults: IPaginatedResult[];
+  totalCount: ITotalCount[];
+}
+
 export interface IAction {
   type: string;
 }
@@ -24,6 +49,28 @@ export interface ITextbookCardsAction extends IAction {
   data?: ITextbookWord[] | null;
   page?: number;
   group?: number;
+}
+
+export interface IUpdateUsersWordsAction extends IAction {
+  wordId: string;
+  userWord?: {
+    difficulty: DifficultyUserWord;
+  };
+}
+
+export interface IDeleteUsersWordsAction extends IAction {
+  wordId: string;
+}
+export interface IAddUsersWordsAction extends IAction {
+  word: IPaginatedResult;
+  userWord?: {
+    difficulty: DifficultyUserWord;
+  };
+}
+
+export interface ITextbookUserWordAction extends IAction {
+  error?: unknown | null;
+  data?: IPaginatedResult[] | null;
 }
 
 export interface IAudioAction extends IAction {

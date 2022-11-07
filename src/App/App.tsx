@@ -16,6 +16,7 @@ import SignUp from '../pages/auth/sign-up';
 import Auth from '../pages/auth';
 import ProtectedRoute from './ProtectedRoute';
 import Statistics from '../pages/statistics';
+import TextbookHardWords from '../pages/textbook/textbook-hard-words';
 
 const App = () => (
   <Router>
@@ -29,6 +30,7 @@ const App = () => (
         </Route>
         <Route path={`${clientRoutes.textbook.absolute()}/*`} element={<Textbook />}>
           <Route path={clientRoutes.textbook.words.relative()} element={<TextbookWords />} />
+          <Route path="hard-words" element={<TextbookHardWords />} />
         </Route>
         <Route path={`${clientRoutes.games.absolute()}/*`} element={<Games />}>
           <Route path={`${clientRoutes.sprint.relative()}/*`} element={<Sprint />}>

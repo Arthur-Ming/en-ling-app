@@ -3,8 +3,12 @@ import styles from './textbook-pagination.module.scss';
 import { ReactComponent as ArrowPrev } from './arrow-prev.svg';
 import { ReactComponent as ArrowNext } from './arrow-next.svg';
 import { connect } from 'react-redux';
-import { useNavigate, useParams } from 'react-router';
-import { textbookLoadingSelector } from '../../../redux/selectors/textbook';
+import { useMatch, useNavigate, useParams } from 'react-router';
+import {
+  textbookGroupSelector,
+  textbookLoadingSelector,
+  textbookPageSelector,
+} from '../../../redux/selectors/textbook';
 import { RootState } from '../../../redux/store';
 import classNames from 'classnames';
 import { PAGE_COUNT, PAGE_SHIFT } from '../../../constants';
@@ -12,12 +16,15 @@ import clientRoutes from '../../../utils/clientRoutes';
 
 type StateProps = {
   isWordsloading: boolean;
+  defaultPage: number;
+  defaultGroup: number;
 };
 
 type Props = StateProps;
 
-const TextbookPagesPagination = ({ isWordsloading }: Props) => {
-  const { page: currentPage, group } = useParams();
+const TextbookPagesPagination = ({ isWordsloading, defaultPage, defaultGroup }: Props) => {
+  const { page: currentPage = defaultPage, group = defaultGroup } = useParams();
+  const isHardWords = useMatch('textbook/hard-words');
   const navigate = useNavigate();
   const handlePageClick = ({ selected }: { selected: number }) => {
     navigate(clientRoutes.textbook.words.relative(selected + PAGE_SHIFT, group));
@@ -27,6 +34,7 @@ const TextbookPagesPagination = ({ isWordsloading }: Props) => {
     <div
       className={classNames(styles.root, {
         [styles.loading]: isWordsloading,
+        [styles.hidden]: isHardWords,
       })}
     >
       <ReactPaginate
@@ -57,6 +65,8 @@ const TextbookPagesPagination = ({ isWordsloading }: Props) => {
 
 const mapStateToProps = (state: RootState) => ({
   isWordsloading: textbookLoadingSelector(state),
+  defaultPage: textbookPageSelector(state),
+  defaultGroup: textbookGroupSelector(state),
 });
 
 export default connect(mapStateToProps)(TextbookPagesPagination);

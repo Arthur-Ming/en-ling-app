@@ -3,24 +3,35 @@ import styles from './auth-link.module.scss';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { userNameSelector } from '../../../redux/selectors/user';
+import { userIsAuthSelector, userNameSelector } from '../../../redux/selectors/user';
 import { useEffect } from 'react';
-import { getUserById } from '../../../redux/actions/user';
+import { getUserById, signOut } from '../../../redux/actions/user';
 
 type StateProps = {
   userName: string | null;
+  isAuth: boolean;
 };
 
 type DispatchProps = {
   getUserById: () => void;
+  signOut: () => void;
 };
 
 type Props = StateProps & DispatchProps;
 
-const AuthLink = ({ userName, getUserById }: Props) => {
+const AuthLink = ({ userName, signOut, isAuth, getUserById }: Props) => {
   useEffect(() => {
     getUserById();
   }, [getUserById]);
+
+  if (isAuth)
+    return (
+      <span className={styles.box} onClick={signOut}>
+        {userName && <span>{userName}</span>}
+        <UserIcon className={styles.icon} />
+      </span>
+    );
+
   return (
     <NavLink to={`auth/sign-in`} className={styles.box}>
       {userName && <span>{userName}</span>}
@@ -32,10 +43,12 @@ const AuthLink = ({ userName, getUserById }: Props) => {
 
 const mapStateToProps = (state: RootState) => ({
   userName: userNameSelector(state),
+  isAuth: userIsAuthSelector(state),
 });
 
 const mapDispatchToProps = {
   getUserById,
+  signOut,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthLink);

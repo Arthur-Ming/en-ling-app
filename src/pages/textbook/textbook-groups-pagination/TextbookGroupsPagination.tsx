@@ -1,8 +1,12 @@
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { useNavigate, useParams } from 'react-router';
-import { GROUP_COUNT } from '../../../constants';
-import { textbookLoadingSelector } from '../../../redux/selectors/textbook';
+import { useMatch, useNavigate, useParams } from 'react-router';
+import { DEFAULT_PAGE, GROUP_COUNT } from '../../../constants';
+import {
+  textbookGroupSelector,
+  textbookLoadingSelector,
+  textbookPageSelector,
+} from '../../../redux/selectors/textbook';
 import { RootState } from '../../../redux/store';
 import clientRoutes from '../../../utils/clientRoutes';
 import styles from './textbook-groups-pagination.module.scss';
@@ -11,15 +15,22 @@ const textbookGroups = Array.from(Array(GROUP_COUNT), (_, index) => index + 1);
 
 type StateProps = {
   isWordsloading: boolean;
+  defaultPage: number;
+  defaultGroup: number;
 };
 
 type Props = StateProps;
 
-const TextbookGroupsPagination = ({ isWordsloading }: Props) => {
-  const { page, group: currentGroup } = useParams();
+const TextbookGroupsPagination = ({ isWordsloading, defaultPage, defaultGroup }: Props) => {
+  const { page = defaultPage, group: currentGroup } = useParams();
   const navigate = useNavigate();
+  const isHardWords = useMatch('textbook/hard-words');
   const handleGroupClick = (group: number) => {
     navigate(clientRoutes.textbook.words.relative(page, group));
+  };
+  console.log('TextbookGroupsPagination');
+  const handleHardWords = () => {
+    navigate('hard-words');
   };
 
   return (
@@ -47,12 +58,24 @@ const TextbookGroupsPagination = ({ isWordsloading }: Props) => {
           <span className={styles.text}>{`Глава ${group}`}</span>
         </button>
       ))}
+
+      <button
+        className={classNames(styles.button, {
+          [styles.active]: isHardWords,
+        })}
+        onClick={() => handleHardWords()}
+        disabled={isWordsloading}
+      >
+        <span className={styles.text}>{`Сложные слова`}</span>
+      </button>
     </div>
   );
 };
 
 const mapStateToProps = (state: RootState) => ({
   isWordsloading: textbookLoadingSelector(state),
+  defaultPage: textbookPageSelector(state),
+  defaultGroup: textbookGroupSelector(state),
 });
 
 export default connect(mapStateToProps)(TextbookGroupsPagination);

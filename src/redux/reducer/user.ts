@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { ISignInAction } from '../../interfaces';
-import { FAILURE, REQUEST, SIGN_IN, SUCCESS } from '../action-types';
+import { FAILURE, REQUEST, SIGN_IN, SIGN_OUT, SUCCESS } from '../action-types';
 
 export interface IUserState {
   loading: boolean;
@@ -40,6 +40,13 @@ export default createReducer(initialState, (builder) => {
       state.loading = false;
       state.loaded = false;
       state.error = error;
+      state.name = null;
+      state.isAuth = false;
+    })
+    .addCase(SIGN_OUT, (state) => {
+      state.loading = false;
+      state.loaded = false;
+      state.error = null;
       state.name = null;
       state.isAuth = false;
     });

@@ -15,14 +15,17 @@ export const textbookLoadedSelector = (state: RootState) => textbookSelector(sta
 export const textbookPageSelector = (state: RootState) => textbookSelector(state, 'page');
 export const textbookGroupSelector = (state: RootState) => textbookSelector(state, 'group');
 
+export const textbookWordByIdSelector = (state: RootState, wordId: string) =>
+  textbookEntitiesSelector(state)[wordId];
+
 export const wordAudioByIdSelector = (state: RootState, wordId: string) => {
-  return textbookEntitiesSelector(state)[wordId]?.audio;
+  return textbookWordByIdSelector(state, wordId)?.audio;
 };
 
 export const wordMeaningAudioByIdSelector = (state: RootState, wordId: string) => {
-  return textbookEntitiesSelector(state)[wordId]?.audioMeaning;
+  return textbookWordByIdSelector(state, wordId)?.audioMeaning;
 };
 
 export const wordExampleAudioByIdSelector = (state: RootState, wordId: string) => {
-  return textbookEntitiesSelector(state)[wordId]?.audioExample;
+  return textbookWordByIdSelector(state, wordId)?.audioExample;
 };

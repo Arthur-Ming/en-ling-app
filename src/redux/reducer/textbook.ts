@@ -39,7 +39,7 @@ export default createReducer(initialState, (builder) => {
       state.error = null;
       state.page = page;
       state.group = group;
-      data && (state.entities = arrToMap(data));
+      data && (state.entities = arrToMap<ITextbookWord>(data, 'id'));
     })
     .addCase(LOAD_WORDS + FAILURE, (state, action) => {
       const { error = null } = <ITextbookCardsAction>action;
