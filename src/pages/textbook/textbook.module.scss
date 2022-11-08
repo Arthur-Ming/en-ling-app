@@ -12,6 +12,14 @@
   padding-left: 40px;
 }
 
+.words_box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding: 0px;
+  margin: 20px 0px;
+}
+
 .word_control_box {
   width: 50%;
   display: flex;

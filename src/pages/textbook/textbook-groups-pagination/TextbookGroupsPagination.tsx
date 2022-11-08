@@ -28,7 +28,7 @@ const TextbookGroupsPagination = ({ isWordsloading, defaultPage, defaultGroup }:
   const handleGroupClick = (group: number) => {
     navigate(clientRoutes.textbook.words.relative(page, group));
   };
-  console.log('TextbookGroupsPagination');
+
   const handleHardWords = () => {
     navigate('hard-words');
   };

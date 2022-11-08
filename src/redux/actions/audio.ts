@@ -3,12 +3,9 @@ import { apiRoutes } from '../../utils/apiRoutes';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { IAudioAction } from '../../interfaces';
-import {
-  wordAudioByIdSelector,
-  wordExampleAudioByIdSelector,
-  wordMeaningAudioByIdSelector,
-} from '../selectors/textbook';
+import { textbookWordByIdSelector } from '../selectors/textbook';
 import audioPlayer from '../../utils/audioPlayer';
+import { userWordsByIdSelector } from '../selectors/userWords';
 
 export const wordAudioStart =
   (wordId: string, audio: string) => async (dispatch: Dispatch<IAudioAction>) => {
@@ -25,9 +22,10 @@ export const wordAudioStart =
 export const textbookWordFullAudioStart =
   (wordId: string) => async (dispatch: Dispatch<IAudioAction>, getState: () => RootState) => {
     const state = getState();
-    const audio = wordAudioByIdSelector(state, wordId);
-    const audioMeaning = wordMeaningAudioByIdSelector(state, wordId);
-    const audioExample = wordExampleAudioByIdSelector(state, wordId);
+
+    const word = textbookWordByIdSelector(state, wordId) || userWordsByIdSelector(state, wordId);
+    if (!word) return;
+    const { audio, audioMeaning, audioExample } = word;
 
     try {
       dispatch({ path: audio, wordId, type: AUDIO + START });

@@ -10,6 +10,8 @@ import {
 } from '../../../redux/selectors/userWords';
 import TextbookWord from '../textbook-word';
 import TextbookHardWordsControl from './textbook-hard-words-control';
+import styles from '../textbook.module.scss';
+import Loader from '../../../components/loader';
 
 type StateProps = {
   loading: boolean;
@@ -19,9 +21,10 @@ type StateProps = {
 
 type Props = StateProps;
 
-const TextbookHardWords = ({ words }: Props) => {
+const TextbookHardWords = ({ words, loading }: Props) => {
+  if (loading) return <Loader />;
   return (
-    <div>
+    <div className={styles.words_box}>
       {words.map((word) => (
         <TextbookWord key={word.id} word={word}>
           <TextbookHardWordsControl wordId={word.id} />

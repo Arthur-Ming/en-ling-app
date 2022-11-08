@@ -1,26 +1,29 @@
-import { useParams } from 'react-router';
 import { ITextbookWord } from '../../../interfaces';
 import TextbookWordAudioButton from './textbook-word-audio-button';
 import TextbookWordExample from './textbook-word-example';
 import TextbookWordHeader from './textbook-word-header';
 import TextbookWordMeaning from './textbook-word-meaning';
-
 import { ReactComponent as LabelIcon } from './label.svg';
-
 import styles from './textbook-word.module.scss';
 import classNames from 'classnames';
 import { apiRoutes } from '../../../utils/apiRoutes';
+import { connect } from 'react-redux';
+import { RootState } from '../../../redux/reducer';
+import { userWordsDifficultySelector } from '../../../redux/selectors/userWords';
 
-interface OwnProps {
+type OwnProps = {
   word: ITextbookWord;
   children?: JSX.Element;
-}
+};
 
-type Props = OwnProps;
+type StateProps = {
+  isWordHard: boolean;
+  isWordEasy: boolean;
+};
 
-const TextbookWord = ({ word, children }: Props) => {
-  const { group } = useParams();
+type Props = OwnProps & StateProps;
 
+const TextbookWord = ({ word, children, isWordHard, isWordEasy }: Props) => {
   const {
     id,
     word: wordText,
@@ -34,10 +37,16 @@ const TextbookWord = ({ word, children }: Props) => {
     audio,
     audioMeaning,
     audioExample,
+    group,
   } = word;
 
   return (
-    <div className={styles.root}>
+    <div
+      className={classNames(styles.root, {
+        [styles.easy]: isWordEasy,
+        [styles.hard]: isWordHard,
+      })}
+    >
       <img className={styles.icon} src={apiRoutes.files(image)} alt={wordText} />
       <div className={styles.content}>
         <TextbookWordHeader
@@ -63,9 +72,14 @@ const TextbookWord = ({ word, children }: Props) => {
           <TextbookWordAudioButton id={id} />
         </div>
       </div>
-      <LabelIcon className={classNames(styles.label, styles[`level-${group}`])} />
+      <LabelIcon className={classNames(styles.label, styles[`level-${group + 1}`])} />
     </div>
   );
 };
 
-export default TextbookWord;
+const mapStateToProps = (state: RootState, { word }: OwnProps) => ({
+  isWordHard: userWordsDifficultySelector(state, word.id) === 'hard',
+  isWordEasy: userWordsDifficultySelector(state, word.id) === 'easy',
+});
+
+export default connect(mapStateToProps)(TextbookWord);

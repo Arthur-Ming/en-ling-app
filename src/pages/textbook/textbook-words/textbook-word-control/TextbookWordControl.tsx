@@ -1,15 +1,11 @@
 import { connect } from 'react-redux';
-import {
-  addUsersWord,
-  deleteUsersWord,
-  getUsersWords,
-  setUsersWord,
-} from '../../../../redux/actions/userWords';
+import { setUsersWord } from '../../../../redux/actions/userWords';
 import { RootState } from '../../../../redux/reducer';
 import { userIsAuthSelector } from '../../../../redux/selectors/user';
 import {
   userWordsByIdSelector,
   userWordsDifficultySelector,
+  userWordsUpdatingSelector,
 } from '../../../../redux/selectors/userWords';
 import { AppDispatch } from '../../../../redux/store';
 import styles from '../../textbook.module.scss';
@@ -22,6 +18,7 @@ type StateProps = {
   isAuth: boolean;
   isWordHard: boolean;
   isWordEasy: boolean;
+  isUpdating: boolean;
 };
 
 type DispatchProps = {
@@ -37,20 +34,21 @@ const TextbookWordControlButtons = ({
   isAuth,
   isWordHard,
   isWordEasy,
+  isUpdating,
 }: Props) => {
   return (
     <div className={styles.word_control_box}>
       <button
         className={styles.word_control_button}
         onClick={addHardUsersWord}
-        disabled={!isAuth || isWordHard}
+        disabled={!isAuth || isWordHard || isUpdating}
       >
         Сложное
       </button>
       <button
         className={styles.word_control_button}
         onClick={addEaseUsersWord}
-        disabled={!isAuth || isWordEasy}
+        disabled={!isAuth || isWordEasy || isUpdating}
       >
         Изученное
       </button>
@@ -62,10 +60,10 @@ const mapStateToProps = (state: RootState, { wordId }: OwnProps) => ({
   isAuth: userIsAuthSelector(state),
   isWordHard: userWordsDifficultySelector(state, wordId) === 'hard',
   isWordEasy: userWordsDifficultySelector(state, wordId) === 'easy',
+  isUpdating: userWordsUpdatingSelector(state, wordId),
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch, props: OwnProps) => ({
-  // addHardUsersWord: () => dispatch(addUsersWord(props.wordId, 'hard')),
   addHardUsersWord: () => dispatch(setUsersWord(props.wordId, 'hard')),
   addEaseUsersWord: () => dispatch(setUsersWord(props.wordId, 'easy')),
 });

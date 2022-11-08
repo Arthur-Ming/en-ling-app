@@ -14,6 +14,9 @@ export const userWordsArrSelector = createSelector(userWordsEntitiesSelector, Ob
 export const userWordsLoadingSelector = (state: RootState) => userWordsSelector(state, 'loading');
 export const userWordsLoadedSelector = (state: RootState) => userWordsSelector(state, 'loaded');
 
+export const userWordsUpdatingSelector = (state: RootState, wordId: string) =>
+  userWordsSelector(state, 'updating')[wordId];
+
 export const userWordsByIdSelector = (state: RootState, wordId: string) =>
   userWordsEntitiesSelector(state)[wordId];
 

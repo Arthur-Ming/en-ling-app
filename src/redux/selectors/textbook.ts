@@ -17,15 +17,3 @@ export const textbookGroupSelector = (state: RootState) => textbookSelector(stat
 
 export const textbookWordByIdSelector = (state: RootState, wordId: string) =>
   textbookEntitiesSelector(state)[wordId];
-
-export const wordAudioByIdSelector = (state: RootState, wordId: string) => {
-  return textbookWordByIdSelector(state, wordId)?.audio;
-};
-
-export const wordMeaningAudioByIdSelector = (state: RootState, wordId: string) => {
-  return textbookWordByIdSelector(state, wordId)?.audioMeaning;
-};
-
-export const wordExampleAudioByIdSelector = (state: RootState, wordId: string) => {
-  return textbookWordByIdSelector(state, wordId)?.audioExample;
-};

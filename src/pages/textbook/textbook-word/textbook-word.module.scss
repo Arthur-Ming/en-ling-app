@@ -82,3 +82,10 @@
 .active {
   color: $text-primary-light;
 }
+.easy {
+  outline: 1px solid $success;
+}
+
+.hard {
+  outline: 1px solid $fail;
+}

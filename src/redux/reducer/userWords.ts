@@ -68,8 +68,6 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(UPDATE_USERS_WORDS + SUCCESS, (state, action: IUpdateUsersWordsAction) => {
       const { wordId, userWord } = action;
-      console.log(wordId);
-      console.log(userWord);
       state.updating[wordId] = false;
       state.updated[wordId] = true;
       userWord && (state.entities[wordId].userWord = userWord);
@@ -82,9 +80,8 @@ export default createReducer(initialState, (builder) => {
     .addCase(ADD_USERS_WORDS + SUCCESS, (state, action: IAddUsersWordsAction) => {
       const { word } = action;
       const { _id } = word;
-      state.updating[_id] = true;
-      state.updated[_id] = false;
-      console.log(word);
+      state.updating[_id] = false;
+      state.updated[_id] = true;
       word && (state.entities[_id] = word);
     })
     .addCase(DELETE_USERS_WORDS + REQUEST, (state, action: IUpdateUsersWordsAction) => {
@@ -94,10 +91,8 @@ export default createReducer(initialState, (builder) => {
     })
     .addCase(DELETE_USERS_WORDS + SUCCESS, (state, action: IUpdateUsersWordsAction) => {
       const { wordId } = action;
-      state.updating[wordId] = true;
-      state.updated[wordId] = false;
+      state.updating[wordId] = false;
+      state.updated[wordId] = true;
       delete state.entities[wordId];
     });
 });
-
-//DELETE_USERS_WORDS

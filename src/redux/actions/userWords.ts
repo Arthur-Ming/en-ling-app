@@ -128,14 +128,13 @@ export const addUsersWord =
             optional: {},
           }),
         });
-        console.log(data);
+
         dispatch({
           type: ADD_USERS_WORDS + SUCCESS,
           word: userWord,
         });
       } catch (err: unknown) {
         if (err instanceof Error) {
-          console.log(err);
           // dispatch({ type: LOAD_USERS_WORDS + FAILURE, error: err.message });
         }
       }
@@ -144,7 +143,7 @@ export const addUsersWord =
 
 export const updateUsersWord =
   (wordId: string, difficulty: DifficultyUserWord) =>
-  async (dispatch: Dispatch<IUpdateUsersWordsAction>, getState: () => RootState) => {
+  async (dispatch: Dispatch<IUpdateUsersWordsAction>) => {
     const userId = Cookies.get(USER_ID);
     const token = Cookies.get(TOKEN);
 
@@ -164,7 +163,7 @@ export const updateUsersWord =
             optional: {},
           }),
         });
-        console.log(data);
+
         dispatch({
           type: UPDATE_USERS_WORDS + SUCCESS,
           wordId,
@@ -174,7 +173,6 @@ export const updateUsersWord =
         });
       } catch (err: unknown) {
         if (err instanceof Error) {
-          console.log(err);
           // dispatch({ type: LOAD_USERS_WORDS + FAILURE, error: err.message });
         }
       }
@@ -188,12 +186,10 @@ export const setUsersWord =
     const userWord = userWordsByIdSelector(state, wordId);
 
     if (!userWord) {
-      console.log('addWord');
       dispatch(addUsersWord(wordId, difficulty));
     }
 
     if (userWord) {
-      console.log('update');
       dispatch(updateUsersWord(wordId, difficulty));
     }
   };
@@ -206,8 +202,6 @@ export const deleteUsersWord =
     const state = getState();
 
     if (userId && token) {
-      console.log('deleteUsersWord');
-      console.log(wordId);
       dispatch({ type: DELETE_USERS_WORDS + REQUEST, wordId });
       try {
         const data = await fetch(apiRoutes.usersWordsById(userId, wordId), {
@@ -216,11 +210,10 @@ export const deleteUsersWord =
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(data);
+
         dispatch({ type: DELETE_USERS_WORDS + SUCCESS, wordId });
       } catch (err: unknown) {
         if (err instanceof Error) {
-          console.log(err);
           // dispatch({ type: LOAD_USERS_WORDS + FAILURE, error: err.message });
         }
       }
