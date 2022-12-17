@@ -15,6 +15,7 @@ const getSprintGameAnswerFromStep = (
 const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
   const [isTrueClick, setIsTrueClick] = useState<null | boolean>(null);
   const [didAnswer, setDidAnswer] = useState<boolean>(false);
+  // заменить на enum
   const [isCorrectAnswerSelected, setIsCorrectAnswerSelected] = useState<null | boolean>(null);
   const [answers, setAnswers] = useState<SprintGameAnswer[]>([]);
 

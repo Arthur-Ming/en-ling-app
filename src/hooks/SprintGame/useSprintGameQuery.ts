@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { GROUP_SHIFT } from '../../constants';
 import { apiRoutes } from '../../utils/apiRoutes';
 import useFetch from '../useFetch';
