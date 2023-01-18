@@ -21,7 +21,7 @@ type Props = StateProps & DispatchProps;
 
 const AuthLink = ({ userName, signOut, isAuth, getUserById }: Props) => {
   useEffect(() => {
-    getUserById();
+    /*  getUserById(); */
   }, [getUserById]);
 
   if (isAuth)
