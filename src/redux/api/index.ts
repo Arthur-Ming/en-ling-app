@@ -12,15 +12,19 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     loadWords: builder.query<ITextbookWord[], ILoadWordsParams>({
-      query: ({ page, group }) => ({
-        url: `/words`,
-        params: {
-          page,
-          group,
-        },
-      }),
+      query: ({ page, group }) => {
+        console.log('call');
+        return {
+          url: `/words`,
+          params: {
+            page,
+            group,
+          },
+        };
+      },
     }),
   }),
 });
 
 export const { useLoadWordsQuery } = api;
+export const { useQueryState: useLoadWordsQueryState } = api.endpoints.loadWords;

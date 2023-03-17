@@ -7,7 +7,7 @@ import styles from './textbook-groups-pagination.module.scss';
 const textbookGroups = Array.from(Array(GROUP_COUNT), (_, index) => index + 1);
 
 const TextbookGroupsPagination = () => {
-  const { page, group: currentGroup } = useParams();
+  const { page = 1, group: currentGroup } = useParams(); // fix: page from localStor
   const navigate = useNavigate();
   const isHardWords = useMatch('textbook/hard-words');
   const handleGroupClick = (group: number) => {

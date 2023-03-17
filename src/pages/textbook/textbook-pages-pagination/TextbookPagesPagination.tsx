@@ -13,6 +13,7 @@ import { RootState } from '../../../redux/store';
 import classNames from 'classnames';
 import { PAGE_COUNT, PAGE_SHIFT } from '../../../constants';
 import clientRoutes from '../../../utils/clientRoutes';
+import { useLoadWordsQueryState } from '../../../redux/api';
 
 type StateProps = {
   isWordsloading: boolean;
@@ -24,6 +25,14 @@ type Props = StateProps;
 
 const TextbookPagesPagination = ({ isWordsloading, defaultPage, defaultGroup }: Props) => {
   const { page: currentPage = defaultPage, group = defaultGroup } = useParams();
+
+  const { isFetching } = useLoadWordsQueryState({
+    page: Number(currentPage) - 1,
+    group: Number(group) - 1,
+  });
+
+  console.log(isFetching);
+
   const isHardWords = useMatch('textbook/hard-words');
   const navigate = useNavigate();
   const handlePageClick = ({ selected }: { selected: number }) => {
@@ -33,7 +42,7 @@ const TextbookPagesPagination = ({ isWordsloading, defaultPage, defaultGroup }: 
   return (
     <div
       className={classNames(styles.root, {
-        [styles.loading]: isWordsloading,
+        [styles.loading]: isFetching,
         [styles.hidden]: isHardWords,
       })}
     >

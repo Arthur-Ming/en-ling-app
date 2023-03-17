@@ -17,26 +17,26 @@ type DispatchProps = {
 type Props = DispatchProps;
 
 const Textbook = ({ getUsersWords }: Props) => {
-  const { page, group } = useTextbookPageParams();
+  /*  const { page, group } = useTextbookPageParams(); */
 
-  useEffect(() => {
+  /*  useEffect(() => {
     getUsersWords();
-  }, [getUsersWords]);
+  }, [getUsersWords]); */
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const syncTextbookParamsToStorage = () => {
       localStorage.setItem('page', String(page));
       localStorage.setItem('group', String(group));
     };
     syncTextbookParamsToStorage();
-  }, [page, group]);
+  }, [page, group]); */
 
-  const match = useMatch(clientRoutes.textbook.words.absolute());
+  /*  const match = useMatch(clientRoutes.textbook.words.absolute());
   const match2 = useMatch('textbook/hard-words');
 
   if (!match && !match2) {
     return <Navigate to={clientRoutes.textbook.words.absolute(page, group)} replace />;
-  }
+  } */
 
   return (
     <main className={styles.root}>

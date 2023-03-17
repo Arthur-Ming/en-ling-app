@@ -7,7 +7,14 @@ import { useLoadWordsQuery } from '../../../redux/api';
 
 const TextbookWords = () => {
   const { page, group } = useParams();
-  const { isLoading, isFetching, data: words } = useLoadWordsQuery({ page, group });
+  const {
+    isLoading,
+    isFetching,
+    data: words,
+  } = useLoadWordsQuery({
+    page: Number(page) - 1,
+    group: Number(group) - 1,
+  });
 
   if (isLoading || isFetching) return <Loader />;
 
