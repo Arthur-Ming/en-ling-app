@@ -8,10 +8,11 @@ import {
   userWordsLoadedSelector,
   userWordsLoadingSelector,
 } from '../../../redux/selectors/userWords';
-import TextbookWord from '../textbook-word';
+
 import TextbookHardWordsControl from './textbook-hard-words-control';
 import styles from '../textbook.module.scss';
 import Loader from '../../../components/loader';
+import WordTicket from '../WordTicket';
 
 type StateProps = {
   loading: boolean;
@@ -26,9 +27,7 @@ const TextbookHardWords = ({ words, loading }: Props) => {
   return (
     <div className={styles.words_box}>
       {words.map((word) => (
-        <TextbookWord key={word.id} word={word}>
-          <TextbookHardWordsControl wordId={word.id} />
-        </TextbookWord>
+        <WordTicket key={word.id} word={word} />
       ))}
     </div>
   );

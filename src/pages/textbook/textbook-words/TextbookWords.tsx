@@ -1,9 +1,8 @@
-import TextbookWord from '../textbook-word';
 import styles from '../textbook.module.scss';
 import { useParams } from 'react-router';
 import Loader from '../../../components/loader';
-import TextbookWordControl from './textbook-word-control';
 import { useLoadWordsQuery } from '../../../redux/api';
+import WordTicket from '../WordTicket';
 
 const TextbookWords = () => {
   const { page, group } = useParams();
@@ -20,12 +19,7 @@ const TextbookWords = () => {
 
   return (
     <div className={styles.words_box}>
-      {words &&
-        words.map((word) => (
-          <TextbookWord key={word.id} word={word}>
-            <TextbookWordControl wordId={word.id} />
-          </TextbookWord>
-        ))}
+      {words && words.map((word) => <WordTicket key={word.id} word={word} />)}
     </div>
   );
 };

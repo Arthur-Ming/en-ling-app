@@ -22,7 +22,7 @@ export const wordAudioStart =
 export const textbookWordFullAudioStart =
   (wordId: string) => async (dispatch: Dispatch<IAudioAction>, getState: () => RootState) => {
     const state = getState();
-
+    console.log('!!!');
     const word = textbookWordByIdSelector(state, wordId) || userWordsByIdSelector(state, wordId);
     if (!word) return;
     const { audio, audioMeaning, audioExample } = word;
