@@ -4,19 +4,8 @@ import TextbookHeader from './TextbookHeader';
 import TextbookFooter from './TextbookFooter';
 import { Navigate, Outlet, Route, Routes, useMatch, useNavigate } from 'react-router';
 import ArrowButton from './ArrowButton';
-import useTextbookPageParams from '../../hooks/useTextbookPageParams';
-import { useEffect } from 'react';
-import clientRoutes from '../../utils/clientRoutes';
-import { connect } from 'react-redux';
-import { getUsersWords } from '../../redux/actions/userWords';
 
-type DispatchProps = {
-  getUsersWords: () => void;
-};
-
-type Props = DispatchProps;
-
-const Textbook = ({ getUsersWords }: Props) => {
+const Textbook = () => {
   /*  const { page, group } = useTextbookPageParams(); */
 
   /*  useEffect(() => {
@@ -52,8 +41,4 @@ const Textbook = ({ getUsersWords }: Props) => {
   );
 };
 
-const mapDispatchToProps = {
-  getUsersWords,
-};
-
-export default connect(null, mapDispatchToProps)(Textbook);
+export default Textbook;

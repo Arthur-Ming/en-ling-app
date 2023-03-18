@@ -13,7 +13,7 @@ import { RootState } from '../../../redux/store';
 import classNames from 'classnames';
 import { PAGE_COUNT, PAGE_SHIFT } from '../../../constants';
 import clientRoutes from '../../../utils/clientRoutes';
-import { useLoadWordsQueryState } from '../../../redux/api';
+import { useLoadWordsQueryState } from '../../../redux/api/words';
 
 type StateProps = {
   isWordsloading: boolean;
