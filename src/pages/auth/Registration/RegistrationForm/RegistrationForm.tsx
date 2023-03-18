@@ -1,16 +1,16 @@
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
-import { ILoginBody } from '../../../../interfaces';
+import { IRegistrationBody } from '../../../../interfaces';
 import styles from './index.module.scss';
 
-type Inputs = ILoginBody;
+type Inputs = IRegistrationBody;
 
 type Props = {
-  onSubmit: (body: ILoginBody) => void;
+  onSubmit: (body: IRegistrationBody) => void;
   isLoading: boolean;
 };
 
-const LoginForm = ({ isLoading, onSubmit }: Props) => {
+const RegistrationForm = ({ isLoading, onSubmit }: Props) => {
   const {
     register,
     handleSubmit,
@@ -33,6 +33,20 @@ const LoginForm = ({ isLoading, onSubmit }: Props) => {
           })}
         />
         {errors.email && <span className={styles.invalid_text}>{errors.email.message}</span>}
+      </label>
+      <label className={styles.label}>
+        <span>Имя</span>
+        <input
+          type="text"
+          placeholder="name"
+          className={classNames(styles.input, {
+            [styles.invalid]: errors.name,
+          })}
+          {...register('name', {
+            required: 'this field is required!',
+          })}
+        />
+        {errors.name && <span className={styles.invalid_text}>{errors.name.message}</span>}
       </label>
       <label className={styles.label}>
         <span>Пароль</span>
@@ -65,4 +79,4 @@ const LoginForm = ({ isLoading, onSubmit }: Props) => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

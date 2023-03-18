@@ -110,6 +110,12 @@ export interface ILoginBody {
   password: string;
 }
 
+export interface IRegistrationBody {
+  email: string;
+  name: string;
+  password: string;
+}
+
 export interface ISuccessfulLogin {
   message: string;
   token: string;
