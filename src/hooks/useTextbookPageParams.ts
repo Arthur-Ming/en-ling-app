@@ -1,10 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { textbookGroupSelector, textbookPageSelector } from '../redux/selectors/textbook';
 
 const useTextbookPageParams = () => {
-  const defaultPage = useSelector(textbookPageSelector);
-  const defaultGroup = useSelector(textbookGroupSelector);
+  const defaultPage = 1;
+  const defaultGroup = 1;
 
   const { page = null, group = null } = useParams();
 

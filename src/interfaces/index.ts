@@ -105,10 +105,10 @@ type PointsForCorrectAnswer = 10 | 20;
 type PointsForWrongAnswer = -10 | -20;
 export type SprintGamePoints = DefaultPoints | PointsForCorrectAnswer | PointsForWrongAnswer;
 
-export type SignInType = {
+export interface ILoginBody {
   email: string;
   password: string;
-};
+}
 
 export interface ISuccessfulLogin {
   message: string;

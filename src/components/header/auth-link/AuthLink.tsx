@@ -5,24 +5,18 @@ import { connect } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { userIsAuthSelector, userNameSelector } from '../../../redux/selectors/user';
 import { useEffect } from 'react';
-import { getUserById, signOut } from '../../../redux/actions/user';
 
 type StateProps = {
   userName: string | null;
   isAuth: boolean;
 };
 
-type DispatchProps = {
-  getUserById: () => void;
-  signOut: () => void;
-};
+type Props = StateProps;
 
-type Props = StateProps & DispatchProps;
-
-const AuthLink = ({ userName, signOut, isAuth, getUserById }: Props) => {
+const AuthLink = ({ userName, isAuth }: Props) => {
   if (isAuth)
     return (
-      <span className={styles.box} onClick={signOut}>
+      <span className={styles.box}>
         {userName && <span>{userName}</span>}
         <UserIcon className={styles.icon} />
       </span>
@@ -42,9 +36,4 @@ const mapStateToProps = (state: RootState) => ({
   isAuth: userIsAuthSelector(state),
 });
 
-const mapDispatchToProps = {
-  getUserById,
-  signOut,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthLink);
+export default connect(mapStateToProps)(AuthLink);

@@ -1,4 +1,6 @@
-import { IUser } from '../../interfaces';
+import Cookies from 'js-cookie';
+import { IUser, ILoginBody } from '../../interfaces';
+import { login } from '../reducer/session';
 import { api } from './';
 
 class AppError extends Error {
@@ -19,7 +21,7 @@ const tokenExpire = 0.5;
 
 const usersApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    loginUser: builder.mutation({
+    loginUser: builder.mutation<IUser, ILoginBody>({
       query: (body) => {
         console.log(body);
         return {
@@ -28,21 +30,19 @@ const usersApi = api.injectEndpoints({
           body,
         };
       },
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const { data } = await queryFulfilled;
           console.log(data);
-          /*     const { token, name, id } = data;
+          const { token, name, id, email } = data;
           Cookies.set('token', token, {
             expires: tokenExpire,
           });
           Cookies.set('userId', id, {
             expires: tokenExpire,
-          }); */
-        } catch (error) {
-          console.log('!!!');
-          console.error(error);
-        }
+          });
+          dispatch(login({ name, email }));
+        } catch (error) {}
       },
     }),
     registerUser: builder.mutation({

@@ -3,7 +3,7 @@ import { apiRoutes } from '../../utils/apiRoutes';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { IAudioAction } from '../../interfaces';
-import { textbookWordByIdSelector } from '../selectors/textbook';
+
 import audioPlayer from '../../utils/audioPlayer';
 import { userWordsByIdSelector } from '../selectors/userWords';
 
@@ -18,7 +18,7 @@ export const wordAudioStart =
       dispatch({ type: AUDIO + STOP });
     }
   };
-
+/* 
 export const textbookWordFullAudioStart =
   (wordId: string) => async (dispatch: Dispatch<IAudioAction>, getState: () => RootState) => {
     const state = getState();
@@ -41,7 +41,7 @@ export const textbookWordFullAudioStart =
     } finally {
       dispatch({ type: AUDIO + STOP });
     }
-  };
+  }; */
 
 export const audioStop = () => (dispatch: Dispatch<AnyAction>) => {
   audioPlayer.stop();
