@@ -17,6 +17,13 @@ export interface ITextbookWord {
 
 export type DifficultyUserWord = 'easy' | 'hard' | null;
 
+export interface IUser {
+  name: string;
+  id: string;
+  token: string;
+  email: string;
+}
+
 export interface ITextbookUserWord {
   difficulty: DifficultyUserWord;
   optional?: unknown;

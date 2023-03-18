@@ -20,10 +20,6 @@ type DispatchProps = {
 type Props = StateProps & DispatchProps;
 
 const AuthLink = ({ userName, signOut, isAuth, getUserById }: Props) => {
-  useEffect(() => {
-    /*  getUserById(); */
-  }, [getUserById]);
-
   if (isAuth)
     return (
       <span className={styles.box} onClick={signOut}>
@@ -33,7 +29,7 @@ const AuthLink = ({ userName, signOut, isAuth, getUserById }: Props) => {
     );
 
   return (
-    <NavLink to={`auth/sign-in`} className={styles.box}>
+    <NavLink to={`/login`} className={styles.box}>
       {userName && <span>{userName}</span>}
       <span className={styles.text}>войти</span>
       <UserIcon className={styles.icon} />

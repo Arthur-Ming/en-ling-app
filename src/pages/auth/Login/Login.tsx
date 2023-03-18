@@ -1,26 +1,23 @@
 import classNames from 'classnames';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
-import styles from '../auth.module.scss';
+import { SignInType } from '../../../interfaces';
+import { useLoginUserMutation } from '../../../redux/api/users';
+import AuthLayout from '../AuthLayout';
+import styles from '../index.module.scss';
 
-type Inputs = {
-  email: string;
-  name: string;
-  password: string;
-};
+type Inputs = SignInType;
 
-const SignUp = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ mode: 'onBlur' });
+  const [login, { isLoading }] = useLoginUserMutation();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-  };
   return (
-    <>
+    <AuthLayout>
       <form className={styles.form}>
         <label className={styles.label}>
           <span>Email</span>
@@ -37,20 +34,6 @@ const SignUp = () => {
             })}
           />
           {errors.email && <span className={styles.invalid_text}>{errors.email.message}</span>}
-        </label>
-        <label className={styles.label}>
-          <span>Имя</span>
-          <input
-            type="text"
-            placeholder="name"
-            className={classNames(styles.input, {
-              [styles.invalid]: errors.name,
-            })}
-            {...register('name', {
-              required: 'this field is required!',
-            })}
-          />
-          {errors.name && <span className={styles.invalid_text}>{errors.name.message}</span>}
         </label>
         <label className={styles.label}>
           <span>Пароль</span>
@@ -74,19 +57,20 @@ const SignUp = () => {
         </label>
         <input
           className={styles.button}
-          onClick={handleSubmit(onSubmit)}
+          onClick={handleSubmit(login)}
           type="submit"
           value="Войти"
+          disabled={isLoading}
         />
       </form>
       <div className={styles.text}>
-        <span>Уже есть аккаунт?</span>
-        <NavLink className={styles.link} to="/auth/sign-in">
-          Войдите
+        <span>Нет аккаунта?</span>
+        <NavLink className={styles.link} to="/registration">
+          Зарегистрируйтесь
         </NavLink>
       </div>
-    </>
+    </AuthLayout>
   );
 };
 
-export default SignUp;
+export default Login;

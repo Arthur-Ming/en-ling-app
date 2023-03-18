@@ -1,35 +1,30 @@
 import classNames from 'classnames';
-import { useForm } from 'react-hook-form';
-import { connect } from 'react-redux';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
-import { SignInType } from '../../../interfaces';
-import { signIn } from '../../../redux/actions/user';
-import { userIsAuthSelector, userLoadingSelector } from '../../../redux/selectors/user';
-import { RootState } from '../../../redux/store';
-import styles from '../auth.module.scss';
+import { useRegisterUserMutation } from '../../../redux/api/users';
+import AuthLayout from '../AuthLayout';
+import styles from '../index.module.scss';
 
-type StateProps = {
-  loading: boolean;
-  isAuth: boolean;
+type Inputs = {
+  email: string;
+  name: string;
+  password: string;
 };
 
-type DispatchProps = {
-  signIn: (requestBody: SignInType) => void;
-};
-
-type Props = StateProps & DispatchProps;
-
-type Inputs = SignInType;
-
-const SignIn = ({ loading, signIn }: Props) => {
+const Registration = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ mode: 'onBlur' });
+  const [signUp] = useRegisterUserMutation();
 
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    signUp(data);
+  };
   return (
-    <>
+    <AuthLayout>
       <form className={styles.form}>
         <label className={styles.label}>
           <span>Email</span>
@@ -46,6 +41,20 @@ const SignIn = ({ loading, signIn }: Props) => {
             })}
           />
           {errors.email && <span className={styles.invalid_text}>{errors.email.message}</span>}
+        </label>
+        <label className={styles.label}>
+          <span>Имя</span>
+          <input
+            type="text"
+            placeholder="name"
+            className={classNames(styles.input, {
+              [styles.invalid]: errors.name,
+            })}
+            {...register('name', {
+              required: 'this field is required!',
+            })}
+          />
+          {errors.name && <span className={styles.invalid_text}>{errors.name.message}</span>}
         </label>
         <label className={styles.label}>
           <span>Пароль</span>
@@ -69,29 +78,19 @@ const SignIn = ({ loading, signIn }: Props) => {
         </label>
         <input
           className={styles.button}
-          onClick={handleSubmit(signIn)}
+          onClick={handleSubmit(onSubmit)}
           type="submit"
           value="Войти"
-          disabled={loading}
         />
       </form>
       <div className={styles.text}>
-        <span>Нет аккаунта?</span>
-        <NavLink className={styles.link} to="/auth/sign-up">
-          Зарегистрируйтесь
+        <span>Уже есть аккаунт?</span>
+        <NavLink className={styles.link} to="/login">
+          Войдите
         </NavLink>
       </div>
-    </>
+    </AuthLayout>
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  loading: userLoadingSelector(state),
-  isAuth: userIsAuthSelector(state),
-});
-
-const mapDispatchToProps = {
-  signIn,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default Registration;

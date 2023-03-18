@@ -20,7 +20,7 @@ interface DispatchProps {
 
 type Props = OwnProps & DispatchProps & StateProps;
 
-const TextbookWordAudioButton = (props: Props) => <AudioButton {...props} />;
+const WordTicketAudio = (props: Props) => <AudioButton {...props} />;
 
 const mapStateToProps = (state: RootState, { id }: OwnProps) => ({
   isCurrentAudio: currentAudioWordIdSelector(state) === id,
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch: AppDispatch, { id, audio }: OwnProps) => (
   onAudioStop: () => dispatch(audioStop()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextbookWordAudioButton);
+export default connect(mapStateToProps, mapDispatchToProps)(WordTicketAudio);

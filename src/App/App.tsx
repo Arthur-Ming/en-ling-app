@@ -11,12 +11,13 @@ import Sprint from '../pages/sprint';
 import AudioCall from '../pages/audio-call';
 import SprintGame from '../pages/sprint/sprint-game';
 import AudioCallGame from '../pages/audio-call/audio-call-game';
-import SignIn from '../pages/auth/sign-in';
-import SignUp from '../pages/auth/sign-up';
+import SignUp from '../pages/auth/Registration';
 import Auth from '../pages/auth';
 import ProtectedRoute from './ProtectedRoute';
 import Statistics from '../pages/statistics';
 import TextbookHardWords from '../pages/textbook/textbook-hard-words';
+import Login from '../pages/auth/Login';
+import Registration from '../pages/auth/Registration';
 
 const App = () => (
   <Router>
@@ -24,10 +25,9 @@ const App = () => (
       <Header />
       <Routes>
         <Route path={clientRoutes.main()} element={<Main />} />
-        <Route path="/auth/*" element={<Auth />}>
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUp />} />
-        </Route>
+        <Route path="login" element={<Login />} />
+        <Route path="registration" element={<Registration />} />
+
         <Route path={`${clientRoutes.textbook.absolute()}/*`} element={<Textbook />}>
           <Route path={clientRoutes.textbook.words.relative()} element={<TextbookWords />} />
           <Route path="hard-words" element={<TextbookHardWords />} />

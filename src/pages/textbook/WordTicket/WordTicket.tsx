@@ -5,6 +5,7 @@ import styles from './index.module.scss';
 import { ReactComponent as LabelIcon } from './label.svg';
 import { AiFillFire } from 'react-icons/ai';
 import WordTicketAudio from './WordTicketAudio';
+
 //AiFillFire
 
 type Props = {
