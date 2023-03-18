@@ -1,5 +1,5 @@
 import ReactPaginate from 'react-paginate';
-import styles from './textbook-pagination.module.scss';
+import styles from './index.module.scss';
 import { ReactComponent as ArrowPrev } from './arrow-prev.svg';
 import { ReactComponent as ArrowNext } from './arrow-next.svg';
 import { connect } from 'react-redux';

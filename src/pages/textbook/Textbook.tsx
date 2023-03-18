@@ -1,9 +1,9 @@
-import TextbookSidebar from './textbook-sidebar';
+import TextbookSidebar from './TextbookSidebar';
 import styles from './textbook.module.scss';
-import TextbookHeader from './textbook-header';
-import TextbookFooter from './textbook-footer';
+import TextbookHeader from './TextbookHeader';
+import TextbookFooter from './TextbookFooter';
 import { Navigate, Outlet, Route, Routes, useMatch, useNavigate } from 'react-router';
-import ArrowButton from './arrow-button';
+import ArrowButton from './ArrowButton';
 import useTextbookPageParams from '../../hooks/useTextbookPageParams';
 import { useEffect } from 'react';
 import clientRoutes from '../../utils/clientRoutes';

@@ -4,7 +4,7 @@ import Footer from '../components/footer';
 import Header from '../components/header';
 import Main from '../pages/main';
 import Textbook from '../pages/textbook';
-import TextbookWords from '../pages/textbook/textbook-words';
+import TextbookWords from '../pages/textbook/TextbookWords';
 import clientRoutes from '../utils/clientRoutes';
 import Games from '../pages/games';
 import Sprint from '../pages/sprint';

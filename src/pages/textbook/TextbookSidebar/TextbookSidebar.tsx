@@ -1,5 +1,5 @@
 import TextbookGroupsPagination from '../textbook-groups-pagination';
-import styles from './textbook-sidebar.module.scss';
+import styles from './index.module.scss';
 
 const TextbookSidebar = () => (
   <aside className={styles.root}>

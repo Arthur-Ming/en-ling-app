@@ -1,5 +1,5 @@
-import TextbookPagesPagination from '../textbook-pages-pagination';
-import styles from './textbook-header.module.scss';
+import TextbookPagesPagination from '../TextbookPagesPagination';
+import styles from './index.module.scss';
 
 const TextbookHeader = () => (
   <div className={styles.root}>

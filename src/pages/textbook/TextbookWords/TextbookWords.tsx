@@ -1,8 +1,8 @@
-import styles from '../textbook.module.scss';
 import { useParams } from 'react-router';
 import Loader from '../../../components/loader';
 import { useLoadWordsQuery } from '../../../redux/api';
 import WordTicket from '../WordTicket';
+import styles from './index.module.scss';
 
 const TextbookWords = () => {
   const { page, group } = useParams();

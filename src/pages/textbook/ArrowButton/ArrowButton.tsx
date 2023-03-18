@@ -1,6 +1,6 @@
 import { ReactComponent as ArrowPrevIcon } from './arrow-prev.svg';
 import { ReactComponent as ArrowNextIcon } from './arrow-next.svg';
-import styles from './arrow-button.module.scss';
+import styles from './index.module.scss';
 import classNames from 'classnames';
 import { useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
