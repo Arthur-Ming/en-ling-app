@@ -5,7 +5,7 @@ import { currentAudioWordIdSelector } from '../../../../redux/selectors/audio';
 import { AppDispatch, RootState } from '../../../../redux/store';
 
 interface OwnProps {
-  id: string;
+  wordId: string;
   audio: string;
 }
 
@@ -22,12 +22,12 @@ type Props = OwnProps & DispatchProps & StateProps;
 
 const WordTicketAudio = (props: Props) => <AudioButton {...props} />;
 
-const mapStateToProps = (state: RootState, { id }: OwnProps) => ({
-  isCurrentAudio: currentAudioWordIdSelector(state) === id,
+const mapStateToProps = (state: RootState, { wordId }: OwnProps) => ({
+  isCurrentAudio: currentAudioWordIdSelector(state) === wordId,
 });
 
-const mapDispatchToProps = (dispatch: AppDispatch, { id, audio }: OwnProps) => ({
-  onAudioStart: () => dispatch(wordAudioStart(id, audio)),
+const mapDispatchToProps = (dispatch: AppDispatch, { wordId, audio }: OwnProps) => ({
+  onAudioStart: () => dispatch(wordAudioStart(wordId, audio)),
   onAudioStop: () => dispatch(audioStop()),
 });
 

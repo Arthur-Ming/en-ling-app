@@ -2,8 +2,11 @@ import TextbookSidebar from './TextbookSidebar';
 import styles from './textbook.module.scss';
 import TextbookHeader from './TextbookHeader';
 import TextbookFooter from './TextbookFooter';
-import { Navigate, Outlet, Route, Routes, useMatch, useNavigate } from 'react-router';
+import { Navigate, Outlet, Route, Routes, useMatch, useNavigate, useParams } from 'react-router';
 import ArrowButton from './ArrowButton';
+import { useLoadUserWordsQuery } from '../../redux/api/userWords';
+import Word from './Word';
+import { isNonNullExpression } from 'typescript';
 
 const Textbook = () => {
   /*  const { page, group } = useTextbookPageParams(); */
@@ -26,6 +29,8 @@ const Textbook = () => {
   if (!match && !match2) {
     return <Navigate to={clientRoutes.textbook.words.absolute(page, group)} replace />;
   } */
+  const { page, group, wordId } = useParams();
+  const { data } = useLoadUserWordsQuery(null);
 
   return (
     <main className={styles.root}>

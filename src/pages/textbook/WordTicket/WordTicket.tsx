@@ -5,6 +5,8 @@ import styles from './index.module.scss';
 import { ReactComponent as LabelIcon } from './label.svg';
 import { AiFillFire } from 'react-icons/ai';
 import WordTicketAudio from './WordTicketAudio';
+import WordChosen from './WordChosen';
+import { useNavigate } from 'react-router';
 
 //AiFillFire
 
@@ -14,7 +16,7 @@ type Props = {
 
 const WordTicket = ({ word }: Props) => {
   const {
-    id,
+    id: wordId,
     word: wordText,
     image,
     transcription,
@@ -28,9 +30,10 @@ const WordTicket = ({ word }: Props) => {
     audioExample,
     group,
   } = word;
-  console.log(audio);
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.box}>
+    <div className={styles.box} onClick={() => navigate(wordId)}>
       <div className={styles.info}>
         <div className={styles.image}>
           <img src={apiRoutes.files(image)} alt={wordText} />
@@ -39,8 +42,8 @@ const WordTicket = ({ word }: Props) => {
       </div>
 
       <div className={styles.buttons}>
-        <AiFillFire className={styles.icon} />
-        <WordTicketAudio id={id} audio={audio} />
+        <WordChosen word={word} />
+        <WordTicketAudio wordId={wordId} audio={audio} />
       </div>
       <LabelIcon className={styles.label} />
     </div>

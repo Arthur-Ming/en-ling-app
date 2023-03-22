@@ -15,7 +15,7 @@ const TextbookGroupsPagination = () => {
   };
 
   const handleHardWords = () => {
-    navigate('hard-words');
+    navigate('user-words');
   };
 
   return (

@@ -15,6 +15,12 @@ export interface ITextbookWord {
   wordTranslate: string;
 }
 
+export interface IUserWords {
+  id: string;
+  userId: string;
+  words: ITextbookWord[];
+}
+
 export type DifficultyUserWord = 'easy' | 'hard' | null;
 
 export interface IUser {

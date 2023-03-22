@@ -23,7 +23,6 @@ const usersApi = api.injectEndpoints({
   endpoints: (builder) => ({
     loginUser: builder.mutation<IUser, ILoginBody>({
       query: (body) => {
-        console.log(body);
         return {
           url: `/users/login`,
           method: 'POST',
@@ -33,7 +32,6 @@ const usersApi = api.injectEndpoints({
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const { data } = await queryFulfilled;
-          console.log(data);
           const { token, name, id, email } = data;
           Cookies.set('token', token, {
             expires: tokenExpire,
@@ -55,11 +53,8 @@ const usersApi = api.injectEndpoints({
       },
       async onQueryStarted(_, { queryFulfilled }) {
         try {
-          const { data } = await queryFulfilled;
-          console.log(data);
-        } catch (error) {
-          console.log(error);
-        }
+          await queryFulfilled;
+        } catch (error) {}
       },
     }),
   }),

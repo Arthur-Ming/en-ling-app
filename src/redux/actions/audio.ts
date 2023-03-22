@@ -5,7 +5,6 @@ import { RootState } from '../store';
 import { IAudioAction } from '../../interfaces';
 
 import audioPlayer from '../../utils/audioPlayer';
-import { userWordsByIdSelector } from '../selectors/userWords';
 
 export const wordAudioStart =
   (wordId: string, audio: string) => async (dispatch: Dispatch<IAudioAction>) => {

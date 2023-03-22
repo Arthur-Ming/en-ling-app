@@ -17,6 +17,8 @@ import Statistics from '../pages/statistics';
 
 import Login from '../pages/Auth/Login';
 import Registration from '../pages/Auth/Registration';
+import UserWords from '../pages/textbook/UserWords';
+import Word from '../pages/textbook/Word';
 
 const App = () => (
   <Router>
@@ -27,7 +29,12 @@ const App = () => (
         <Route path="login" element={<Login />} />
         <Route path="registration" element={<Registration />} />
         <Route path={`${clientRoutes.textbook.absolute()}/*`} element={<Textbook />}>
-          <Route path={clientRoutes.textbook.words.relative()} element={<TextbookWords />} />
+          <Route path={`${clientRoutes.textbook.words.relative()}/*`} element={<TextbookWords />}>
+            <Route path={`:wordId`} element={<Word />} />
+          </Route>
+          <Route path={`user-words`} element={<UserWords />}>
+            <Route path={`:wordId`} element={<Word />} />
+          </Route>
         </Route>
         <Route path={`${clientRoutes.games.absolute()}/*`} element={<Games />}>
           <Route path={`${clientRoutes.sprint.relative()}/*`} element={<Sprint />}>

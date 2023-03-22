@@ -24,7 +24,13 @@ const AudioButton = ({
       <MuteIcon className={muteClass} />
     </button>
   ) : (
-    <button className={buttonClass} onClick={onAudioStart}>
+    <button
+      className={buttonClass}
+      onClick={(e) => {
+        e.stopPropagation();
+        onAudioStart && onAudioStart();
+      }}
+    >
       <AudioIcon className={audioClass} />
     </button>
   );
