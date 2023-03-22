@@ -1,7 +1,7 @@
 import { SprintGameAnswer } from '../../../../../interfaces';
 import styles from './../sprint-game-result.module.scss';
 import { currentAudioWordIdSelector } from '../../../../../redux/selectors/audio';
-import { audioStop, wordAudioStart } from '../../../../../redux/actions/audio';
+import { wordAudioStop, wordAudioPlay } from '../../../../../redux/actions/audio';
 import { AppDispatch, RootState } from '../../../../../redux/store';
 import { connect } from 'react-redux';
 import AudioButton from '../../../../../components/audio-button';
@@ -50,8 +50,8 @@ const mapStateToProps = (state: RootState, { answer }: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch, { answer }: OwnProps) => ({
-  onAudioStart: () => dispatch(wordAudioStart(answer.id, answer.audio)),
-  onAudioStop: () => dispatch(audioStop()),
+  onAudioStart: () => dispatch(wordAudioPlay(answer.id, answer.audio)),
+  onAudioStop: () => dispatch(wordAudioStop()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SprintGameResultItem);

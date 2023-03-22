@@ -86,7 +86,7 @@ export interface ITextbookUserWordAction extends IAction {
   data?: IPaginatedResult[] | null;
 }
 
-export interface IAudioAction extends IAction {
+export interface IAudioAction {
   error?: null | unknown;
   path?: string | null;
   wordId?: string | null;

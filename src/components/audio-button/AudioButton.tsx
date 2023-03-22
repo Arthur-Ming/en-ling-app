@@ -1,6 +1,6 @@
 import { ReactComponent as AudioIcon } from '../../svg/audio.svg';
 import { ReactComponent as MuteIcon } from '../../svg/mute.svg';
-import styles from './audio-button.module.scss';
+import styles from './index.module.scss';
 
 type Props = {
   isCurrentAudio: boolean;
@@ -20,7 +20,13 @@ const AudioButton = ({
   buttonClass = styles.button,
 }: Props) => {
   return isCurrentAudio ? (
-    <button className={buttonClass} onClick={onAudioStop}>
+    <button
+      className={buttonClass}
+      onClick={(e) => {
+        e.stopPropagation();
+        onAudioStop && onAudioStop();
+      }}
+    >
       <MuteIcon className={muteClass} />
     </button>
   ) : (

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { AiFillFire } from 'react-icons/ai';
 import { connect, TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { ITextbookWord } from '../../../../interfaces';
-import { wordAudioStart } from '../../../../redux/actions/audio';
 import { useAddUserWordMutation, useRemoveUserWordMutation } from '../../../../redux/api/userWords';
 import { userWordsByIdSelector } from '../../../../redux/selectors/userWords';
 import { AppDispatch, RootState } from '../../../../redux/store';

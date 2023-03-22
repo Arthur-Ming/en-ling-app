@@ -1,6 +1,8 @@
 import { ITextbookWord } from '../../../../interfaces';
 import { apiRoutes } from '../../../../utils/apiRoutes';
+import WordChosen from '../../WordTicket/WordChosen';
 import styles from './index.module.scss';
+import WordAudio from './WordAudio';
 import WordExample from './WordExample';
 import WordMeaning from './WordMeaning';
 import WordTranslate from './WordTranslate';
@@ -47,7 +49,15 @@ const WordContent = ({ word }: Props) => {
         textExampleTranslate={textExampleTranslate}
         audio={audioExample}
       />
-      <div></div>
+      <div>
+        <WordAudio
+          wordId={wordId}
+          audio={audio}
+          audioMeaning={audioMeaning}
+          audioExample={audioExample}
+        />
+        <WordChosen word={word} />
+      </div>
     </div>
   );
 };

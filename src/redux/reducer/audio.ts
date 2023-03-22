@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAudioAction } from '../../interfaces';
 import { AUDIO, FAILURE, START, STOP } from '../action-types';
 
@@ -14,7 +14,7 @@ const initialState: IAudioState = {
   wordId: null,
 };
 
-export default createReducer(initialState, (builder) => {
+/* export default createReducer(initialState, (builder) => {
   builder
     .addCase(AUDIO + START, (state, action) => {
       const { path = null, wordId = null } = <IAudioAction>action;
@@ -33,3 +33,30 @@ export default createReducer(initialState, (builder) => {
       state.error = error;
     });
 });
+ */
+
+const audioSlice = createSlice({
+  name: 'audio',
+  initialState,
+  reducers: {
+    audioStart(state, action: PayloadAction<IAudioAction>) {
+      const { path = null, wordId = null } = action.payload;
+      state.path = path;
+      state.wordId = wordId;
+      state.error = null;
+    },
+    audioStop(state) {
+      state.path = null;
+      state.wordId = null;
+    },
+    audioFailure(state, action: PayloadAction<IAudioAction>) {
+      const { error = 'error' } = action.payload;
+      state.path = null;
+      state.wordId = null;
+      state.error = error;
+    },
+  },
+});
+
+export const { audioStart, audioStop, audioFailure } = audioSlice.actions;
+export default audioSlice.reducer;
