@@ -18,12 +18,12 @@ const WordExample = ({ textExample, textExampleTranslate, isCurrentAudioPath }: 
   return (
     <div>
       <h4
-        className={classNames([styles.title], {
+        className={classNames([styles.subtitle], {
           [styles.active]: isCurrentAudioPath,
         })}
         dangerouslySetInnerHTML={{ __html: textExample }}
       ></h4>
-      <h4 className={styles.text}>{textExampleTranslate}</h4>
+      <h4 className={styles.subtitle}>{textExampleTranslate}</h4>
     </div>
   );
 };

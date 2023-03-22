@@ -6,6 +6,7 @@ import { RootState } from '../../../redux/store';
 import Word from '../Word';
 import WordTicket from '../WordTicket';
 import styles from './index.module.scss';
+import UserWord from './UserWord/UserWord';
 
 type StateProps = {
   userWords: ITextbookWord[];
@@ -22,7 +23,7 @@ const UserWords = ({ userWords }: Props) => {
           <WordTicket key={word.id} word={word} />
         ))}
       </div>
-      <Routes>{wordId && <Route path={`:wordId`} element={<Word />} />}</Routes>
+      <Routes>{wordId && <Route path={`:wordId`} element={<UserWord />} />}</Routes>
     </>
   );
 };

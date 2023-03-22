@@ -26,37 +26,40 @@ const WordContent = ({ word }: Props) => {
     audio,
     audioMeaning,
     audioExample,
-    group,
   } = word;
   return (
-    <div>
+    <div className={styles.box}>
       <div className={styles.image}>
         <img src={apiRoutes.files(image)} alt={wordText} />
       </div>
-      <WordTranslate
-        wordText={wordText}
-        transcription={transcription}
-        wordTranslate={wordTranslate}
-        audio={audio}
-      />
-      <WordMeaning
-        textMeaning={textMeaning}
-        textMeaningTranslate={textMeaningTranslate}
-        audio={audioMeaning}
-      />
-      <WordExample
-        textExample={textExample}
-        textExampleTranslate={textExampleTranslate}
-        audio={audioExample}
-      />
-      <div>
-        <WordAudio
-          wordId={wordId}
-          audio={audio}
-          audioMeaning={audioMeaning}
-          audioExample={audioExample}
-        />
-        <WordChosen word={word} />
+      <div className={styles.t}>
+        <div className={styles.text}>
+          <WordTranslate
+            wordText={wordText}
+            transcription={transcription}
+            wordTranslate={wordTranslate}
+            audio={audio}
+          />
+          <WordMeaning
+            textMeaning={textMeaning}
+            textMeaningTranslate={textMeaningTranslate}
+            audio={audioMeaning}
+          />
+          <WordExample
+            textExample={textExample}
+            textExampleTranslate={textExampleTranslate}
+            audio={audioExample}
+          />
+        </div>
+        <div className={styles.buttons}>
+          <WordAudio
+            wordId={wordId}
+            audio={audio}
+            audioMeaning={audioMeaning}
+            audioExample={audioExample}
+          />
+          <WordChosen word={word} />
+        </div>
       </div>
     </div>
   );

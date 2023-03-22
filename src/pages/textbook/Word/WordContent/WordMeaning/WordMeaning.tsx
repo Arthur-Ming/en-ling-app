@@ -18,12 +18,12 @@ const WordMeaning = ({ textMeaning, textMeaningTranslate, isCurrentAudioPath }: 
   return (
     <div>
       <h4
-        className={classNames([styles.title], {
+        className={classNames([styles.subtitle], {
           [styles.active]: isCurrentAudioPath,
         })}
         dangerouslySetInnerHTML={{ __html: textMeaning }}
       ></h4>
-      <h4 className={styles.text}>{textMeaningTranslate}</h4>
+      <h4 className={styles.subtitle}>{textMeaningTranslate}</h4>
     </div>
   );
 };

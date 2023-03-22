@@ -20,7 +20,7 @@ const TextbookWords = () => {
 
   return (
     <>
-      <div className={styles.words_box}>
+      <div className={styles.root}>
         {words && words.map((word) => <WordTicket key={word.id} word={word} />)}
       </div>
       <Routes>{wordId && <Route path={`:wordId`} element={<Word />} />}</Routes>

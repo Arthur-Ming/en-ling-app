@@ -1,3 +1,48 @@
+.box {
+  padding: 0;
+  display: flex;
+  column-gap: 20px;
+}
+
 .active {
   color: red;
+}
+.image {
+  display: flex;
+  justify-content: center;
+  img {
+    border-radius: 10px;
+  }
+}
+
+.title {
+  white-space: pre;
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+}
+
+.subtitle {
+  white-space: pre;
+  margin: 0;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4rem;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.t {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

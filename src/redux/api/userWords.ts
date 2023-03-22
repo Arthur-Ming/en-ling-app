@@ -68,3 +68,4 @@ const userWordsApi = api.injectEndpoints({
 
 export const { useLoadUserWordsQuery, useAddUserWordMutation, useRemoveUserWordMutation } =
   userWordsApi;
+export const { useQueryState: useLoadUserWordsQueryState } = userWordsApi.endpoints.loadUserWords;

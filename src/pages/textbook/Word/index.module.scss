@@ -1,15 +1,16 @@
 .wrapper {
   position: absolute;
-  top: 48px;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
-  width: 768px;
+  transform: translate(-50%, -50%);
+  min-width: 900px;
   padding: 20px;
-  background-color: white;
+  background-color: #212429;
   z-index: 999;
   transition: all 0.3s ease 0s;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
   border-radius: 3px;
+  color: #ffffff75;
 }
 
 .close-icon {

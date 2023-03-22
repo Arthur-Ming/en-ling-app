@@ -19,6 +19,7 @@ import Login from '../pages/Auth/Login';
 import Registration from '../pages/Auth/Registration';
 import UserWords from '../pages/textbook/UserWords';
 import Word from '../pages/textbook/Word';
+import UserWord from '../pages/textbook/UserWords/UserWord';
 
 const App = () => (
   <Router>
@@ -33,7 +34,7 @@ const App = () => (
             <Route path={`:wordId`} element={<Word />} />
           </Route>
           <Route path={`user-words`} element={<UserWords />}>
-            <Route path={`:wordId`} element={<Word />} />
+            <Route path={`:wordId`} element={<UserWord />} />
           </Route>
         </Route>
         <Route path={`${clientRoutes.games.absolute()}/*`} element={<Games />}>
