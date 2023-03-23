@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { Route, Routes, useParams } from 'react-router';
 import { ITextbookWord } from '../../../interfaces';
+import { useLoadUserWordsQueryState } from '../../../redux/api/userWords';
 import { userWordsListSelector } from '../../../redux/selectors/userWords';
 import { RootState } from '../../../redux/store';
 import Word from '../Word';
@@ -15,7 +16,6 @@ type StateProps = {
 type Props = StateProps;
 
 const UserWords = ({ userWords }: Props) => {
-  const { page, group, wordId } = useParams();
   return (
     <>
       <div className={styles.words_box}>
@@ -23,7 +23,7 @@ const UserWords = ({ userWords }: Props) => {
           <WordTicket key={word.id} word={word} />
         ))}
       </div>
-      <Routes>{wordId && <Route path={`:wordId`} element={<UserWord />} />}</Routes>
+      <Routes>{<Route path={`:wordId`} element={<UserWord />} />}</Routes>
     </>
   );
 };

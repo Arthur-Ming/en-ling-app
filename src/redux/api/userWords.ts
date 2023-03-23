@@ -1,16 +1,25 @@
-import Cookies from 'js-cookie';
-import { IUser, ILoginBody, IUserWords, ITextbookWord } from '../../interfaces';
+import { IUserWords, ITextbookWord } from '../../interfaces';
+import { arrToMap } from '../../utils/arrToMap';
 import { getUserId } from '../../utils/cookies';
-import { login } from '../reducer/session';
-import { addUserWord, addUserWords, removeUserWord } from '../reducer/userWords';
 import { api } from './';
 
 interface IUserWordsBody {
   wordId: string;
 }
 
-const userWordsApi = api.injectEndpoints({
+export const userWordsApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    loadUserWords: builder.query<{ [key: string]: ITextbookWord }, void>({
+      query: () => {
+        const userId = getUserId();
+        return {
+          url: `/users/${userId}/words`,
+          method: 'GET',
+        };
+      },
+
+      transformResponse: (response: IUserWords) => arrToMap(response.words),
+    }),
     addUserWord: builder.mutation<ITextbookWord, ITextbookWord>({
       query: (word) => {
         const userId = getUserId();
@@ -21,11 +30,15 @@ const userWordsApi = api.injectEndpoints({
         };
       },
       async onQueryStarted(word, { queryFulfilled, dispatch }) {
+        const patchResult = dispatch(
+          userWordsApi.util.updateQueryData('loadUserWords', undefined, (draft) => {
+            draft[word.id] = word;
+          })
+        );
         try {
-          dispatch(addUserWord(word));
           await queryFulfilled;
         } catch (error) {
-          dispatch(removeUserWord(word));
+          patchResult.undo();
         }
       },
     }),
@@ -38,34 +51,27 @@ const userWordsApi = api.injectEndpoints({
         };
       },
       async onQueryStarted(word, { queryFulfilled, dispatch }) {
+        const patchResult = dispatch(
+          userWordsApi.util.updateQueryData('loadUserWords', undefined, (draft) => {
+            delete draft[word.id];
+          })
+        );
         try {
-          dispatch(removeUserWord(word));
           await queryFulfilled;
         } catch (error) {
-          dispatch(addUserWord(word));
+          patchResult.undo();
         }
-      },
-    }),
-    loadUserWords: builder.query<IUserWords, null>({
-      query: () => {
-        const userId = getUserId();
-        return {
-          url: `/users/${userId}/words`,
-          method: 'GET',
-        };
-      },
-      async onQueryStarted(_, { queryFulfilled, dispatch }) {
-        try {
-          const { data } = await queryFulfilled;
-          const { words } = data;
-          dispatch(addUserWords(words));
-        } catch (error) {}
       },
     }),
   }),
   overrideExisting: false,
 });
 
-export const { useLoadUserWordsQuery, useAddUserWordMutation, useRemoveUserWordMutation } =
-  userWordsApi;
+export const {
+  useLoadUserWordsQuery,
+  useAddUserWordMutation,
+  useRemoveUserWordMutation,
+  useLazyLoadUserWordsQuery,
+} = userWordsApi;
+
 export const { useQueryState: useLoadUserWordsQueryState } = userWordsApi.endpoints.loadUserWords;

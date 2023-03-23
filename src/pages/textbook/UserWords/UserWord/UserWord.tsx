@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { IoMdClose as CloseIcon } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
@@ -14,7 +15,10 @@ const UserWord = () => {
   const word: ITextbookWord | undefined = useSelector((state: RootState) =>
     userWordsByIdSelector(state, { wordId })
   );
-
+  const [savedWord, setSavedWord] = useState<ITextbookWord | undefined>(undefined);
+  useEffect(() => {
+    word && setSavedWord(word);
+  }, [word]);
   /*  const word: ITextbookWord | undefined = data && data.words.find(({ id }) => id === wordId); */
   const onCloseClick = () => {
     navigate(`/textbook/user-words`);
@@ -26,7 +30,7 @@ const UserWord = () => {
         <div className={styles.close} onClick={onCloseClick}>
           <CloseIcon className={styles['close-icon']} />
         </div>
-        <WordContent word={word} />
+        <WordContent word={savedWord} />
       </div>
     </Modal>
   );

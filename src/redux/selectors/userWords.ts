@@ -1,14 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { selector, Selector } from '.';
-import { IUserWordsState } from '../reducer/userWords';
+import { userWordsApi } from '../api/userWords';
 import { RootState } from '../store';
 
-const userWordsStateSelector: Selector<IUserWordsState> = (state, field) =>
-  selector(state, 'userWords')[field];
+const baseThingSelector = userWordsApi.endpoints.loadUserWords.select;
 
-const userWordsSelector = (state: RootState) => userWordsStateSelector(state, 'entities');
+const userWordsSelector = (state: RootState) => baseThingSelector()(state).data || {};
 
 export const userWordsListSelector = createSelector(userWordsSelector, Object.values);
 
-export const userWordsByIdSelector = (state: RootState, { wordId }: { wordId: string }) =>
-  userWordsSelector(state)[wordId];
+export const userWordsByIdSelector = (state: RootState, { wordId }: { wordId: string }) => {
+  const { data } = baseThingSelector()(state);
+  if (data) return data[wordId];
+};
