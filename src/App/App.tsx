@@ -20,6 +20,7 @@ import Registration from '../pages/Auth/Registration';
 import UserWords from '../pages/textbook/UserWords';
 import Word from '../pages/textbook/Word';
 import UserWord from '../pages/textbook/UserWords/UserWord';
+import TextbookWord from '../pages/textbook/TextbookWords/TextbookWord';
 
 const App = () => (
   <Router>
@@ -31,7 +32,7 @@ const App = () => (
         <Route path="registration" element={<Registration />} />
         <Route path={`${clientRoutes.textbook.absolute()}/*`} element={<Textbook />}>
           <Route path={`${clientRoutes.textbook.words.relative()}/*`} element={<TextbookWords />}>
-            <Route path={`:wordId`} element={<Word />} />
+            <Route path={`:wordId`} element={<TextbookWord />} />
           </Route>
           <Route path={`user-words`} element={<UserWords />}>
             <Route path={`:wordId`} element={<UserWord />} />

@@ -3,6 +3,7 @@ import Loader from '../../../components/loader';
 import { useLoadWordsQuery } from '../../../redux/api/words';
 import Word from '../Word';
 import WordTickets from '../WordTickets';
+import TextbookWord from './TextbookWord/TextbookWord';
 
 const TextbookWords = () => {
   const { page, group, wordId } = useParams();
@@ -20,7 +21,7 @@ const TextbookWords = () => {
   return (
     <>
       {words && <WordTickets words={words} />}
-      <Routes>{wordId && <Route path={`:wordId`} element={<Word />} />}</Routes>
+      <Routes>{wordId && <Route path={`:wordId`} element={<TextbookWord />} />}</Routes>
     </>
   );
 };
