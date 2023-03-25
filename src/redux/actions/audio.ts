@@ -1,8 +1,5 @@
-import { AUDIO, FAILURE, START, STOP } from '../action-types';
 import { apiRoutes } from '../../utils/apiRoutes';
-import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from '../store';
-import { IAudioAction } from '../../interfaces';
 
 import audioPlayer from '../../utils/audioPlayer';
 import { audioFailure, audioStart, audioStop } from '../reducer/audio';

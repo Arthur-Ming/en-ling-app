@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { SprintGameStep, ITextbookWord } from '../../interfaces';
+import { SprintGameStep, IWord } from '../../interfaces';
 import { getRandomInt, getRandomIntWithoutCurrent, shuffle } from '../../utils/random';
 
-const createSprintStepsByWords = (words: ITextbookWord[]) =>
+const createSprintStepsByWords = (words: IWord[]) =>
   words.map(({ id, word, wordTranslate, audio }, index) => {
     const isTrue = Boolean(getRandomInt(0, 2));
     let translate = wordTranslate;
@@ -21,13 +21,13 @@ const createSprintStepsByWords = (words: ITextbookWord[]) =>
     };
   });
 
-const createShuffledSprintStepsByWords = (words: ITextbookWord[]) => {
+const createShuffledSprintStepsByWords = (words: IWord[]) => {
   const steps = createSprintStepsByWords(words);
   shuffle(steps);
   return steps;
 };
 
-const useSprintGameStep = (words: ITextbookWord[] | null, shouldGetNextStep: null | boolean) => {
+const useSprintGameStep = (words: IWord[] | null, shouldGetNextStep: null | boolean) => {
   const [sprintSteps, setSprintSteps] = useState<null | SprintGameStep[]>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [sprintStep, setSprintStep] = useState<null | SprintGameStep>(null);

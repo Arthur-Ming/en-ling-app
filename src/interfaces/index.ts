@@ -1,4 +1,4 @@
-export interface ITextbookWord {
+export interface IWord {
   id: string;
   group: number;
   page: number;
@@ -18,7 +18,7 @@ export interface ITextbookWord {
 export interface IUserWords {
   id: string;
   userId: string;
-  words: ITextbookWord[];
+  words: IWord[];
 }
 
 export type DifficultyUserWord = 'easy' | 'hard' | null;
@@ -37,7 +37,7 @@ export interface ITextbookUserWord {
   id: string;
 }
 
-export interface IPaginatedResult extends Omit<ITextbookWord, 'id'> {
+export interface IPaginatedResult extends Omit<IWord, 'id'> {
   _id: string;
   userWord?: {
     difficulty: DifficultyUserWord;
@@ -59,7 +59,7 @@ export interface IAction {
 
 export interface ITextbookCardsAction extends IAction {
   error?: unknown | null;
-  data?: ITextbookWord[] | null;
+  data?: IWord[] | null;
   page?: number;
   group?: number;
 }
@@ -97,7 +97,7 @@ export interface ISignInAction extends IAction {
   error?: null | unknown;
 }
 
-export type SprintGameAnswer = Pick<ITextbookWord, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
+export type SprintGameAnswer = Pick<IWord, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
   isCorrectAnswer: boolean;
 };
 

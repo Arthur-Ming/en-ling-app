@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import AudioButton from '../../../../components/audio-button';
-import { wordAudioStop, wordAudioPlay } from '../../../../redux/actions/audio';
-import { currentAudioWordIdSelector } from '../../../../redux/selectors/audio';
-import { AppDispatch, RootState } from '../../../../redux/store';
+import AudioButton from '../../../../../components/audio-button';
+import { wordAudioPlay, wordAudioStop } from '../../../../../redux/actions/audio';
+import { currentAudioWordIdSelector } from '../../../../../redux/selectors/audio';
+import { AppDispatch, RootState } from '../../../../../redux/store';
 
 interface OwnProps {
   wordId: string;

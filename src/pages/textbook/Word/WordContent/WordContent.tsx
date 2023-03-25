@@ -1,6 +1,6 @@
-import { ITextbookWord } from '../../../../interfaces';
+import { IWord } from '../../../../interfaces';
 import { apiRoutes } from '../../../../utils/apiRoutes';
-import WordChosen from '../../WordTicket/WordChosen';
+import WordChosen from '../../WordChosen';
 import styles from './index.module.scss';
 import WordAudio from './WordAudio';
 import WordExample from './WordExample';
@@ -8,7 +8,7 @@ import WordMeaning from './WordMeaning';
 import WordTranslate from './WordTranslate';
 
 type Props = {
-  word?: ITextbookWord;
+  word?: IWord;
 };
 
 const WordContent = ({ word }: Props) => {

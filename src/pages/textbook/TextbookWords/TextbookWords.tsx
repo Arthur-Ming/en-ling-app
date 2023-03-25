@@ -2,8 +2,7 @@ import { Route, Routes, useParams } from 'react-router';
 import Loader from '../../../components/loader';
 import { useLoadWordsQuery } from '../../../redux/api/words';
 import Word from '../Word';
-import WordTicket from '../WordTicket';
-import styles from './index.module.scss';
+import WordTickets from '../WordTickets';
 
 const TextbookWords = () => {
   const { page, group, wordId } = useParams();
@@ -20,9 +19,7 @@ const TextbookWords = () => {
 
   return (
     <>
-      <div className={styles.root}>
-        {words && words.map((word) => <WordTicket key={word.id} word={word} />)}
-      </div>
+      {words && <WordTickets words={words} />}
       <Routes>{wordId && <Route path={`:wordId`} element={<Word />} />}</Routes>
     </>
   );

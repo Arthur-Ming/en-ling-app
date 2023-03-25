@@ -1,16 +1,13 @@
 import { connect } from 'react-redux';
-import { Route, Routes, useParams } from 'react-router';
-import { ITextbookWord } from '../../../interfaces';
-import { useLoadUserWordsQueryState } from '../../../redux/api/userWords';
+import { Route, Routes } from 'react-router';
+import { IWord } from '../../../interfaces';
 import { userWordsListSelector } from '../../../redux/selectors/userWords';
 import { RootState } from '../../../redux/store';
-import Word from '../Word';
-import WordTicket from '../WordTicket';
-import styles from './index.module.scss';
+import WordTickets from '../WordTickets';
 import UserWord from './UserWord/UserWord';
 
 type StateProps = {
-  userWords: ITextbookWord[];
+  userWords: IWord[];
 };
 
 type Props = StateProps;
@@ -18,11 +15,7 @@ type Props = StateProps;
 const UserWords = ({ userWords }: Props) => {
   return (
     <>
-      <div className={styles.words_box}>
-        {userWords.map((word) => (
-          <WordTicket key={word.id} word={word} />
-        ))}
-      </div>
+      <WordTickets words={userWords} />
       <Routes>{<Route path={`:wordId`} element={<UserWord />} />}</Routes>
     </>
   );

@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 import { IoMdClose as CloseIcon } from 'react-icons/io';
 import WordContent from './WordContent';
 import { useLoadWordsQueryState } from '../../../redux/api/words';
-import { ITextbookWord } from '../../../interfaces';
+import { IWord } from '../../../interfaces';
 
 const Word = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Word = () => {
     group: Number(group) - 1,
   });
 
-  const word: ITextbookWord | undefined = data && data.find(({ id }) => id === wordId);
+  const word: IWord | undefined = data && data.find(({ id }) => id === wordId);
   const onCloseClick = () => {
     navigate(`/textbook/${page}/${group}`);
   };

@@ -1,4 +1,4 @@
-import { IUserWords, ITextbookWord } from '../../interfaces';
+import { IUserWords, IWord } from '../../interfaces';
 import { arrToMap } from '../../utils/arrToMap';
 import { getUserId } from '../../utils/cookies';
 import { api } from './';
@@ -9,7 +9,7 @@ interface IUserWordsBody {
 
 export const userWordsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    loadUserWords: builder.query<{ [key: string]: ITextbookWord }, void>({
+    loadUserWords: builder.query<{ [key: string]: IWord }, void>({
       query: () => {
         const userId = getUserId();
         return {
@@ -20,7 +20,7 @@ export const userWordsApi = api.injectEndpoints({
 
       transformResponse: (response: IUserWords) => arrToMap(response.words),
     }),
-    addUserWord: builder.mutation<ITextbookWord, ITextbookWord>({
+    addUserWord: builder.mutation<IWord, IWord>({
       query: (word) => {
         const userId = getUserId();
 
@@ -42,7 +42,7 @@ export const userWordsApi = api.injectEndpoints({
         }
       },
     }),
-    removeUserWord: builder.mutation<IUserWords, ITextbookWord>({
+    removeUserWord: builder.mutation<IUserWords, IWord>({
       query: (word) => {
         const userId = getUserId();
         return {

@@ -4,10 +4,7 @@ import TextbookHeader from './TextbookHeader';
 import TextbookFooter from './TextbookFooter';
 import { Navigate, Outlet, Route, Routes, useMatch, useNavigate, useParams } from 'react-router';
 import ArrowButton from './ArrowButton';
-import { useLazyLoadUserWordsQuery, useLoadUserWordsQuery } from '../../redux/api/userWords';
-import Word from './Word';
-import { isNonNullExpression } from 'typescript';
-import { useEffect } from 'react';
+import { useLoadUserWordsQuery } from '../../redux/api/userWords';
 import React from 'react';
 
 const TextbookContent = React.memo(() => {

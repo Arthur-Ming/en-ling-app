@@ -1,4 +1,4 @@
-import { ITextbookWord } from '../../interfaces';
+import { IWord } from '../../interfaces';
 import { api } from './';
 
 interface ILoadWordsParams {
@@ -8,7 +8,7 @@ interface ILoadWordsParams {
 
 const wordsApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    loadWords: builder.query<ITextbookWord[], ILoadWordsParams>({
+    loadWords: builder.query<IWord[], ILoadWordsParams>({
       query: ({ page, group }) => {
         return {
           url: `/words`,

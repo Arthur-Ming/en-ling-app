@@ -3,7 +3,7 @@ import { IoMdClose as CloseIcon } from 'react-icons/io';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import Modal from '../../../../components/Modal';
-import { ITextbookWord } from '../../../../interfaces';
+import { IWord } from '../../../../interfaces';
 import { userWordsByIdSelector } from '../../../../redux/selectors/userWords';
 import { RootState } from '../../../../redux/store';
 import WordContent from '../../Word/WordContent';
@@ -12,10 +12,10 @@ import styles from './index.module.scss';
 const UserWord = () => {
   const navigate = useNavigate();
   const { wordId = '' } = useParams();
-  const word: ITextbookWord | undefined = useSelector((state: RootState) =>
+  const word: IWord | undefined = useSelector((state: RootState) =>
     userWordsByIdSelector(state, { wordId })
   );
-  const [savedWord, setSavedWord] = useState<ITextbookWord | undefined>(undefined);
+  const [savedWord, setSavedWord] = useState<IWord | undefined>(undefined);
   useEffect(() => {
     word && setSavedWord(word);
   }, [word]);

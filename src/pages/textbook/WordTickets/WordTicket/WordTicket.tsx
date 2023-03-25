@@ -1,35 +1,17 @@
-import AudioButton from '../../../components/audio-button';
-import { ITextbookWord } from '../../../interfaces';
-import { apiRoutes } from '../../../utils/apiRoutes';
 import styles from './index.module.scss';
 import { ReactComponent as LabelIcon } from './label.svg';
-import { AiFillFire } from 'react-icons/ai';
 import WordTicketAudio from './WordTicketAudio';
-import WordChosen from './WordChosen';
 import { useNavigate } from 'react-router';
-
-//AiFillFire
+import { IWord } from '../../../../interfaces';
+import { apiRoutes } from '../../../../utils/apiRoutes';
+import WordChosen from '../../WordChosen';
 
 type Props = {
-  word: ITextbookWord;
+  word: IWord;
 };
 
 const WordTicket = ({ word }: Props) => {
-  const {
-    id: wordId,
-    word: wordText,
-    image,
-    transcription,
-    wordTranslate,
-    textMeaning,
-    textMeaningTranslate,
-    textExample,
-    textExampleTranslate,
-    audio,
-    audioMeaning,
-    audioExample,
-    group,
-  } = word;
+  const { id: wordId, word: wordText, image, transcription, wordTranslate, audio } = word;
   const navigate = useNavigate();
 
   return (
