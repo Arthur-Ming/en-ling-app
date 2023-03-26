@@ -29,7 +29,7 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
     answers,
   } = useSprintGame(level);
   const timer = useSprintGameTimer(wordsLoaded);
-
+  console.log('sprintgame');
   if (pagesOver || timer.isTimeOver)
     return <SprintGameResult answers={answers} points={gamePoints} />;
 
@@ -43,6 +43,8 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
           numberOfContinuousWrongAnswers={numberOfContinuousAnswers.wrong}
         />
         <div className={styles.words}>
+          {' '}
+          {/* вынести в компонент  */}
           {wordsLoading && <div>Loading...</div>}
           {sprintStep && (
             <SprintGameWords

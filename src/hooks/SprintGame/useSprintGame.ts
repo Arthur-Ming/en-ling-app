@@ -8,6 +8,7 @@ import useSprintGameAnswerHandler from './useSprintGameAnswerHandler';
 const useSprintGame = (level: number) => {
   const [shouldGetNextStep, setShouldGetNextStep] = useState<boolean>(false);
   const [shouldGetNextRandomPage, setShouldGetNextRandomPage] = useState<boolean>(false);
+
   const { randomPage, pagesOver } = useSprintGameRandomPage(shouldGetNextRandomPage);
   const { wordsLoading, wordsLoaded, error, words } = useSprintGameQuery(randomPage, level);
   const { sprintStep, stepsOver } = useSprintGameStep(words, shouldGetNextStep);

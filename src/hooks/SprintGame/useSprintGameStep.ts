@@ -27,7 +27,7 @@ const createShuffledSprintStepsByWords = (words: IWord[]) => {
   return steps;
 };
 
-const useSprintGameStep = (words: IWord[] | null, shouldGetNextStep: null | boolean) => {
+const useSprintGameStep = (words: IWord[] | undefined, shouldGetNextStep: null | boolean) => {
   const [sprintSteps, setSprintSteps] = useState<null | SprintGameStep[]>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [sprintStep, setSprintStep] = useState<null | SprintGameStep>(null);
