@@ -9,6 +9,7 @@ import SprintGamePoints from './sprint-game-points';
 import SprintGameDotsOfAnswers from './sprint-game-dots';
 import SprintGameResult from './sprint-game-result';
 import useSprintGameTimer from '../../../hooks/SprintGame/useSprintGameTimer';
+import { SprintGameStep } from '../../../interfaces';
 
 interface OwnProps {
   level?: number;
@@ -16,12 +17,19 @@ interface OwnProps {
 
 type Props = OwnProps;
 
+type P = {
+  sprintStep: SprintGameStep;
+  wordsLoading: boolean;
+  wordsLoaded: boolean;
+  wordsLoadingError: unknown | undefined;
+};
+
 const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
   const {
     sprintStep,
     wordsLoading,
     wordsLoaded,
-    error,
+    wordsLoadingError,
     handlers,
     pagesOver,
     gamePoints,
@@ -43,8 +51,6 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
           numberOfContinuousWrongAnswers={numberOfContinuousAnswers.wrong}
         />
         <div className={styles.words}>
-          {' '}
-          {/* вынести в компонент  */}
           {wordsLoading && <div>Loading...</div>}
           {sprintStep && (
             <SprintGameWords

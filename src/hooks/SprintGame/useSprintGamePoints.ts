@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
-import { SprintGamePoints } from '../../interfaces';
+import { SprintGameAnswer, SprintGamePoints } from '../../interfaces';
 
 const EXTRA_POINTS_NUMBER = 3;
 
-const useSprintGamePoints = (isCorrectAnswer: null | boolean) => {
+const useSprintGamePoints = (answers: SprintGameAnswer[]) => {
   const [points, setPoints] = useState<SprintGamePoints[]>([]);
   const [currentPoints, setCurrentPoints] = useState<SprintGamePoints | null>(null);
   const [numberOfContinuousCorrectAnswers, setNumberOfContinuousCorrectAnswers] = useState(0);
   const [numberOfContinuousWrongAnswers, setNumberOfContinuousWrongAnswers] = useState(0);
 
   useEffect(() => {
-    if (isCorrectAnswer !== null) {
-      isCorrectAnswer
+    if (answers.length) {
+      answers[answers.length - 1].isCorrectAnswer
         ? setNumberOfContinuousCorrectAnswers((prevNum) => prevNum + 1)
         : setNumberOfContinuousWrongAnswers((prevNum) => prevNum + 1);
     }
-  }, [isCorrectAnswer]);
+  }, [answers]);
 
   useEffect(() => {
     if (numberOfContinuousCorrectAnswers !== 0) {

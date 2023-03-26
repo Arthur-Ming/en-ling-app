@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { SprintGameAnswer, SprintGameStep } from '../../interfaces';
+import { AnswerType, SprintGameAnswer, SprintGameStep } from '../../interfaces';
 
 const getSprintGameAnswerFromStep = (
   { id, word, wordTranslate, audio }: SprintGameStep,
@@ -13,58 +13,32 @@ const getSprintGameAnswerFromStep = (
 });
 
 const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
-  const [isTrueClick, setIsTrueClick] = useState<null | boolean>(null);
-  const [didAnswer, setDidAnswer] = useState<boolean>(false);
-  // заменить на enum
-  const [isCorrectAnswerSelected, setIsCorrectAnswerSelected] = useState<null | boolean>(null);
+  const [didAnswer, setDidAnswer] = useState<AnswerType>(AnswerType.idle);
   const [answers, setAnswers] = useState<SprintGameAnswer[]>([]);
 
   useEffect(() => {
-    if (isTrueClick !== null && sprintStep !== null) {
-      isTrueClick
-        ? setIsCorrectAnswerSelected(sprintStep.isTrue)
-        : setIsCorrectAnswerSelected(!sprintStep.isTrue);
-      setIsTrueClick(null);
-    }
-  }, [isTrueClick, sprintStep]);
+    if (didAnswer !== AnswerType.idle && sprintStep !== null) {
+      const isCorrectAnswer =
+        didAnswer === AnswerType.correct ? sprintStep.isTrue : !sprintStep.isTrue;
 
-  useEffect(() => {
-    if (sprintStep !== null) {
-      setDidAnswer(false);
-    }
-  }, [sprintStep]);
-
-  useEffect(() => {
-    if (isCorrectAnswerSelected !== null) {
-      setDidAnswer(true);
-    }
-  }, [isCorrectAnswerSelected]);
-
-  useEffect(() => {
-    if (didAnswer) {
-      setIsCorrectAnswerSelected(null);
-    }
-  }, [didAnswer]);
-
-  useEffect(() => {
-    if (isCorrectAnswerSelected !== null && sprintStep !== null) {
       setAnswers((prevAnswers) => [
         ...prevAnswers,
-        getSprintGameAnswerFromStep(sprintStep, isCorrectAnswerSelected),
+        getSprintGameAnswerFromStep(sprintStep, isCorrectAnswer),
       ]);
+
+      setDidAnswer(AnswerType.idle);
     }
-  }, [isCorrectAnswerSelected, sprintStep]);
+  }, [didAnswer, sprintStep]);
 
   const handlers = useMemo(
     () => ({
-      onTrueClick: () => setIsTrueClick(true),
-      onFalseClick: () => setIsTrueClick(false),
+      onTrueClick: () => setDidAnswer(AnswerType.correct),
+      onFalseClick: () => setDidAnswer(AnswerType.wrong),
     }),
     []
   );
 
   return {
-    isCorrectAnswerSelected,
     didAnswer,
     handlers,
     answers,

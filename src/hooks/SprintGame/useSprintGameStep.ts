@@ -50,19 +50,14 @@ const useSprintGameStep = (words: IWord[] | undefined) => {
   useEffect(() => {
     if (words && currentStepIndex === words.length) {
       setStepsOver(true);
-    }
-  }, [currentStepIndex, words]);
-
-  useEffect(() => {
-    if (stepsOver) {
       setSprintSteps(null);
       setSprintStep(null);
       setCurrentStepIndex(0);
     }
-  }, [stepsOver]);
+  }, [currentStepIndex, words]);
 
   const getNextStep = useCallback(() => {
-    setCurrentStepIndex((prevStepIndex) => prevStepIndex + 1);
+    setCurrentStepIndex((s) => s + 1);
   }, []);
 
   return {

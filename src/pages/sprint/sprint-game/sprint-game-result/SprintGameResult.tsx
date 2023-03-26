@@ -14,7 +14,8 @@ const SprintGameResult = ({ answers, points }: Props) => {
   const [trueAnswers, setTrueAnswers] = useState<SprintGameAnswer[]>([]);
   const [falseAnswers, setFalseAnswers] = useState<SprintGameAnswer[]>([]);
   const [pointsSum, setPointsSum] = useState<number>(0);
-
+  console.log(answers);
+  console.log(points);
   useEffect(() => {
     if (answers.length) {
       setTrueAnswers(answers.filter(({ isCorrectAnswer }) => isCorrectAnswer));

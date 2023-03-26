@@ -1,20 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useSprintGameRandomPage from './useSprintGameRandomPage';
 import useSprintGamePoints from './useSprintGamePoints';
 import useSprintGameQuery from './useSprintGameQuery';
 import useSprintGameStep from './useSprintGameStep';
 import useSprintGameAnswerHandler from './useSprintGameAnswerHandler';
+import { AnswerType } from '../../interfaces';
 
 const useSprintGame = (level: number) => {
   const { randomPage, pagesOver, getNextRandomPage } = useSprintGameRandomPage();
-  const { wordsLoading, wordsLoaded, error, words } = useSprintGameQuery(randomPage, level);
+  const { wordsLoading, wordsLoaded, wordsLoadingError, words } = useSprintGameQuery(
+    randomPage,
+    level
+  );
   const { sprintStep, stepsOver, getNextStep } = useSprintGameStep(words);
-  const { isCorrectAnswerSelected, didAnswer, handlers, answers } =
-    useSprintGameAnswerHandler(sprintStep);
-  const { gamePoints, numberOfContinuousAnswers } = useSprintGamePoints(isCorrectAnswerSelected);
+  const { didAnswer, handlers, answers } = useSprintGameAnswerHandler(sprintStep);
+  const { gamePoints, numberOfContinuousAnswers } = useSprintGamePoints(answers);
 
   useEffect(() => {
-    if (didAnswer) {
+    if (didAnswer !== AnswerType.idle) {
       getNextStep();
     }
   }, [didAnswer, getNextStep]);
@@ -29,7 +32,7 @@ const useSprintGame = (level: number) => {
     sprintStep,
     wordsLoading,
     wordsLoaded,
-    error,
+    wordsLoadingError,
     handlers,
     pagesOver,
     gamePoints,

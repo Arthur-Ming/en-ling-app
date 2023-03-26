@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { GROUP_SHIFT } from '../../constants';
-import { useLazyLoadWordsQuery, useLoadWordsQuery } from '../../redux/api/words';
+import { useLazyLoadWordsQuery } from '../../redux/api/words';
 
 const useSprintGameQuery = (page: null | number, level: number) => {
   const [getWords, { isLoading, isFetching, isSuccess, error, data: words }] =
@@ -18,7 +18,7 @@ const useSprintGameQuery = (page: null | number, level: number) => {
   return {
     wordsLoading: isLoading || isFetching,
     wordsLoaded: isSuccess,
-    error,
+    wordsLoadingError: error,
     words,
   };
 };

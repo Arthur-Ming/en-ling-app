@@ -135,3 +135,9 @@ export interface ISuccessfulUserById {
   email: string;
   password: string;
 }
+
+export enum AnswerType {
+  idle = 'idle',
+  correct = 'correct',
+  wrong = 'wrong  ',
+}
