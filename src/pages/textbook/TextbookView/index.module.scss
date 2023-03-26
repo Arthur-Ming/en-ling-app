@@ -1,13 +1,15 @@
 @import '/src/index.scss';
 
 .root {
+  padding-top: 60px;
+  background-color: $bg-secondary-dark;
+}
+
+.body {
   @extend .wrapper-box;
+  padding: 0px 100px;
+}
+.content {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0px 0px 0px 0px;
-  h2 {
-    margin: 0;
-    flex: 1 0 auto;
-  }
 }

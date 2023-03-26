@@ -11,14 +11,12 @@ import { useLoadWordsQueryState } from '../../../redux/api/words';
 const TextbookPagesPagination = () => {
   const { page: currentPage = 1, group = 1 } = useParams();
 
-  const { isFetching } = useLoadWordsQueryState({
+  /* const { isFetching } = useLoadWordsQueryState({
     page: Number(currentPage) - 1,
     group: Number(group) - 1,
-  });
+  }); */
 
-  console.log(isFetching);
-
-  const isHardWords = useMatch('textbook/hard-words');
+  const isHardWords = useMatch('textbook/user-words');
   const navigate = useNavigate();
   const handlePageClick = ({ selected }: { selected: number }) => {
     navigate(clientRoutes.textbook.words.relative(selected + PAGE_SHIFT, group));
@@ -27,7 +25,7 @@ const TextbookPagesPagination = () => {
   return (
     <div
       className={classNames(styles.root, {
-        [styles.loading]: isFetching,
+        [styles.loading]: false,
         [styles.hidden]: isHardWords,
       })}
     >

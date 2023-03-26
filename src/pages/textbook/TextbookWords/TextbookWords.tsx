@@ -1,7 +1,6 @@
 import { Route, Routes, useParams } from 'react-router';
 import Loader from '../../../components/loader';
 import { useLoadWordsQuery } from '../../../redux/api/words';
-import Word from '../Word';
 import WordTickets from '../WordTickets';
 import TextbookWord from './TextbookWord/TextbookWord';
 

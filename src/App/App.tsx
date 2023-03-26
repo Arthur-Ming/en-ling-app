@@ -11,14 +11,11 @@ import Sprint from '../pages/sprint';
 import AudioCall from '../pages/audio-call';
 import SprintGame from '../pages/sprint/sprint-game';
 import AudioCallGame from '../pages/audio-call/audio-call-game';
-
 import ProtectedRoute from './ProtectedRoute';
 import Statistics from '../pages/statistics';
-
 import Login from '../pages/Auth/Login';
 import Registration from '../pages/Auth/Registration';
 import UserWords from '../pages/textbook/UserWords';
-import Word from '../pages/textbook/Word';
 import UserWord from '../pages/textbook/UserWords/UserWord';
 import TextbookWord from '../pages/textbook/TextbookWords/TextbookWord';
 
@@ -34,7 +31,7 @@ const App = () => (
           <Route path={`${clientRoutes.textbook.words.relative()}/*`} element={<TextbookWords />}>
             <Route path={`:wordId`} element={<TextbookWord />} />
           </Route>
-          <Route path={`user-words`} element={<UserWords />}>
+          <Route path={`user-words/*`} element={<UserWords />}>
             <Route path={`:wordId`} element={<UserWord />} />
           </Route>
         </Route>

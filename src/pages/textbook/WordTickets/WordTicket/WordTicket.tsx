@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router';
 import { IWord } from '../../../../interfaces';
 import { apiRoutes } from '../../../../utils/apiRoutes';
 import WordChosen from '../../WordChosen';
+import classNames from 'classnames';
 
 type Props = {
   word: IWord;
 };
 
 const WordTicket = ({ word }: Props) => {
-  const { id: wordId, word: wordText, image, transcription, wordTranslate, audio } = word;
+  const { id: wordId, word: wordText, image, transcription, wordTranslate, audio, group } = word;
   const navigate = useNavigate();
 
   return (
@@ -27,7 +28,7 @@ const WordTicket = ({ word }: Props) => {
         <WordChosen word={word} />
         <WordTicketAudio wordId={wordId} audio={audio} />
       </div>
-      <LabelIcon className={styles.label} />
+      <LabelIcon className={classNames(styles.label, styles[`level-${group + 1}`])} />
     </div>
   );
 };

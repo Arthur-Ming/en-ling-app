@@ -2,7 +2,7 @@ import { ReactComponent as ArrowPrevIcon } from './arrow-prev.svg';
 import { ReactComponent as ArrowNextIcon } from './arrow-next.svg';
 import styles from './index.module.scss';
 import classNames from 'classnames';
-import { useNavigate, useParams } from 'react-router';
+import { useMatch, useNavigate, useParams } from 'react-router';
 import { connect } from 'react-redux';
 import { RootState } from '../../../redux/store';
 
@@ -22,7 +22,7 @@ type Props = OwnProps & StateProps;
 const ArrowButton = ({ prev, isWordsloading }: Props) => {
   const { page = null, group = null } = useParams();
   const navigate = useNavigate();
-
+  const isHardWords = useMatch('textbook/user-words');
   const onNextClick = () => {
     if (page !== null && group !== null) {
       navigate(clientRoutes.textbook.words.relative(Number(page) + PAGE_SHIFT, group));
@@ -42,7 +42,11 @@ const ArrowButton = ({ prev, isWordsloading }: Props) => {
           onClick={onPrevClick}
           disabled={Number(page) === DEFAULT_PAGE || isWordsloading}
         >
-          <ArrowPrevIcon className={classNames(styles.arrow, styles.prev)} />
+          <ArrowPrevIcon
+            className={classNames(styles.arrow, styles.prev, {
+              [styles.hidden]: isHardWords,
+            })}
+          />
         </button>
       ) : (
         <button
@@ -50,7 +54,11 @@ const ArrowButton = ({ prev, isWordsloading }: Props) => {
           onClick={onNextClick}
           disabled={Number(page) === PAGE_COUNT || isWordsloading}
         >
-          <ArrowNextIcon className={classNames(styles.arrow, styles.next)} />
+          <ArrowNextIcon
+            className={classNames(styles.arrow, styles.next, {
+              [styles.hidden]: isHardWords,
+            })}
+          />
         </button>
       )}
     </div>

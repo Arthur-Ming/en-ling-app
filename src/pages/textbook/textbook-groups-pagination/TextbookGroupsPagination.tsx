@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { useMatch, useNavigate, useParams } from 'react-router';
 import { GROUP_COUNT } from '../../../constants';
 import clientRoutes from '../../../utils/clientRoutes';
-import styles from './textbook-groups-pagination.module.scss';
+import styles from './index.module.scss';
+import { ReactComponent as LabelIcon } from './label.svg';
 
 const textbookGroups = Array.from(Array(GROUP_COUNT), (_, index) => index + 1);
 
@@ -28,17 +29,7 @@ const TextbookGroupsPagination = () => {
           onClick={() => handleGroupClick(group)}
           key={group}
         >
-          <svg
-            className={classNames(styles.icon, styles[`level-${group}`])}
-            focusable="false"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              fill="currentColor"
-              d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"
-            ></path>
-          </svg>
+          <LabelIcon className={classNames(styles.label, styles[`level-${group}`])} />
           <span className={styles.text}>{`Глава ${group}`}</span>
         </button>
       ))}

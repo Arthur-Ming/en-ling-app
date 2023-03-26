@@ -3,7 +3,7 @@
 .root {
   @extend .wrapper-box;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin-top: 20px;
   margin-bottom: 60px;
 }
