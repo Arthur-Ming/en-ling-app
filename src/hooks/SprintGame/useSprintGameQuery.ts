@@ -1,25 +1,22 @@
+import { useEffect } from 'react';
 import { GROUP_SHIFT } from '../../constants';
-import { useLoadWordsQuery } from '../../redux/api/words';
-import { apiRoutes } from '../../utils/apiRoutes';
-import useFetch from '../useFetch';
+import { useLazyLoadWordsQuery, useLoadWordsQuery } from '../../redux/api/words';
 
 const useSprintGameQuery = (page: null | number, level: number) => {
-  /* const path = page === null ? null : apiRoutes.words(page, level - GROUP_SHIFT);
-  const { loading: wordsLoading, loaded: wordsLoaded, error, data: words } = useFetch(path); */
+  const [getWords, { isLoading, isFetching, isSuccess, error, data: words }] =
+    useLazyLoadWordsQuery();
 
-  const {
-    isLoading,
-    isFetching,
-    data: words,
-    isSuccess,
-    error,
-  } = useLoadWordsQuery({
-    page: Number(page),
-    group: Number(level) - 1,
-  });
+  useEffect(() => {
+    if (page !== null) {
+      getWords({
+        page: Number(page),
+        group: Number(level) - 1,
+      });
+    }
+  }, [getWords, level, page]);
 
   return {
-    wordsLoading: isLoading,
+    wordsLoading: isLoading || isFetching,
     wordsLoaded: isSuccess,
     error,
     words,

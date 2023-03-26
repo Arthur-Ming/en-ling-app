@@ -29,7 +29,7 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
     answers,
   } = useSprintGame(level);
   const timer = useSprintGameTimer(wordsLoaded);
-  console.log('sprintgame');
+
   if (pagesOver || timer.isTimeOver)
     return <SprintGameResult answers={answers} points={gamePoints} />;
 

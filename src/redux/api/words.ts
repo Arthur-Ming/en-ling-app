@@ -23,5 +23,5 @@ const wordsApi = api.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useLoadWordsQuery } = wordsApi;
+export const { useLoadWordsQuery, useLazyLoadWordsQuery } = wordsApi;
 export const { useQueryState: useLoadWordsQueryState } = wordsApi.endpoints.loadWords;

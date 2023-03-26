@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { SprintGameStep, IWord } from '../../interfaces';
 import { getRandomInt, getRandomIntWithoutCurrent, shuffle } from '../../utils/random';
 
@@ -27,7 +27,7 @@ const createShuffledSprintStepsByWords = (words: IWord[]) => {
   return steps;
 };
 
-const useSprintGameStep = (words: IWord[] | undefined, shouldGetNextStep: null | boolean) => {
+const useSprintGameStep = (words: IWord[] | undefined) => {
   const [sprintSteps, setSprintSteps] = useState<null | SprintGameStep[]>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [sprintStep, setSprintStep] = useState<null | SprintGameStep>(null);
@@ -61,15 +61,14 @@ const useSprintGameStep = (words: IWord[] | undefined, shouldGetNextStep: null |
     }
   }, [stepsOver]);
 
-  useEffect(() => {
-    if (shouldGetNextStep) {
-      setCurrentStepIndex((prevStepIndex) => prevStepIndex + 1);
-    }
-  }, [shouldGetNextStep]);
+  const getNextStep = useCallback(() => {
+    setCurrentStepIndex((prevStepIndex) => prevStepIndex + 1);
+  }, []);
 
   return {
     sprintStep,
     stepsOver,
+    getNextStep,
   };
 };
 
