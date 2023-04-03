@@ -32,9 +32,33 @@
   flex-direction: column;
   row-gap: 15px;
 }
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
 .button {
-  display: block;
-  margin: 0 auto;
+  box-sizing: border-box;
+  width: 120px;
+  border-radius: 6px;
+  height: 32px;
+  background-color: $main-color;
+  color: $text-primary-light;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 5px 0px;
+  transition: all 0.3s ease 0s;
+  outline: none;
+  &:hover {
+    /*    border-color: var(--main-color);
+    color: var(--text-color-gray); */
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 }
 .text {
   width: 100%;

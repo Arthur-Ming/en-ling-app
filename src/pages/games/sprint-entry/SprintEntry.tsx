@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 import useTextbookPageParams from '../../../hooks/useTextbookPageParams';
 import { GROUP_COUNT } from '../../../constants';
 import styles from './index.module.scss';
-import React from 'react';
 import PageRange from '../../../components/PageRange';
 import GroupPicker from '../../../components/GroupPicker/GroupPicker';
 import { ReactComponent as LabelIcon } from './label.svg';
@@ -39,9 +38,11 @@ const SprintEntry = () => {
         </p>
         <p>cтраницы {`${pageRange[0]} - ${pageRange[1]}`}</p>
       </div>
-      <button className={styles.button} onClick={onButtonClick}>
-        <span>Начать</span>
-      </button>
+      <div className={styles.buttons}>
+        <button className={styles.button} onClick={onButtonClick}>
+          <span>Начать</span>
+        </button>
+      </div>
     </div>
   );
 };
