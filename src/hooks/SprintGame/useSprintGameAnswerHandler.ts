@@ -30,17 +30,9 @@ const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
     }
   }, [didAnswer, sprintStep]);
 
-  const handlers = useMemo(
-    () => ({
-      onTrueClick: () => setDidAnswer(AnswerType.correct),
-      onFalseClick: () => setDidAnswer(AnswerType.wrong),
-    }),
-    []
-  );
-
   return {
     didAnswer,
-    handlers,
+    onAnswerButtonClick: setDidAnswer,
     answers,
   };
 };

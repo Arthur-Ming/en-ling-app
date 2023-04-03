@@ -1,9 +1,10 @@
 import { shuffle } from './random';
 
-export const createArr = (num: number): number[] => Array.from(Array(num), (_, index) => index);
+export const createArr = (length: number, shift = 0): number[] =>
+  Array.from(Array(length), (_, index) => index + shift);
 
-export const createShuffledArr = (num: number): number[] => {
-  const arr = createArr(num);
+export const createShuffledArr = (range: [number, number]): number[] => {
+  const arr = createArr(range[1] - range[0] + 1, range[0]);
   shuffle<number>(arr);
   return arr;
 };

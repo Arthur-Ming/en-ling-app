@@ -9,6 +9,7 @@ type Props = {
 };
 
 const SprintGameHeader = ({ gamePoints, audio }: Props) => {
+  console.log('SprintGameHeader');
   const gamePointsSum = useSprintGamePointsSum(gamePoints);
   return (
     <div className={styles.header}>

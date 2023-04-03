@@ -13,7 +13,7 @@ const useSprintGame = (level: number) => {
     level
   );
   const { sprintStep, stepsOver, getNextStep } = useSprintGameStep(words);
-  const { didAnswer, handlers, answers } = useSprintGameAnswerHandler(sprintStep);
+  const { didAnswer, onAnswerButtonClick, answers } = useSprintGameAnswerHandler(sprintStep);
   const { gamePoints, numberOfContinuousAnswers } = useSprintGamePoints(answers);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const useSprintGame = (level: number) => {
     wordsLoading,
     wordsLoaded,
     wordsLoadingError,
-    handlers,
+    onAnswerButtonClick,
     pagesOver,
     gamePoints,
     numberOfContinuousAnswers,

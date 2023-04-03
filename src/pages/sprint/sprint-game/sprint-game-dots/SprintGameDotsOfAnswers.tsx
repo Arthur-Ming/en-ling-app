@@ -15,6 +15,7 @@ const SprintGameDotsOfAnswers = ({
   numberOfContinuousCorrectAnswers,
   numberOfContinuousWrongAnswers,
 }: Props) => {
+  console.log('SprintGameDotsOfAnswers');
   return (
     <div className={styles.dots}>
       {dotsArr.map(({ dotId }) => (

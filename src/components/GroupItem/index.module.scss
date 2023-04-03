@@ -1,0 +1,67 @@
+@import '/src/index.scss';
+
+.button {
+  position: relative;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  row-gap: 3px;
+  padding: 0px 12px 5px 12px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  border: 1px $bg-secondary-dark solid;
+  opacity: 0.8;
+  border-radius: 10px;
+  transition: opacity 0.3s ease 0s;
+  background-color: #212429;
+
+  &:hover {
+    opacity: 1;
+  }
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+.label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -3px;
+  width: 24px;
+  height: 24px;
+  color: $bg-primary-dark;
+}
+.text {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  color: $text-secondary-dark;
+}
+
+.level-1 {
+  color: $group-1;
+}
+.level-2 {
+  color: $group-2;
+}
+.level-3 {
+  color: $group-3;
+}
+.level-4 {
+  color: $group-4;
+}
+.level-5 {
+  color: $group-5;
+}
+.level-6 {
+  color: $group-6;
+}
+
+.active {
+  border: 2px $active-link solid;
+  pointer-events: none;
+
+  opacity: 1;
+}

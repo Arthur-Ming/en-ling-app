@@ -1,21 +1,31 @@
 import { memo } from 'react';
+import { AnswerType } from '../../../../interfaces';
 import styles from '../../sprint.module.scss';
 
 interface Props {
-  onTrueClick: () => void;
-  onFalseClick: () => void;
+  onAnswerButtonClick: (answerType: AnswerType) => void;
   disabled: boolean;
 }
 
-const SprintGameButtons = ({ onTrueClick, onFalseClick, disabled }: Props) => (
-  <div className={styles.footer}>
-    <button className={styles.button} onClick={onFalseClick} disabled={disabled}>
-      Неверно
-    </button>
-    <button className={styles.button} onClick={onTrueClick} disabled={disabled}>
-      Верно
-    </button>
-  </div>
-);
+const SprintGameButtons = ({ onAnswerButtonClick, disabled }: Props) => {
+  return (
+    <div className={styles.footer}>
+      <button
+        className={styles.button}
+        onClick={() => onAnswerButtonClick(AnswerType.wrong)}
+        disabled={disabled}
+      >
+        Неверно
+      </button>
+      <button
+        className={styles.button}
+        onClick={() => onAnswerButtonClick(AnswerType.correct)}
+        disabled={disabled}
+      >
+        Верно
+      </button>
+    </div>
+  );
+};
 
 export default memo(SprintGameButtons);

@@ -2,8 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { PAGE_COUNT } from '../../constants';
 import { createShuffledArr } from '../../utils/arrayHelpers';
 
-const shuffledPagesArr = createShuffledArr(PAGE_COUNT);
-
+const shuffledPagesArr = createShuffledArr([0, 29]);
+console.log(shuffledPagesArr);
 const useSprintGameRandomPage = () => {
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const [randomPage, setRandomPage] = useState<null | number>(null);

@@ -17,20 +17,13 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-type P = {
-  sprintStep: SprintGameStep;
-  wordsLoading: boolean;
-  wordsLoaded: boolean;
-  wordsLoadingError: unknown | undefined;
-};
-
 const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
   const {
     sprintStep,
     wordsLoading,
     wordsLoaded,
     wordsLoadingError,
-    handlers,
+    onAnswerButtonClick,
     pagesOver,
     gamePoints,
     numberOfContinuousAnswers,
@@ -59,11 +52,7 @@ const SprintGame = ({ level = DEFAULT_GROUP }: Props) => {
             />
           )}
         </div>
-        <SprintGameButtons
-          onFalseClick={handlers.onFalseClick}
-          onTrueClick={handlers.onTrueClick}
-          disabled={wordsLoading}
-        />
+        <SprintGameButtons onAnswerButtonClick={onAnswerButtonClick} disabled={wordsLoading} />
       </div>
       <SprintGamePoints gamePoints={gamePoints} />
     </>

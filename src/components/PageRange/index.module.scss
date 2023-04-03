@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.track {
+  height: 36px;
+  display: flex;
+  width: 100%;
+}
+.thumbs {
+  height: 42px;
+  width: 16px;
+  border-radius: 4px;
+  background-color: #c9d1d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: 0px 2px 6px #aaa; */
+}
+
+.thumb {
+  height: 16px;
+  width: 5px;
+  /*  background-color: #ffffff75; */
+}
+.dragged {
+}
+.label {
+  position: absolute;
+  top: -28px;
+  font-size: 14px;
+  padding: 4px;
+}
