@@ -35,6 +35,7 @@ const useSprintGameStep = (words: IWord[] | undefined) => {
 
   useEffect(() => {
     if (words) {
+      console.log(words);
       setSprintSteps(createShuffledSprintStepsByWords(words));
       setStepsOver(false);
     }

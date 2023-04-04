@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useState } from 'react';
 import useTextbookPageParams from '../../hooks/useTextbookPageParams';
 import { GROUP_COUNT } from '../../constants';
 import styles from './index.module.scss';
@@ -16,9 +15,8 @@ const Sprint = () => {
   const [selectedGroup, setSelectedGroup] = useState(group);
   const [pageRange, setPageRange] = useState([1, page]);
   const [isGame, setIsGame] = useState(false);
-  const navigate = useNavigate();
 
-  if (isGame) return <SprintGame group={group} pageRange={pageRange} />;
+  if (isGame) return <SprintGame group={selectedGroup} pageRange={pageRange} />;
 
   const onButtonClick = () => {
     setIsGame(true);

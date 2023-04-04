@@ -6,8 +6,8 @@ import useSprintGameStep from './useSprintGameStep';
 import useSprintGameAnswerHandler from './useSprintGameAnswerHandler';
 import { AnswerType } from '../../interfaces';
 
-const useSprintGame = (level: number) => {
-  const { randomPage, pagesOver, getNextRandomPage } = useSprintGameRandomPage();
+const useSprintGame = (level: number, pageRange: number[]) => {
+  const { randomPage, pagesOver, getNextRandomPage } = useSprintGameRandomPage(pageRange);
   const { wordsLoading, wordsLoaded, wordsLoadingError, words } = useSprintGameQuery(
     randomPage,
     level

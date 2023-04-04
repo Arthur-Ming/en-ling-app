@@ -1,26 +1,31 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PAGE_COUNT } from '../../constants';
+import { useCallback, useEffect, useState } from 'react';
 import { createShuffledArr } from '../../utils/arrayHelpers';
 
-const shuffledPagesArr = createShuffledArr([0, 29]);
-console.log(shuffledPagesArr);
-const useSprintGameRandomPage = () => {
+const shuffledPagesArr = createShuffledArr([0, 20]);
+
+const useSprintGameRandomPage = (pageRange: number[]) => {
+  const [shuffledPagesArr, setShuffledPagesArr] = useState<number[]>([]);
   const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const [randomPage, setRandomPage] = useState<null | number>(null);
   const [pagesOver, setPagesOver] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!pagesOver) {
+    setShuffledPagesArr(createShuffledArr(pageRange));
+  }, [pageRange]);
+
+  useEffect(() => {
+    if (!pagesOver && shuffledPagesArr.length) {
+      console.log(shuffledPagesArr);
       const page = shuffledPagesArr[currentPageIndex];
       setRandomPage(page);
     }
-  }, [currentPageIndex, pagesOver]);
+  }, [currentPageIndex, pagesOver, shuffledPagesArr]);
 
   useEffect(() => {
-    if (currentPageIndex === shuffledPagesArr.length) {
+    if (shuffledPagesArr.length && currentPageIndex === shuffledPagesArr.length) {
       setPagesOver(true);
     }
-  }, [currentPageIndex]);
+  }, [currentPageIndex, shuffledPagesArr.length]);
 
   useEffect(() => {
     if (pagesOver) {

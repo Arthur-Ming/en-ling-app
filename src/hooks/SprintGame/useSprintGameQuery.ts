@@ -9,7 +9,7 @@ const useSprintGameQuery = (page: null | number, level: number) => {
   useEffect(() => {
     if (page !== null) {
       getWords({
-        page: Number(page),
+        page: Number(page) - 1,
         group: Number(level) - 1,
       });
     }

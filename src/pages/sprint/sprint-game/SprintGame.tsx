@@ -28,7 +28,7 @@ const SprintGame = ({ group, pageRange }: Props) => {
     gamePoints,
     numberOfContinuousAnswers,
     answers,
-  } = useSprintGame(group);
+  } = useSprintGame(group, pageRange);
   const timer = useSprintGameTimer(wordsLoaded);
 
   if (pagesOver || timer.isTimeOver)
