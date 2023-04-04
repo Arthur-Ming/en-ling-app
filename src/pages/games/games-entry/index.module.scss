@@ -1,0 +1,44 @@
+@import '/src/index.scss';
+
+.root {
+}
+.box {
+  @extend .wrapper-box;
+  padding-top: 80px;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 28px;
+}
+.description {
+  font-size: 16px;
+  line-height: 24px;
+}
+.item {
+  box-sizing: border-box;
+  flex: 0 0 45%;
+  outline: 1px $main-color solid;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+  &:hover {
+    color: #c9d1d9;
+    outline: 1px orange solid;
+  }
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+}
+.icon {
+  width: 40px;
+  height: 45px;
+}
