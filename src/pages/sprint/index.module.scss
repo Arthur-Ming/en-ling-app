@@ -1,6 +1,7 @@
 @import '/src/index.scss';
 
 .box {
+  @extend .wrapper-box;
   /*  background-color: $bg-primary-dark; */
   color: $text-secondary-dark;
   margin-top: 30px;

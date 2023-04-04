@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { memo } from 'react';
 import { SprintGamePoints as SprintGamePointsType } from '../../../../interfaces';
-import styles from '../../sprint.module.scss';
+import styles from '../index.module.scss';
 
 type Props = {
   gamePoints: SprintGamePointsType[];

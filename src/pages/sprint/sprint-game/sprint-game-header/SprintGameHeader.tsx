@@ -1,4 +1,4 @@
-import styles from '../../sprint.module.scss';
+import styles from '../index.module.scss';
 import { SprintGamePoints as SprintGamePointsType } from '../../../../interfaces';
 import useSprintGamePointsSum from '../../../../hooks/SprintGame/useSprintGamePointsSum';
 import React from 'react';

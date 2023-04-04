@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { AnswerType } from '../../../../interfaces';
-import styles from '../../sprint.module.scss';
+import styles from '../index.module.scss';
 
 interface Props {
   onAnswerButtonClick: (answerType: AnswerType) => void;

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { memo } from 'react';
-import styles from '../../sprint.module.scss';
+import styles from '../index.module.scss';
 
 const dotsArr = Array.from(Array(3), (_, index) => ({
   dotId: index + 1,

@@ -1,10 +1,13 @@
-import SprintEntry from '../sprint-entry';
-import styles from '../games.module.scss';
+import styles from '../index.module.scss';
+import { useNavigate } from 'react-router';
 
-const GamesEntry = () => (
-  <main className={styles.box}>
-    <SprintEntry />
-  </main>
-);
+const GamesEntry = () => {
+  const navigate = useNavigate();
+  return (
+    <main className={styles.box}>
+      <div onClick={() => navigate('sprint')}>Sprint</div>
+    </main>
+  );
+};
 
 export default GamesEntry;

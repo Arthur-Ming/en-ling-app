@@ -36,26 +36,8 @@ const App = () => (
           </Route>
         </Route>
         <Route path={`${clientRoutes.games.absolute()}/*`} element={<Games />}>
-          <Route path={`${clientRoutes.sprint.relative()}/*`} element={<Sprint />}>
-            <Route path={clientRoutes.sprint.round.relative()} element={<SprintGame />} />
-          </Route>
-          <Route path="audio-call/*" element={<AudioCall />}>
-            <Route path=":group" element={<AudioCallGame />} />
-          </Route>
+          <Route path="sprint" element={<Sprint />} />
         </Route>
-        <Route
-          path="/statistics"
-          element={
-            <ProtectedRoute>
-              <Statistics />
-            </ProtectedRoute>
-          }
-        />
-
-        {/*   <ProtectedRoute>
-          <Route path="/statistics" element={<Statistics />} />
-        </ProtectedRoute> */}
-        {/*   <Route path="/statistics" element={<Statistics />} /> */}
       </Routes>
       <Footer />
     </div>
