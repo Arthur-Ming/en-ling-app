@@ -18,8 +18,9 @@ const useSprintGameAnswerHandler = (sprintStep: SprintGameStep | null) => {
 
   useEffect(() => {
     if (didAnswer !== AnswerType.idle && sprintStep !== null) {
+      const isTranslateCorrect = sprintStep.mockTranslate === sprintStep.wordTranslate;
       const isCorrectAnswer =
-        didAnswer === AnswerType.correct ? sprintStep.isTrue : !sprintStep.isTrue;
+        didAnswer === AnswerType.correct ? isTranslateCorrect : !isTranslateCorrect;
 
       setAnswers((prevAnswers) => [
         ...prevAnswers,

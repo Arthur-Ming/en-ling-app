@@ -5,19 +5,18 @@ import { getRandomInt, getRandomIntWithoutCurrent, shuffle } from '../../utils/r
 const createSprintStepsByWords = (words: IWord[]) =>
   words.map(({ id, word, wordTranslate, audio }, index) => {
     const isTrue = Boolean(getRandomInt(0, 2));
-    let translate = wordTranslate;
+    let mockTranslate = wordTranslate;
     if (!isTrue) {
       const randomIndex = getRandomIntWithoutCurrent(index, 0, 20);
       const { wordTranslate: fakeWordTranslate } = words[randomIndex];
-      translate = fakeWordTranslate;
+      mockTranslate = fakeWordTranslate;
     }
     return {
       id,
       word,
-      mockWordTranslate: translate,
+      mockTranslate,
       wordTranslate,
       audio,
-      isTrue,
     };
   });
 

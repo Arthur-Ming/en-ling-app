@@ -30,7 +30,7 @@ const SprintGame = ({ group, pageRange }: Props) => {
     answers,
   } = useSprintGame(group, pageRange);
   const timer = useSprintGameTimer(wordsLoaded);
-
+  console.log(sprintStep);
   if (pagesOver || timer.isTimeOver)
     return <SprintGameResult answers={answers} points={gamePoints} />;
 
@@ -49,7 +49,7 @@ const SprintGame = ({ group, pageRange }: Props) => {
             {sprintStep && (
               <SprintGameWords
                 word={sprintStep.word}
-                mockWordTranslate={sprintStep.mockWordTranslate}
+                mockWordTranslate={sprintStep.mockTranslate}
               />
             )}
           </div>

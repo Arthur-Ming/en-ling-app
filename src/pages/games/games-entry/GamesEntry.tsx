@@ -1,8 +1,7 @@
 import styles from './index.module.scss';
 import { useNavigate } from 'react-router';
-import { GiSprint } from 'react-icons/gi';
+import { GiSoundWaves } from 'react-icons/gi';
 import { ReactComponent as SprintIcon } from './sprint.svg';
-//GiSprint
 
 const gameItems = [
   {
@@ -18,7 +17,7 @@ const gameItems = [
     description: `Это игра улучшает восприятие речи на слух.
     Твоя задача - выбрать правильный перевод слов.
     Чем больше ты дашь правильных ответов, тем больше баллов получишь.`,
-    icon: SprintIcon,
+    icon: GiSoundWaves,
     link: 'audiochallenge',
   },
 ];

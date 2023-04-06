@@ -102,8 +102,7 @@ export type SprintGameAnswer = Pick<IWord, 'id' | 'word' | 'wordTranslate' | 'au
 };
 
 export type SprintGameStep = Pick<SprintGameAnswer, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
-  mockWordTranslate: string;
-  isTrue: boolean;
+  mockTranslate: string;
 };
 
 type DefaultPoints = 0;
