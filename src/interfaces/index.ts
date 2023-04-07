@@ -97,9 +97,9 @@ export interface ISignInAction extends IAction {
   error?: null | unknown;
 }
 
-export type SprintGameAnswer = Pick<IWord, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
+export interface SprintGameAnswer extends Pick<IWord, 'id' | 'word' | 'wordTranslate' | 'audio'> {
   isCorrectAnswer: boolean;
-};
+}
 
 export type SprintGameStep = Pick<SprintGameAnswer, 'id' | 'word' | 'wordTranslate' | 'audio'> & {
   mockTranslate: string;
@@ -109,6 +109,10 @@ type DefaultPoints = 0;
 type PointsForCorrectAnswer = 10 | 20;
 type PointsForWrongAnswer = -10 | -20;
 export type SprintGamePoints = DefaultPoints | PointsForCorrectAnswer | PointsForWrongAnswer;
+
+export interface ISprintResult extends SprintGameAnswer {
+  points: SprintGamePoints;
+}
 
 export interface ILoginBody {
   email: string;

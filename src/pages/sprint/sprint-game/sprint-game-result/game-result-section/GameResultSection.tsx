@@ -1,6 +1,6 @@
 import { SprintGameAnswer } from '../../../../../interfaces';
 import SprintGameResultItem from '../sprint-game-result-item';
-import styles from './../sprint-game-result.module.scss';
+import styles from './../index.module.scss';
 
 type Props = {
   filtredAnswers: SprintGameAnswer[];

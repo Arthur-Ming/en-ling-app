@@ -9,6 +9,9 @@ import SprintGamePoints from './sprint-game-points';
 import SprintGameDotsOfAnswers from './sprint-game-dots';
 import SprintGameResult from './sprint-game-result';
 import useSprintGameTimer from '../../../hooks/SprintGame/useSprintGameTimer';
+import { SprintGameAnswer, ISprintResult } from '../../../interfaces';
+import { getResult } from '../helpers';
+import Sprint from '../Sprint';
 
 interface OwnProps {
   group: number;
@@ -31,8 +34,11 @@ const SprintGame = ({ group, pageRange }: Props) => {
   } = useSprintGame(group, pageRange);
   const timer = useSprintGameTimer(wordsLoaded);
   console.log(sprintStep);
-  if (pagesOver || timer.isTimeOver)
-    return <SprintGameResult answers={answers} points={gamePoints} />;
+  if (pagesOver || timer.isTimeOver) {
+    const gameResult = getResult(answers, gamePoints);
+    console.log(gameResult);
+    return <Sprint results={gameResult} />;
+  }
 
   return (
     <main className={styles.main}>

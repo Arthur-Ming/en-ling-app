@@ -1,5 +1,5 @@
 import { SprintGameAnswer } from '../../../../../interfaces';
-import styles from './../sprint-game-result.module.scss';
+import styles from './../index.module.scss';
 import { currentAudioWordIdSelector } from '../../../../../redux/selectors/audio';
 import { wordAudioStop, wordAudioPlay } from '../../../../../redux/actions/audio';
 import { AppDispatch, RootState } from '../../../../../redux/store';

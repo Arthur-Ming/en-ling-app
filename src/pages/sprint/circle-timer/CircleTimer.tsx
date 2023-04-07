@@ -58,7 +58,7 @@ interface Props {
   duration?: number;
 }
 
-const CircleTimer = ({ pause, onTimeOver, duration = 30 }: Props) => {
+const CircleTimer = ({ pause, onTimeOver, duration = 5 }: Props) => {
   const [timePassed, setTimePassed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(duration);
   const [time, setTime] = useState(formatTime(timeLeft));

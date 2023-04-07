@@ -2,10 +2,10 @@
 .box {
   @extend .wrapper-box;
   max-width: 900px;
-  min-height: 100vh;
+
   background-color: $bg-primary-dark;
   box-sizing: border-box;
-  padding: 40px 60px 60px;
+  padding: 0px 60px 0px;
 }
 .sections {
   display: flex;

@@ -7,49 +7,42 @@ import PageRange from '../../components/PageRange';
 import GroupPicker from '../../components/GroupPicker/GroupPicker';
 import { ReactComponent as LabelIcon } from './label.svg';
 import SprintGame from './sprint-game/SprintGame';
+import { ISprintResult } from '../../interfaces';
+import SprintResultModal from './SprintResultModal/SprintResultModal';
+import SprintEntry from './SprintEntry/SprintEntry';
 
 const groups = Array.from(Array(GROUP_COUNT), (_, index) => index + 1);
 
-const Sprint = () => {
+type Props = {
+  results?: ISprintResult[];
+};
+
+const Sprint = ({ results }: Props) => {
   const { group, page } = useTextbookPageParams();
   const [selectedGroup, setSelectedGroup] = useState(group);
   const [pageRange, setPageRange] = useState([1, page]);
   const [isGame, setIsGame] = useState(false);
+  const [isShowResult, setShowResult] = useState(Boolean(results));
 
   if (isGame) return <SprintGame group={selectedGroup} pageRange={pageRange} />;
 
-  const onButtonClick = () => {
+  const onPlay = () => {
     setIsGame(true);
   };
 
   return (
-    <main className={styles.root}>
-      <div className={styles.box}>
-        <h4 className={styles.title}>Спринт</h4>
-        <h5 className={styles.subtitle}>Попробуйте перевести как можно больше слов за 60 секунд</h5>
-        <div>
-          <p>Выберите главу:</p>
-          <GroupPicker groups={groups} selectedGroup={selectedGroup} onSelect={setSelectedGroup} />
-        </div>
-
-        <div className={styles.pages}>
-          <p>Выберите диапазон страниц:</p>
-          <PageRange values={pageRange} setValues={setPageRange} />
-        </div>
-        <div className={styles.text}>
-          <p>
-            группа {selectedGroup}
-            <LabelIcon className={classNames(styles.label, styles[`level-${selectedGroup}`])} />
-          </p>
-          <p>cтраницы {`${pageRange[0]} - ${pageRange[1]}`}</p>
-        </div>
-        <div className={styles.buttons}>
-          <button className={styles.button} onClick={onButtonClick}>
-            <span>Начать</span>
-          </button>
-        </div>
-      </div>
-    </main>
+    <>
+      <SprintEntry
+        onPlay={onPlay}
+        selectedGroup={selectedGroup}
+        setSelectedGroup={setSelectedGroup}
+        pageRange={pageRange}
+        setPageRange={setPageRange}
+      />
+      {results && isShowResult && (
+        <SprintResultModal results={results} onClose={() => setShowResult(false)} onPlay={onPlay} />
+      )}
+    </>
   );
 };
 
