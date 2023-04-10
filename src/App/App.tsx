@@ -18,6 +18,7 @@ import Registration from '../pages/Auth/Registration';
 import UserWords from '../pages/textbook/UserWords';
 import UserWord from '../pages/textbook/UserWords/UserWord';
 import TextbookWord from '../pages/textbook/TextbookWords/TextbookWord';
+import AudioChallenge from '../pages/AudioChallenge/AudioChallenge';
 
 const App = () => (
   <Router>
@@ -37,6 +38,7 @@ const App = () => (
         </Route>
         <Route path={`${clientRoutes.games.absolute()}/*`} element={<Games />}>
           <Route path="sprint" element={<Sprint />} />
+          <Route path="audiochallenge" element={<AudioChallenge />} />
         </Route>
       </Routes>
       <Footer />
